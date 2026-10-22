@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aether Vanguard — RPG Tactique Voxel & Gestion de Mercenaires</title>
+  <meta name="description" content="Découvrez Aether Vanguard : RPG tactique sombre de gestion de mercenaires en vue top-down dézoomée avec combats automatisés programmables (Gambits) et rendu voxel stylisé.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Cinzel+Decorative:wght@700&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- Subtle Orthogonal Voxel Grid Background Overlay -->
+  <div class="voxel-grid-overlay" aria-hidden="true"></div>
+  <div class="ambient-glow ether-glow" aria-hidden="true"></div>
+  <div class="ambient-glow blood-glow" aria-hidden="true"></div>
+
+  <!-- Global Header & Navigation -->
+  <header class="site-header" id="header">
+    <div class="header-inner container">
+      <a href="#hero" class="brand-logo" id="brand-logo">
+        <span class="brand-crest">❖</span>
+        <span class="brand-text">AETHER VANGUARD</span>
+        <span class="brand-badge">VOXEL TACTICS</span>
+      </a>
+
+      <nav class="nav-menu" id="nav-menu" aria-label="Navigation principale">
+        <a href="#hero" class="nav-link active">Vision</a>
+        <a href="#class-tree-section" class="nav-link">Arbre de Classes</a>
+        <a href="#class-details" class="nav-link">Grimoire & Détails</a>
+        <a href="#tactics" class="nav-link">Mécaniques</a>
+        <a href="#devlogs" class="nav-link">Devlogs</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="#class-tree-section" class="btn btn-chamfer btn-primary btn-sm" id="btn-explore-tree">
+          <span class="btn-icon">⚔</span>
+          <span>Explorer l'Arbre</span>
+        </a>
+        <button class="mobile-nav-toggle" id="btn-mobile-nav" aria-label="Menu de navigation" aria-expanded="false">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Section 1 : Introduction & Brief Projet (Hero) -->
+    <section class="section-hero" id="hero">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-tag">
+            <span class="tag-dot"></span>
+            <span>RPG Tactique Dark Medieval • Vue Top-Down Voxel</span>
+          </div>
+
+          <h1 class="hero-title">
+            Dominez l'Arène Éthérée en Voxel Ciselé
+          </h1>
+
+          <p class="hero-description">
+            Plongez au cœur d'un univers où l'acier froid, les dalles de pierre taillée et l'éther incandescent s'affrontent sur un échiquier tactique. Dirigez vos escouades, personnalisez votre lignée et débloquez la puissance des classes avancées.
+          </p>
+
+          <div class="hero-stats-row">
+            <div class="stat-card">
+              <span class="stat-number">28</span>
+              <span class="stat-label">Classes &amp; Concepts</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <span class="stat-number">Niv. 100</span>
+              <span class="stat-label">Plafond par Classe</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <span class="stat-number">Gambits</span>
+              <span class="stat-label">IA &amp; Mana Commun</span>
+            </div>
+          </div>
+
+          <div class="hero-cta-group">
+            <a href="#class-tree-section" class="btn btn-chamfer btn-accent btn-lg" id="hero-cta-tree">
+              <span class="btn-icon">⬡</span>
+              <span>Découvrir l'Arbre des Classes</span>
+            </a>
+            <a href="#class-details" class="btn btn-chamfer btn-secondary btn-lg" id="hero-cta-details">
+              <span>Consulter le Grimoire</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div class="hero-frame-wrapper">
+            <div class="chamfer-corner tl"></div>
+            <div class="chamfer-corner tr"></div>
+            <div class="chamfer-corner bl"></div>
+            <div class="chamfer-corner br"></div>
+            
+            <div class="hero-image-container" id="hero-img-trigger" role="button" tabindex="0" title="Cliquer pour agrandir la vision cible">
+              <img src="assets/voxel_hero.jpg" alt="Concept visuel d'arène médiévale tactique vue du dessus en rendu voxel" class="hero-image" id="hero-showcase-img">
+              <div class="image-gradient-overlay"></div>
+              
+              <div class="tactical-hud-badge">
+                <span class="hud-status-dot"></span>
+                <span>VISION CIBLE • RENDU CONCEPTUEL (NON-INGAME)</span>
+              </div>
+
+              <div class="expand-prompt-badge">
+                <span class="expand-icon">⤢</span>
+                <span>Agrandir</span>
+              </div>
+            </div>
+            <p class="hero-image-subnote">
+              * Illustration conceptuelle représentative de l'objectif visuel et de la direction artistique (non issu d'une capture de gameplay direct).
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2 : Arbre Interactif des Classes (Conteneur Scrollable & Grab) -->
+    <section class="section-class-tree" id="class-tree-section">
+      <div class="container section-header">
+        <div class="section-subtitle">Progression & Spécialisations</div>
+        <h2 class="section-title">Arbre Tactique des Classes</h2>
+        <p class="section-desc">
+          Naviguez librement dans l'arborescence à travers les échelons martiaux et mystiques. Maintenez le clic pour faire glisser la vue.
+        </p>
+      </div>
+
+      <div class="container tree-wrapper">
+        <!-- The Master Viewport with Overflow Sticky Animations -->
+        <div class="tree-viewport-container" id="tree-viewport-container">
+          <!-- Sticky Edge Indicators with Animations -->
+          <div class="sticky-edge-indicator edge-top" id="edge-top" aria-hidden="true">
+            <div class="edge-pulse-beam"></div>
+            <div class="edge-hint">▲ Défilement supérieur disponible</div>
+          </div>
+          <div class="sticky-edge-indicator edge-bottom" id="edge-bottom" aria-hidden="true">
+            <div class="edge-pulse-beam"></div>
+            <div class="edge-hint">▼ Défilement inférieur disponible</div>
+          </div>
+          <div class="sticky-edge-indicator edge-left" id="edge-left" aria-hidden="true">
+            <div class="edge-pulse-beam"></div>
+            <div class="edge-hint">◄ Défilement latéral gauche</div>
+          </div>
+          <div class="sticky-edge-indicator edge-right" id="edge-right" aria-hidden="true">
+            <div class="edge-pulse-beam"></div>
+            <div class="edge-hint">Défilement latéral droit ►</div>
+          </div>
+
+          <!-- Tree Viewport HUD Controls -->
+          <div class="tree-hud-topbar">
+            <div class="hud-item hud-pill">
+              <span class="hud-icon">✋</span>
+              <span class="hud-text">Glisser pour explorer (Grab &amp; Drag)</span>
+            </div>
+            <div class="hud-actions">
+              <button type="button" class="btn-hud" id="hud-zoom-out" title="Dézoomer" aria-label="Dézoomer">−</button>
+              <span class="hud-zoom-level" id="hud-zoom-level">100%</span>
+              <button type="button" class="btn-hud" id="hud-zoom-in" title="Zoomer" aria-label="Zoomer">+</button>
+              <button type="button" class="btn-hud btn-hud-reset" id="hud-reset" title="Recentrer la vue">
+                <span>Recentrer</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive Scrollable & Draggable Canvas / Matrix -->
+          <div class="tree-canvas" id="tree-canvas" tabindex="0" role="region" aria-label="Arbre interactif des classes">
+            <div class="tree-inner-matrix" id="tree-matrix">
+              <!-- Tier Labels Header -->
+              <div class="matrix-tiers-header">
+                <div class="tier-column-label">
+                  <span class="tier-roman">I</span>
+                  <span class="tier-title">PALLIER D'INITIATION</span>
+                  <span class="tier-caption">Classes de Base Fondatrices</span>
+                </div>
+                <div class="tier-connection-gap">
+                  <div class="tier-ortho-bridge"></div>
+                </div>
+                <div class="tier-column-label">
+                  <span class="tier-roman">II</span>
+                  <span class="tier-title">PALLIER DE MAÎTRISE</span>
+                  <span class="tier-caption">Évolutions &amp; Spécialisations</span>
+                </div>
+                <div class="tier-connection-gap">
+                  <div class="tier-ortho-bridge"></div>
+                </div>
+                <div class="tier-column-label tier-locked">
+                  <span class="tier-roman">III</span>
+                  <span class="tier-title">PALLIER ÉTHÉRÉ</span>
+                  <span class="tier-caption">Ascension Parangon (À Venir)</span>
+                </div>
+              </div>
+
+              <!-- Main Tree Layout Rows (Prepared framing with interactive preview cards) -->
+              <div class="tree-branches-layout">
+                
+                <!-- Branch 1 : Voie Martiale (Guerrier -> Sentinelle) -->
+                <div class="tree-branch-row" data-branch="warrior">
+                  <div class="branch-meta">
+                    <span class="branch-icon red-icon">🛡️</span>
+                    <span class="branch-name">Voie du Fer &amp; du Bouclier</span>
+                  </div>
+
+                  <div class="branch-slots">
+                    <!-- Base Node: Guerrier -->
+                    <div class="unit-card-slot" data-class="guerrier" tabindex="0">
+                      <div class="unit-tile voxel-bevel warrior-glow">
+                        <div class="unit-role-pill">Première Ligne</div>
+                        <div class="unit-avatar-box">
+                          <span class="avatar-glyph">⚔️</span>
+                        </div>
+                        <div class="unit-info">
+                          <h4 class="unit-name">Guerrier</h4>
+                          <span class="unit-sub">Classe de Base • Niv. 1</span>
+                        </div>
+                        <div class="unit-status-tag unlocked">Débloqué</div>
+                      </div>
+
+                      <!-- Hover Card Preview -->
+                      <div class="unit-hover-preview">
+                        <div class="preview-header">
+                          <span class="preview-role">Rempart Physique</span>
+                          <h5>Guerrier</h5>
+                        </div>
+                        <p class="preview-summary">Contrôle de foule, charge lourde et provocation martiale pour verrouiller les assauts ennemis.</p>
+                        <div class="preview-tags">
+                          <span class="badge badge-red">Saignement</span>
+                          <span class="badge badge-amber">Contrôle</span>
+                        </div>
+                        <div class="preview-cta">Cliquer pour charger la fiche</div>
+                      </div>
+                    </div>
+
+                    <!-- Orthogonal Connector Line -->
+                    <div class="ortho-connector">
+                      <div class="connector-line active-line"></div>
+                      <div class="connector-arrow">▶</div>
+                    </div>
+
+                    <!-- Advanced Node: Sentinelle -->
+                    <div class="unit-card-slot" data-class="sentinelle" tabindex="0">
+                      <div class="unit-tile voxel-bevel sentinelle-glow active-highlight">
+                        <div class="unit-role-pill">Absorption &amp; Pavois</div>
+                        <div class="unit-avatar-box">
+                          <span class="avatar-glyph">🛡️</span>
+                        </div>
+                        <div class="unit-info">
+                          <h4 class="unit-name">Sentinelle</h4>
+                          <span class="unit-sub">Évolution Guerrier • Niv. 20</span>
+                        </div>
+                        <div class="unit-status-tag specialized">Spécialisation</div>
+                      </div>
+
+                      <!-- Hover Card Preview -->
+                      <div class="unit-hover-preview">
+                        <div class="preview-header">
+                          <span class="preview-role">Bastion Suprême</span>
+                          <h5>Sentinelle</h5>
+                        </div>
+                        <p class="preview-summary">Pavois renforcé absorbant les impacts lourds, déséquilibre au bouclier et barrière d'acier inébranlable.</p>
+                        <div class="preview-tags">
+                          <span class="badge badge-blue">Déséquilibre</span>
+                          <span class="badge badge-amber">Absorption</span>
+                        </div>
+                        <div class="preview-cta">Cliquer pour charger la fiche</div>
+                      </div>
+                    </div>
+
+                    <!-- Orthogonal Connector to Tier III -->
+                    <div class="ortho-connector locked-connector">
+                      <div class="connector-line dashed-line"></div>
+                      <div class="connector-arrow">🔒</div>
+                    </div>
+
+                    <!-- Tier III Slot Placeholder -->
+                    <div class="unit-card-slot slot-locked">
+                      <div class="unit-tile voxel-bevel unit-locked">
+                        <div class="locked-icon">🔒</div>
+                        <div class="locked-title">Ascendant de Pierre</div>
+                        <div class="locked-desc">Prérequis : Sentinelle Niv. 50</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Branch 2 : Voie du Tir (Archer -> Arbalétrier) -->
+                <div class="tree-branch-row" data-branch="archer">
+                  <div class="branch-meta">
+                    <span class="branch-icon amber-icon">🏹</span>
+                    <span class="branch-name">Voie de la Balistique Cendrée</span>
+                  </div>
+
+                  <div class="branch-slots">
+                    <!-- Base Node: Archer -->
+                    <div class="unit-card-slot" data-class="archer" tabindex="0">
+                      <div class="unit-tile voxel-bevel archer-glow">
+                        <div class="unit-role-pill">Tir de Précision</div>
+                        <div class="unit-avatar-box">
+                          <span class="avatar-glyph">🏹</span>
+                        </div>
+                        <div class="unit-info">
+                          <h4 class="unit-name">Archer</h4>
+                          <span class="unit-sub">Classe de Base • Niv. 1</span>
+                        </div>
+                        <div class="unit-status-tag unlocked">Débloqué</div>
+                      </div>
+
+                      <div class="unit-hover-preview">
+                        <div class="preview-header">
+                          <span class="preview-role">Distance &amp; Volée</span>
+                          <h5>Archer</h5>
+                        </div>
+                        <p class="preview-summary">Cadence de tir élevée, volées de flèches perçantes et esquives véloces sur le champ de bataille.</p>
+                        <div class="preview-tags">
+                          <span class="badge badge-amber">Mobilité</span>
+                          <span class="badge badge-red">Perforation</span>
+                        </div>
+                        <div class="preview-cta">Cliquer pour charger la fiche</div>
+                      </div>
+                    </div>
+
+                    <div class="ortho-connector">
+                      <div class="connector-line active-line"></div>
+                      <div class="connector-arrow">▶</div>
+                    </div>
+
+                    <!-- Advanced Node: Arbalétrier -->
+                    <div class="unit-card-slot" data-class="arbaletrier" tabindex="0">
+                      <div class="unit-tile voxel-bevel arbaletrier-glow">
+                        <div class="unit-role-pill">Munitions Tactiques</div>
+                        <div class="unit-avatar-box">
+                          <span class="avatar-glyph">⚙️</span>
+                        </div>
+                        <div class="unit-info">
+                          <h4 class="unit-name">Arbalétrier</h4>
+                          <span class="unit-sub">Évolution Archer • Niv. 20</span>
+                        </div>
+                        <div class="unit-status-tag specialized">Spécialisation</div>
+                      </div>
+
+                      <div class="unit-hover-preview">
+                        <div class="preview-header">
+                          <span class="preview-role">Recharges Lourdes</span>
+                          <h5>Arbalétrier</h5>
+                        </div>
+                        <p class="preview-summary">Mécanique unique de tirs préparés : carreaux transperçants, charges explosives et toxines neutralisantes.</p>
+                        <div class="preview-tags">
+                          <span class="badge badge-red">Explosion</span>
+                          <span class="badge badge-green">Neutralisation</span>
+                        </div>
+                        <div class="preview-cta">Cliquer pour charger la fiche</div>
+                      </div>
+                    </div>
+
+                    <div class="ortho-connector locked-connector">
+                      <div class="connector-line dashed-line"></div>
+                      <div class="connector-arrow">🔒</div>
+                    </div>
+
+                    <div class="unit-card-slot slot-locked">
+                      <div class="unit-tile voxel-bevel unit-locked">
+                        <div class="locked-icon">🔒</div>
+                        <div class="locked-title">Maître Baliste</div>
+                        <div class="locked-desc">Prérequis : Arbalétrier Niv. 50</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Branch 3 : Voie de l'Ombre (Rogue -> Assassin) -->
+                <div class="tree-branch-row" data-branch="rogue">
+                  <div class="branch-meta">
+                    <span class="branch-icon green-icon">🗡️</span>
+                    <span class="branch-name">Voie du Venin &amp; de l'Ombre</span>
+                  </div>
+
+                  <div class="branch-slots">
+                    <!-- Base Node: Rogue -->
+                    <div class="unit-card-slot" data-class="rogue" tabindex="0">
+                      <div class="unit-tile voxel-bevel rogue-glow">
+                        <div class="unit-role-pill">Infiltration</div>
+                        <div class="unit-avatar-box">
+                          <span class="avatar-glyph">🗡️</span>
+                        </div>
+                        <div class="unit-info">
+                          <h4 class="unit-name">Rogue</h4>
+                          <span class="unit-sub">Classe de Base • Niv. 1</span>
+                        </div>
+                        <div class="unit-status-tag unlocked">Débloqué</div>
+                      </div>
+
+                      <div class="unit-hover-preview">
+                        <div class="preview-header">
+                          <span class="preview-role">Frappe Sournoise</span>
+                          <h5>Rogue</h5>
+                        </div>
+                        <p class="preview-summary">Attaques dans le dos dévastatrices, étourdissements éclair et lacérations hémorragiques.</p>
+                        <div class="preview-tags">
+                          <span class="badge badge-green">Poison</span>
+                          <span class="badge badge-red">Lacération</span>
+                        </div>
+                        <div class="preview-cta">Cliquer pour charger la fiche</div>
+                      </div>
+                    </div>
+
+                    <div class="ortho-connector">
+                      <div class="connector-line active-line"></div>
+                      <div class="connector-arrow">▶</div>
+                    </div>
+
+                    <!-- Advanced Node: Assassin -->
+                    <div class="unit-card-slot" data-class="assassin" tabindex="0">
+                      <div class="unit-tile voxel-bevel assassin-glow">
+                        <div class="unit-role-pill">Ombre &amp; Léthalité</div>
+                        <div class="unit-avatar-box">
+                          <span class="avatar-glyph">☠️</span>
+                        </div>
+                        <div class="unit-info">
+                          <h4 class="unit-name">Assassin</h4>
+                          <span class="unit-sub">Évolution Rogue • Niv. 20</span>
+                        </div>
+                        <div class="unit-status-tag specialized">Spécialisation</div>
+                      </div>
+
+                      <div class="unit-hover-preview">
+                        <div class="preview-header">
+                          <span class="preview-role">Exécution Venimeuse</span>
+                          <h5>Assassin</h5>
+                        </div>
+                        <p class="preview-summary">Poisons neurotoxiques profonds, pas de l'ombre téléporté et destruction des résistances défensives adverses.</p>
+                        <div class="preview-tags">
+                          <span class="badge badge-green">Neurotoxine</span>
+                          <span class="badge badge-blue">Vulnérabilité</span>
+                        </div>
+                        <div class="preview-cta">Cliquer pour charger la fiche</div>
+                      </div>
+                    </div>
+
+                    <div class="ortho-connector locked-connector">
+                      <div class="connector-line dashed-line"></div>
+                      <div class="connector-arrow">🔒</div>
+                    </div>
+
+                    <div class="unit-card-slot slot-locked">
+                      <div class="unit-tile voxel-bevel unit-locked">
+                        <div class="locked-icon">🔒</div>
+                        <div class="locked-title">Ombre Éclipse</div>
+                        <div class="locked-desc">Prérequis : Assassin Niv. 50</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Branch 4 : Voie Magique & Sacrée (Acolyte -> Magicien) -->
+                <div class="tree-branch-row" data-branch="mage">
+                  <div class="branch-meta">
+                    <span class="branch-icon blue-icon">✨</span>
+                    <span class="branch-name">Voie de la Foi &amp; de l'Éther</span>
+                  </div>
+
+                  <div class="branch-slots">
+                    <!-- Base Node: Acolyte -->
+                    <div class="unit-card-slot" data-class="acolyte" tabindex="0">
+                      <div class="unit-tile voxel-bevel acolyte-glow">
+                        <div class="unit-role-pill">Soutien Sacré</div>
+                        <div class="unit-avatar-box">
+                          <span class="avatar-glyph">✨</span>
+                        </div>
+                        <div class="unit-info">
+                          <h4 class="unit-name">Acolyte</h4>
+                          <span class="unit-sub">Classe de Base • Niv. 1</span>
+                        </div>
+                        <div class="unit-status-tag unlocked">Débloqué</div>
+                      </div>
+
+                      <div class="unit-hover-preview">
+                        <div class="preview-header">
+                          <span class="preview-role">Guérison &amp; Bénédiction</span>
+                          <h5>Acolyte</h5>
+                        </div>
+                        <p class="preview-summary">Toucher guérisseur au contact, prière curative à distance et purification des malus.</p>
+                        <div class="preview-tags">
+                          <span class="badge badge-green">Soin Contact</span>
+                          <span class="badge badge-blue">Purification</span>
+                        </div>
+                        <div class="preview-cta">Cliquer pour charger la fiche</div>
+                      </div>
+                    </div>
+
+                    <div class="ortho-connector">
+                      <div class="connector-line active-line"></div>
+                      <div class="connector-arrow">▶</div>
+                    </div>
+
+                    <!-- Advanced Node: Magicien -->
+                    <div class="unit-card-slot" data-class="magicien" tabindex="0">
+                      <div class="unit-tile voxel-bevel mage-glow">
+                        <div class="unit-role-pill">Dégâts Élémentaires</div>
+                        <div class="unit-avatar-box">
+                          <span class="avatar-glyph">🔮</span>
+                        </div>
+                        <div class="unit-info">
+                          <h4 class="unit-name">Magicien</h4>
+                          <span class="unit-sub">Évolution Acolyte • Niv. 20</span>
+                        </div>
+                        <div class="unit-status-tag specialized">Spécialisation</div>
+                      </div>
+
+                      <div class="unit-hover-preview">
+                        <div class="preview-header">
+                          <span class="preview-role">Maître des Éléments</span>
+                          <h5>Magicien</h5>
+                        </div>
+                        <p class="preview-summary">Trait arcanique, feu résiduel brûlant, lance de givre perforante et zap d'éclairs en chaîne.</p>
+                        <div class="preview-tags">
+                          <span class="badge badge-blue">Éther</span>
+                          <span class="badge badge-red">Zone Magique</span>
+                        </div>
+                        <div class="preview-cta">Cliquer pour charger la fiche</div>
+                      </div>
+                    </div>
+
+                    <div class="ortho-connector locked-connector">
+                      <div class="connector-line dashed-line"></div>
+                      <div class="connector-arrow">🔒</div>
+                    </div>
+
+                    <div class="unit-card-slot slot-locked">
+                      <div class="unit-tile voxel-bevel unit-locked">
+                        <div class="locked-icon">🔒</div>
+                        <div class="locked-title">Archimage Céleste</div>
+                        <div class="locked-desc">Prérequis : Magicien Niv. 50</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Branch 5 (Anticipation) : Voies Croisées & Classes Hybrides (Paladin) -->
+                <div class="tree-branch-row hybrid-branch-row" data-branch="hybrid">
+                  <div class="branch-meta">
+                    <span class="branch-icon gold-icon">❖</span>
+                    <span class="branch-name">Voies Croisées &amp; Classes Hybrides</span>
+                    <span class="hybrid-badge-indicator">Intersection Martiale + Sacrée</span>
+                  </div>
+
+                  <div class="branch-slots hybrid-slots">
+                    <!-- Dual Parents Origin Node Mockup -->
+                    <div class="dual-parents-box">
+                      <div class="parent-chip"><span class="parent-icon">⚔️</span> Guerrier (Niv. 20)</div>
+                      <div class="parent-operator">+</div>
+                      <div class="parent-chip"><span class="parent-icon">✨</span> Acolyte (Niv. 20)</div>
+                    </div>
+
+                    <!-- Orthogonal Dual Connector -->
+                    <div class="ortho-connector hybrid-connector">
+                      <div class="connector-line hybrid-line"></div>
+                      <div class="connector-arrow">▶</div>
+                    </div>
+
+                    <!-- Cross-Branch Node: Paladin -->
+                    <div class="unit-card-slot" data-class="paladin" tabindex="0">
+                      <div class="unit-tile voxel-bevel paladin-glow">
+                        <div class="unit-role-pill">Classe Hybride • Croisée</div>
+                        <div class="unit-avatar-box">
+                          <span class="avatar-glyph">⚔️✨</span>
+                        </div>
+                        <div class="unit-info">
+                          <h4 class="unit-name">Paladin</h4>
+                          <span class="unit-sub">Guerrier + Acolyte • Niv. 20</span>
+                        </div>
+                        <div class="unit-status-tag hybrid-tag">Spécialisation Croisée</div>
+                      </div>
+
+                      <div class="unit-hover-preview">
+                        <div class="preview-header">
+                          <span class="preview-role">Chevalier Sacré</span>
+                          <h5>Paladin</h5>
+                        </div>
+                        <p class="preview-summary">Intersection de la robustesse martiale et des bénédictions divines. Châtiment du jugement, bouclier de lumière et aura de rédemption.</p>
+                        <div class="preview-tags">
+                          <span class="badge badge-amber">Absorption</span>
+                          <span class="badge badge-green">Guérison</span>
+                          <span class="badge badge-blue">Châtiment Sacré</span>
+                        </div>
+                        <div class="preview-cta">Cliquer pour charger la fiche</div>
+                      </div>
+                    </div>
+
+                    <div class="ortho-connector locked-connector">
+                      <div class="connector-line dashed-line"></div>
+                      <div class="connector-arrow">🔒</div>
+                    </div>
+
+                    <div class="unit-card-slot slot-locked">
+                      <div class="unit-tile voxel-bevel unit-locked">
+                        <div class="locked-icon">🔒</div>
+                        <div class="locked-title">Croisé Solaire</div>
+                        <div class="locked-desc">Prérequis : Paladin Niv. 50</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Viewport Footer Bar -->
+          <div class="tree-viewport-footer">
+            <div class="viewport-legend">
+              <span class="legend-item"><span class="legend-dot unlocked-dot"></span> Débloqué</span>
+              <span class="legend-item"><span class="legend-dot specialized-dot"></span> Spécialisation Niv. 20</span>
+              <span class="legend-item"><span class="legend-dot hybrid-dot"></span> Voie Croisée Hybride</span>
+              <span class="legend-item"><span class="legend-dot locked-dot"></span> Pallier Verrouillé</span>
+            </div>
+            <div class="viewport-hint">
+              Cliquez sur une classe pour charger sa fiche détaillée ci-dessous.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3 : Panneau de Détail & Fiches de Compétences -->
+    <section class="section-details" id="class-details">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-subtitle">Archives &amp; Codex Tactique</div>
+          <h2 class="section-title">Fiche d'Identité &amp; Grimoire</h2>
+          <p class="section-desc">
+            Examinez en détail les spécificités mécaniques, les coûts d'éther et les synergies d'altérations pour chaque classe.
+          </p>
+        </div>
+
+        <!-- Class Quick Selector Tabs -->
+        <div class="class-selector-tabs" id="class-tabs" role="tablist">
+          <button type="button" class="tab-btn" data-class="guerrier" role="tab">Guerrier</button>
+          <button type="button" class="tab-btn active" data-class="sentinelle" role="tab">Sentinelle</button>
+          <button type="button" class="tab-btn" data-class="archer" role="tab">Archer</button>
+          <button type="button" class="tab-btn" data-class="arbaletrier" role="tab">Arbalétrier</button>
+          <button type="button" class="tab-btn" data-class="rogue" role="tab">Rogue</button>
+          <button type="button" class="tab-btn" data-class="assassin" role="tab">Assassin</button>
+          <button type="button" class="tab-btn" data-class="acolyte" role="tab">Acolyte</button>
+          <button type="button" class="tab-btn" data-class="magicien" role="tab">Magicien</button>
+          <button type="button" class="tab-btn tab-hybrid" data-class="paladin" role="tab">❖ Paladin (Hybride)</button>
+        </div>
+
+        <!-- Active Class Details Sheet Display -->
+        <div class="details-display-card voxel-bevel" id="class-sheet-container">
+          <!-- Dynamically populated by app.js, default initial state provided -->
+          <div class="sheet-grid">
+            <!-- Left Column: Identity & Attributes -->
+            <div class="sheet-identity-panel">
+              <div class="identity-badge-row">
+                <span class="badge badge-amber" id="detail-category">Spécialisation Avancée</span>
+                <span class="badge badge-blue" id="detail-tier">Pallier II (Niv. 20)</span>
+              </div>
+
+              <div class="identity-main-header">
+                <div class="identity-avatar-large" id="detail-avatar">🛡️</div>
+                <div>
+                  <h3 class="identity-name" id="detail-name">Sentinelle</h3>
+                  <div class="identity-role" id="detail-role">Forteresse Vivante • Contrôle &amp; Absorption</div>
+                </div>
+              </div>
+
+              <p class="identity-lore" id="detail-lore">
+                Évolution directe du Guerrier, la Sentinelle sacrifie une part de sa vélocité offensive au profit d'un pavois massif capable d'absorber les coups les plus violents et d'infliger un déséquilibre mortel aux assaillants.
+              </p>
+
+              <!-- Signature Gear & Resource -->
+              <div class="identity-specs-box">
+                <div class="spec-row">
+                  <span class="spec-label">Arme Signature :</span>
+                  <span class="spec-value" id="detail-weapon">Pavois d'Acier &amp; Masse de Brèche</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Ressource Clé :</span>
+                  <span class="spec-value text-blue" id="detail-resource">Stabilité &amp; Éther Martiale</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Prérequis :</span>
+                  <span class="spec-value" id="detail-prereq">Guerrier Niveau 20</span>
+                </div>
+              </div>
+
+              <!-- Stat gauges -->
+              <div class="identity-gauges">
+                <div class="gauge-item">
+                  <div class="gauge-header">
+                    <span>Défense &amp; Absorption</span>
+                    <span id="gauge-def-val">95%</span>
+                  </div>
+                  <div class="gauge-track"><div class="gauge-fill fill-amber" id="gauge-def-bar" style="width: 95%;"></div></div>
+                </div>
+                <div class="gauge-item">
+                  <div class="gauge-header">
+                    <span>Impact Physique</span>
+                    <span id="gauge-atk-val">65%</span>
+                  </div>
+                  <div class="gauge-track"><div class="gauge-fill fill-red" id="gauge-atk-bar" style="width: 65%;"></div></div>
+                </div>
+                <div class="gauge-item">
+                  <div class="gauge-header">
+                    <span>Mobilité Tactique</span>
+                    <span id="gauge-mob-val">40%</span>
+                  </div>
+                  <div class="gauge-track"><div class="gauge-fill fill-blue" id="gauge-mob-bar" style="width: 40%;"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Column: Grimoire / Skills List -->
+            <div class="sheet-grimoire-panel">
+              <div class="grimoire-header">
+                <h4 class="grimoire-title">Compétences de Combat &amp; Tactiques</h4>
+                <span class="grimoire-count" id="skills-count">4 Capacités Révélées</span>
+              </div>
+
+              <div class="skills-list" id="skills-list">
+                <!-- Skill 1 -->
+                <div class="skill-card voxel-bevel">
+                  <div class="skill-top">
+                    <div class="skill-name-wrap">
+                      <span class="skill-type-tag tag-atk">Attaque Gardée</span>
+                      <h5 class="skill-name">Attaque de Base</h5>
+                    </div>
+                    <div class="skill-costs">
+                      <span class="cost-item ether-cost">0 Éther</span>
+                      <span class="cost-item cd-cost">Instantané</span>
+                    </div>
+                  </div>
+                  <p class="skill-desc">Frappe défensive à l'arme à une main tout en maintenant la garde levée pour minimiser l'exposition.</p>
+                  <div class="skill-footer">
+                    <span class="effect-chip chip-amber">⚔️ Frappe Contrôlée</span>
+                    <span class="effect-chip chip-blue">🛡️ Garde Maintenue</span>
+                  </div>
+                </div>
+
+                <!-- Skill 2 -->
+                <div class="skill-card voxel-bevel">
+                  <div class="skill-top">
+                    <div class="skill-name-wrap">
+                      <span class="skill-type-tag tag-def">Posture Défensive Active</span>
+                      <h5 class="skill-name">Blocage Partiel</h5>
+                    </div>
+                    <div class="skill-costs">
+                      <span class="cost-item ether-cost">15 Éther</span>
+                      <span class="cost-item cd-cost">6s Recharge</span>
+                    </div>
+                  </div>
+                  <p class="skill-desc">Posture active réduisant considérablement un pourcentage des dégâts subis de face contre une perte d'endurance/stamina.</p>
+                  <div class="skill-footer">
+                    <span class="effect-chip chip-amber">🛡️ Réduction Frontale Massive</span>
+                    <span class="effect-chip chip-blue">⚡ Consommation Stamina</span>
+                  </div>
+                </div>
+
+                <!-- Skill 3 -->
+                <div class="skill-card voxel-bevel">
+                  <div class="skill-top">
+                    <div class="skill-name-wrap">
+                      <span class="skill-type-tag tag-buff">Aura de Renfort</span>
+                      <h5 class="skill-name">Buff de Défense</h5>
+                    </div>
+                    <div class="skill-costs">
+                      <span class="cost-item ether-cost">25 Éther</span>
+                      <span class="cost-item cd-cost">18s Recharge</span>
+                    </div>
+                  </div>
+                  <p class="skill-desc">Renforce l'armure et les résistances magiques de la Sentinelle et des alliés adjacents pendant plusieurs tours.</p>
+                  <div class="skill-footer">
+                    <span class="effect-chip chip-blue">✨ Armure &amp; Résistances Magiques</span>
+                    <span class="effect-chip chip-amber">👥 Synergie d'Escouade</span>
+                  </div>
+                </div>
+
+                <!-- Skill 4 -->
+                <div class="skill-card voxel-bevel">
+                  <div class="skill-top">
+                    <div class="skill-name-wrap">
+                      <span class="skill-type-tag tag-atk">Impact &amp; Répulsion</span>
+                      <h5 class="skill-name">Bash au Bouclier</h5>
+                    </div>
+                    <div class="skill-costs">
+                      <span class="cost-item ether-cost">20 Éther</span>
+                      <span class="cost-item cd-cost">8s Recharge</span>
+                    </div>
+                  </div>
+                  <p class="skill-desc">Coup violent asséné avec le pavois, repoussant la cible de quelques cases et lui infligeant l'état Déséquilibre.</p>
+                  <div class="skill-footer">
+                    <span class="effect-chip chip-red">💥 Déséquilibre Majeur</span>
+                    <span class="effect-chip chip-blue">⚓ Répulsion Voxel</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4 : Mécaniques & Synergies Tactiques -->
+    <section class="section-tactics" id="tactics">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="section-subtitle">Profondeur de Jeu</div>
+          <h2 class="section-title">Synergies &amp; Altérations d'État</h2>
+          <p class="section-desc">
+            Chaque classe combine des états critiques pour déclencher des réactions en chaîne au combat.
+          </p>
+        </div>
+
+        <div class="tactics-grid">
+          <div class="tactic-card voxel-bevel">
+            <div class="tactic-icon-box green-box">☠️</div>
+            <h3>Poisons &amp; Neurotoxines</h3>
+            <p>Infligés par le Rogue et l'Assassin. Dégâts d'érosion continus contournant les défenses physiques et réduisant les soins ennemis.</p>
+            <div class="tactic-badge">Appliqué par : Rogue, Assassin</div>
+          </div>
+
+          <div class="tactic-card voxel-bevel">
+            <div class="tactic-icon-box red-box">🩸</div>
+            <h3>Saignements &amp; Lacérations</h3>
+            <p>Provoqués par les lames effilées et pointes d'acier. Les dégâts s'intensifient chaque fois que la cible se déplace sur la grille voxel.</p>
+            <div class="tactic-badge">Appliqué par : Guerrier, Rogue</div>
+          </div>
+
+          <div class="tactic-card voxel-bevel">
+            <div class="tactic-icon-box blue-box">⚡</div>
+            <h3>Déséquilibre &amp; Vulnérabilité</h3>
+            <p>Fracas au bouclier et tirs de rupture neutralisent la garde adverse, augmentant tous les dégâts critiques subis de 35%.</p>
+            <div class="tactic-badge">Appliqué par : Sentinelle, Arbalétrier</div>
+          </div>
+
+          <div class="tactic-card voxel-bevel">
+            <div class="tactic-icon-box amber-box">⚙️</div>
+            <h3>Recharges Préparées</h3>
+            <p>L'Arbalétrier charge tactiquement ses munitions (transperçantes, explosives, neutralisantes) pour s'adapter à la menace en temps réel.</p>
+            <div class="tactic-badge">Appliqué par : Arbalétrier</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5 : Chroniques & Devlogs Officiels (Timeline Frise) -->
+    <section class="section-devlogs" id="devlogs">
+      <div class="container">
+        <div class="section-header text-center">
+          <div class="hero-tag">
+            <span class="tag-dot"></span>
+            <span>Journal Officiel de Développement</span>
+          </div>
+          <h2 class="section-title">Chroniques du Front &amp; Devlogs</h2>
+          <p class="section-desc centered-desc">
+            Suivi officiel et horodaté de la conception d'Aether Vanguard. Jalons techniques, arbitrages de design et déploiements documentés au fil de l'expédition.
+          </p>
+        </div>
+
+        <!-- Vertical Timeline Frise (Design conforme au schéma) -->
+        <div class="timeline-container">
+          <div class="timeline-spine" aria-hidden="true">
+            <div class="timeline-spine-glow"></div>
+          </div>
+
+          <!-- Devlog Entry 1 : Création du projet (23/10/2026) -->
+          <article class="timeline-entry" id="devlog-01">
+            <div class="timeline-node">
+              <span class="node-crest">❖</span>
+            </div>
+
+            <div class="timeline-card voxel-bevel">
+              <div class="timeline-header">
+                <div class="timeline-date-badge">
+                  <span class="date-icon">📅</span>
+                  <time datetime="2026-10-23">23 / 10 / 2026</time>
+                </div>
+                <span class="timeline-tag tag-genesis">Devlog #01 • Création du Projet</span>
+                <span class="timeline-status-pill">Canon Officiel</span>
+              </div>
+
+              <h3 class="timeline-title">
+                Création Officielle du Projet : Aether Vanguard
+              </h3>
+              <div class="timeline-codename">
+                Nom de code initial : <span class="text-gold">« Antigravity »</span>
+              </div>
+
+              <p class="timeline-summary">
+                Lancement officiel et fixation des piliers de conception pour <strong>Aether Vanguard</strong>, RPG tactique sombre de gestion de mercenaires en vue top-down dézoomée avec rendu voxel stylisé.
+              </p>
+
+              <div class="timeline-pillars-grid">
+                <div class="pillar-item">
+                  <div class="pillar-icon">⚔️</div>
+                  <div class="pillar-text">
+                    <strong>Troupes de 12 &amp; Grille 3x4 :</strong> Organisation des mercenaires en escouades de 12 sur une formation tactique préparatoire (Frontline, Midline, Backline). Multi-troupes en temps réel et raids coopératifs.
+                  </div>
+                </div>
+
+                <div class="pillar-item">
+                  <div class="pillar-icon">📜</div>
+                  <div class="pillar-text">
+                    <strong>Gambits Programmables :</strong> Boucle continue de prise de décision sans délai. De 3 slots initiaux jusqu'à 10 slots débloqués via des formations d'entraînement au QG.
+                  </div>
+                </div>
+
+                <div class="pillar-item">
+                  <div class="pillar-icon">✨</div>
+                  <div class="pillar-text">
+                    <strong>Affinité &amp; Éther Collectif :</strong> Réserve commune d'Éther calculée par la somme des stats d'Affinité des 12 unités. Démarrage au maximum, recharge passive à 1% et compétences de canalisation.
+                  </div>
+                </div>
+
+                <div class="pillar-item">
+                  <div class="pillar-icon">🏰</div>
+                  <div class="pillar-text">
+                    <strong>Donjons Procéduraux &amp; Salles :</strong> Couloirs linéaires ponctués par des points d'arrêt (Salles d'ennemis, de 5 à 20+). Condition absolue de réussite : 100% de survie sans aucun mort.
+                  </div>
+                </div>
+              </div>
+
+              <div class="timeline-footer">
+                <div class="timeline-author">
+                  <span class="author-avatar">🛡️</span>
+                  <span>Commandement de l'Avant-Garde</span>
+                </div>
+                <div class="timeline-version-tag">
+                  Version Initiale : <code>v0.1.0</code>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Jalon de Version sur la Frise (Correspond au "- v0.1.1" du schéma) -->
+          <div class="timeline-milestone-marker">
+            <div class="milestone-line-left"></div>
+            <div class="milestone-badge">
+              <span class="milestone-icon">❖</span>
+              <span>Jalon v0.1.1 — Socle Pré-Alpha</span>
+            </div>
+            <div class="milestone-line-right"></div>
+          </div>
+
+          <!-- Nœud En Attente (Boîte [...] du schéma) -->
+          <div class="timeline-pending-node">
+            <div class="pending-card voxel-bevel">
+              <div class="pending-dots">. . .</div>
+              <span class="pending-text">Prochain jalon de développement en cours de rédaction</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <span class="brand-crest">❖</span>
+        <span class="brand-name">AETHER VANGUARD</span>
+        <p class="footer-tagline">Projet RPG Tactique Voxel Top-Down • Dark Medieval Fantasy</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#hero">Haut de Page</a>
+        <a href="#class-tree-section">Arbre de Classes</a>
+        <a href="#class-details">Grimoire</a>
+        <a href="#tactics">Mécaniques</a>
+        <a href="#devlogs">Devlogs</a>
+      </div>
+
+      <div class="footer-meta">
+        <div class="build-badge">
+          <span class="badge-dot"></span>
+          <span>Prototype Alpha • One-Page Vitrine</span>
+        </div>
+        <p class="copyright">© 2026 Aether Vanguard. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Modal for Hero Concept Image -->
+  <div class="lightbox-modal" id="hero-lightbox" aria-hidden="true" role="dialog" aria-label="Agrandissement de la vision cible">
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-content-wrapper">
+      <button type="button" class="lightbox-close-btn" id="lightbox-close" aria-label="Fermer la vue agrandie">✕</button>
+      <div class="lightbox-frame voxel-bevel">
+        <img src="assets/voxel_hero.jpg" alt="Agrandissement de la vision artistique cible voxel Aether Vanguard" class="lightbox-image">
+        <div class="lightbox-caption-bar">
+          <div class="caption-header">
+            <span class="caption-dot"></span>
+            <span class="caption-tag">OBJECTIF DE DÉVELOPPEMENT • VISION REPRÉSENTATIVE</span>
+          </div>
+          <h4 class="caption-title">Arène Tactique Voxel Top-Down (Rendu Cible 60°)</h4>
+          <p class="caption-text">
+            Ce visuel illustre l'objectif esthétique final du projet : quadrillage tactique en dalles de pierre taillée, runes d'éther lumineuses, éclairage volumétrique et figurines voxel détaillées. <em>Il s'agit d'une maquette de vision cible et non d'une capture d'écran de gameplay direct.</em>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
