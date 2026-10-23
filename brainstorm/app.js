@@ -1,5 +1,5 @@
 /**
- * ANTIGRAVITY — CODEX & BRAINSTORMING STUDIO (v1.2.0)
+ * AETHER VANGUARD — CODEX & BRAINSTORMING STUDIO (v1.3.0)
  * 16:9 Widescreen Game Design Studio:
  * - Macro Poles Bar & 28 Brainstormed Classes
  * - Redundancy Risk Arbitrations & Weapon Signatures
@@ -23,8 +23,8 @@ let currentBrainstormSection = 'arbitrages'; // 'arbitrages' | 'backlog'
 // Autonomous Fallback Data in case local file:// CORS blocks fetch('data.json')
 const FALLBACK_DATA = {
   "project": {
-    "title": "Antigravity RPG — Codex & Brainstorming Studio",
-    "version": "1.2.0",
+    "title": "Aether Vanguard — Codex & Studio de Brainstorming",
+    "version": "1.3.0",
     "description": "Base de données modulaire des classes, des moyens d'obtention et du catalogue indépendant des sorts pour le game design et l'équilibrage.",
     "lastUpdated": "2026-10-22",
     "widescreenOptimized": true
@@ -1805,7 +1805,7 @@ async function initCodexStudio() {
     if (!response.ok) throw new Error('CORS or file protocol restriction');
     codexData = await response.json();
   } catch (err) {
-    console.warn('Utilisation du dataset autonome sécurisé pour Antigravity Codex :', err);
+    console.warn('Utilisation du dataset autonome sécurisé pour Aether Vanguard Codex :', err);
     codexData = FALLBACK_DATA;
   }
 
@@ -1840,10 +1840,17 @@ function populateMetrics() {
     c.designEvaluation && c.designEvaluation.redundancyRisk && c.designEvaluation.redundancyRisk.toLowerCase().includes('élevé')
   ).length : 0;
 
-  document.getElementById('metric-total-classes').textContent = totalClasses;
-  document.getElementById('metric-total-spells').textContent = totalSpells;
-  document.getElementById('metric-redundancy-count').textContent = highRiskClasses;
-  document.getElementById('metric-completion').textContent = `${completionRate}%`;
+  const elClasses = document.getElementById('metric-total-classes');
+  if (elClasses) elClasses.textContent = totalClasses;
+
+  const elSpells = document.getElementById('metric-total-spells');
+  if (elSpells) elSpells.textContent = totalSpells;
+
+  const elRedundancy = document.getElementById('metric-redundancy-count');
+  if (elRedundancy) elRedundancy.textContent = highRiskClasses;
+
+  const elCompletion = document.getElementById('metric-completion');
+  if (elCompletion) elCompletion.textContent = `${completionRate}%`;
 
   const badgeSpells = document.getElementById('tab-badge-spells-count');
   if (badgeSpells) badgeSpells.textContent = totalSpells;
@@ -1860,8 +1867,8 @@ function populateMetrics() {
   const statTodo = document.getElementById('stat-todo-count');
 
   if (statDone) statDone.textContent = doneSpells;
-  if (statBalance) statBalance.textContent = codexData.spells.filter(s => s.status === 'À Équilibrer').length;
-  if (statTodo) statTodo.textContent = codexData.spells.filter(s => s.status === 'À Concevoir').length;
+  if (statBalance) statBalance.textContent = codexData.spells ? codexData.spells.filter(s => s.status === 'À Équilibrer').length : 0;
+  if (statTodo) statTodo.textContent = codexData.spells ? codexData.spells.filter(s => s.status === 'À Concevoir').length : 0;
 }
 
 // =============================================================================
@@ -1911,7 +1918,8 @@ function renderClassesView() {
   const countLabel = document.getElementById('classes-results-count');
   if (!cardsContainer || !matrixTbody) return;
 
-  const query = (document.getElementById('class-search-input').value || '').toLowerCase().trim();
+  const searchInput = document.getElementById('class-search-input');
+  const query = (searchInput && searchInput.value ? searchInput.value : '').toLowerCase().trim();
 
   const filtered = (codexData.classes || []).filter(cls => {
     const matchPole = currentPoleFilter === 'all' || cls.pole === currentPoleFilter;
@@ -2092,10 +2100,10 @@ function renderSpellsView() {
   const cardsContainer = document.getElementById('spells-cards-container');
   const groupedContainer = document.getElementById('spells-grouped-container');
   const countLabel = document.getElementById('spells-results-count');
+  if (!tbody && !cardsContainer && !groupedContainer) return;
 
-  if (!tbody || !cardsContainer || !groupedContainer) return;
-
-  const query = (document.getElementById('spell-search-input').value || '').toLowerCase().trim();
+  const searchInput = document.getElementById('spell-search-input');
+  const query = (searchInput && searchInput.value ? searchInput.value : '').toLowerCase().trim();
 
   const filtered = (codexData.spells || []).filter(spell => {
     // Status Filter

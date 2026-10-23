@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aether Vanguard — Classes &amp; Pôles Tactiques (Codex Studio)</title>
+  <meta name="description" content="Matrice des classes, moyens d'obtention, pôles tactiques et analyse des redondances pour Aether Vanguard RPG.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- Subtle Orthogonal Grid Backdrop -->
+  <div class="voxel-grid-overlay" aria-hidden="true"></div>
+
+  <!-- App Header & KPI Bar (16:9 Widescreen Optimized) -->
+  <header class="app-header">
+    <div class="container header-layout">
+      <div class="header-brand">
+        <span class="brand-crest">❖</span>
+        <div>
+          <h1 class="brand-title">AETHER VANGUARD // CODEX STUDIO</h1>
+          <span class="brand-sub">Game Design Studio &bull; Matrice des 28 Classes, Pôles &amp; Arbitrages</span>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Bar -->
+      <div class="header-metrics">
+        <div class="metric-box">
+          <span class="metric-val" id="metric-total-classes">28</span>
+          <span class="metric-lbl">Classes &amp; Concepts</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-val" id="metric-total-spells">--</span>
+          <span class="metric-lbl">Sorts au Catalogue</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-val text-warn" id="metric-redundancy-count">--</span>
+          <span class="metric-lbl">Redondances à Arbitrer</span>
+        </div>
+        <div class="metric-box metric-progress-box">
+          <div class="metric-val text-gold" id="metric-completion">--%</div>
+          <span class="metric-lbl">Sorts Validés (Fait)</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Multi-Page Global Navigation Bar -->
+  <nav class="view-navigation container" aria-label="Navigation principale">
+    <div class="view-tabs-list">
+      <a href="index.html" class="view-tab-btn">
+        <span class="tab-icon">📜</span>
+        <span>Manifeste &amp; Scope du Projet</span>
+      </a>
+      <a href="classes.html" class="view-tab-btn active">
+        <span class="tab-icon">🔮</span>
+        <span>Classes &amp; Moyens d'Obtention</span>
+        <span class="tab-badge" id="tab-badge-classes-count">28</span>
+      </a>
+      <a href="spells.html" class="view-tab-btn">
+        <span class="tab-icon">⚡</span>
+        <span>Catalogue des Sorts (Audit)</span>
+        <span class="tab-badge" id="tab-badge-spells-count">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Views Container -->
+  <main class="container main-content">
+
+    <!-- =========================================================================
+         CLASSES & MOYENS D'OBTENTION
+         ========================================================================= -->
+    <section class="app-view active-view" id="view-classes">
+      
+      <!-- Pôles Tactiques Macro Bar -->
+      <div class="poles-macro-bar voxel-bevel">
+        <div class="poles-bar-header">
+          <span class="poles-bar-title">🏛️ Pôles Tactiques &amp; Familles de Combat :</span>
+          <span class="poles-bar-sub">Cliquez sur un pôle pour filtrer instantanément la matrice</span>
+        </div>
+        <div class="poles-pills-list" id="poles-container">
+          <!-- Dynamically populated by app.js -->
+        </div>
+      </div>
+
+      <!-- Classes Toolbar & Controls -->
+      <div class="view-toolbar classes-toolbar">
+        <div class="toolbar-search">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="class-search-input" placeholder="Rechercher une classe, arme, rôle ou prérequis (ex: pavois, masse, poison)..." aria-label="Recherche de classe">
+        </div>
+
+        <div class="toolbar-filters">
+          <span class="filter-label">Risque Redondance :</span>
+          <button type="button" class="filter-pill-risk active" data-risk="all">Tous</button>
+          <button type="button" class="filter-pill-risk" data-risk="high">⚠️ Risque Élevé</button>
+          <button type="button" class="filter-pill-risk" data-risk="medium">⚡ Moyen</button>
+          <button type="button" class="filter-pill-risk" data-risk="low">✅ Validé / Faible</button>
+        </div>
+
+        <div class="toolbar-view-mode">
+          <span class="filter-label">Affichage :</span>
+          <div class="btn-group-toggle">
+            <button type="button" class="btn-toggle active" id="btn-mode-cards" title="Vue Fiches Détaillées">🎴 Fiches</button>
+            <button type="button" class="btn-toggle" id="btn-mode-matrix" title="Vue Tableau de Synthèse 16:9">📊 Synthèse 16:9</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Classes Results Info -->
+      <div class="results-meta-row">
+        <span id="classes-results-count" class="results-count-text">Chargement des classes...</span>
+      </div>
+
+      <!-- Mode 1 : Cards Grid Container -->
+      <div class="classes-matrix-grid" id="classes-cards-container">
+        <!-- Rendered dynamically by app.js -->
+      </div>
+
+      <!-- Mode 2 : Compact Matrix Table Container (Hidden by default) -->
+      <div class="classes-table-wrapper voxel-bevel" id="classes-matrix-table-container" style="display: none;">
+        <table class="classes-matrix-table" id="classes-matrix-table">
+          <thead>
+            <tr>
+              <th>Classe</th>
+              <th>Pôle &amp; Palier</th>
+              <th>Arme Signature</th>
+              <th>Rôle Tactique</th>
+              <th>Moyen d'Obtention</th>
+              <th>Risque Redondance</th>
+              <th>Arbitrage / Différenciation Clé</th>
+              <th>Sorts</th>
+            </tr>
+          </thead>
+          <tbody id="classes-matrix-tbody">
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         ARBITRAGES & REDONDANCES
+         ========================================================================= -->
+    <section class="app-view active-view" id="view-brainstorm" style="margin-top: 40px;">
+      <div class="brainstorm-subnav">
+        <div class="btn-group-toggle">
+          <button type="button" class="btn-toggle active" id="btn-show-arbitrages">
+            ⚖️ Arbitrages des Redondances (Classes Proches)
+          </button>
+          <button type="button" class="btn-toggle" id="btn-show-backlog">
+            📋 Backlog Évolutif &amp; Mécaniques Futures
+          </button>
+        </div>
+      </div>
+
+      <!-- Sub-view 1 : Arbitrages Grid -->
+      <div id="section-arbitrages">
+        <div class="arbitrages-grid" id="arbitrages-container">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+
+      <!-- Sub-view 2 : Feature Backlog Grid -->
+      <div id="section-backlog" style="display: none;">
+        <div class="backlog-filters-row">
+          <span class="filter-label">Catégorie :</span>
+          <button type="button" class="filter-pill-backlog active" data-cat="all">Toutes</button>
+          <button type="button" class="filter-pill-backlog" data-cat="Combat">Combat</button>
+          <button type="button" class="filter-pill-backlog" data-cat="Progression">Progression</button>
+          <button type="button" class="filter-pill-backlog" data-cat="UI">Interface</button>
+          <button type="button" class="filter-pill-backlog" data-cat="Contenu">Contenu</button>
+        </div>
+        <div class="features-grid" id="backlog-features-container">
+          <!-- Rendered dynamically by app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         BAC À SABLE & EXPORT JSON
+         ========================================================================= -->
+    <section class="app-view active-view" id="view-editor" style="margin-top: 40px; margin-bottom: 60px;">
+      <div class="editor-grid">
+        <!-- Left : Fast Class Creator Form -->
+        <div class="editor-form-card voxel-bevel">
+          <div class="card-title-row">
+            <h3>⚡ Ajout Rapide d'une Classe au Codex</h3>
+            <span class="tag tag-dim">Sandbox Game Design</span>
+          </div>
+          <p class="form-intro-desc">
+            Créez une nouvelle classe prototype. Elle sera injectée directement dans le dataset en mémoire avec prévisualisation JSON immédiate.
+          </p>
+
+          <form id="form-create-class" class="creator-form">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="new-class-name">Nom de la Classe :</label>
+                <input type="text" id="new-class-name" required placeholder="Ex: Fracasseur, Envoûteur...">
+              </div>
+              <div class="form-group">
+                <label for="new-class-avatar">Émoji / Glyphe :</label>
+                <input type="text" id="new-class-avatar" placeholder="Ex: 🌿, 💀, 🎵...">
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="new-class-pole">Pôle Tactique :</label>
+                <select id="new-class-pole">
+                  <option value="frontline">Frontline &amp; Remparts</option>
+                  <option value="hast">Hast &amp; Allonge</option>
+                  <option value="balistique">Balistique &amp; Tir</option>
+                  <option value="furtivite">Ombre &amp; Furtivité</option>
+                  <option value="divin">Ordre Sacré &amp; Foi</option>
+                  <option value="arcanique">Arcanes &amp; Éléments</option>
+                  <option value="occulte">Magie Sombre &amp; Mort</option>
+                  <option value="invocation">Invocations &amp; Totems</option>
+                  <option value="acoustique">Acoustique &amp; Rythme</option>
+                  <option value="hybride" selected>Voies Croisées Hybrides</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="new-class-tier">Palier :</label>
+                <select id="new-class-tier">
+                  <option value="1">Palier 1 (Base)</option>
+                  <option value="2" selected>Palier 2 (Spécialisation / Hybride)</option>
+                  <option value="3">Palier 3 (Ascension Parangon)</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="new-class-weapon">Arme Signature :</label>
+              <input type="text" id="new-class-weapon" placeholder="Ex: Pavois à deux mains, Grande masse étoile, Flûte...">
+            </div>
+
+            <div class="form-group">
+              <label for="new-class-obtainment">Moyens d'Obtention &amp; Prérequis :</label>
+              <textarea id="new-class-obtainment" rows="2" placeholder="Ex: Guerrier Niv. 20 + 1000 Pièces d'Acier"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="new-class-summary">Rôle &amp; Résumé Tactique :</label>
+              <textarea id="new-class-summary" rows="2" placeholder="Ex: Combattant de choc brisant les dalles voxel de combat..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="new-class-arbitrage">Arbitrage / Risque de Redondance :</label>
+              <textarea id="new-class-arbitrage" rows="2" placeholder="Ex: À différencier de la Sentinelle par la lenteur et la destruction d'armure..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-chamfer btn-primary">
+              <span>+ Enregistrer la Classe dans le Codex</span>
+            </button>
+          </form>
+        </div>
+
+        <!-- Right : Contained Raw JSON View & Actions -->
+        <div class="editor-json-card voxel-bevel">
+          <div class="json-card-header">
+            <div>
+              <h4>Fichier de Données : data.json</h4>
+              <span class="json-sub-text">Données actualisées en temps réel &bull; Conteneur sécurisé</span>
+            </div>
+            <div class="json-actions">
+              <button type="button" class="btn-hud" id="btn-toggle-json" title="Replier ou déplier le visualiseur">Masquer</button>
+              <button type="button" class="btn-hud" id="btn-copy-json" title="Copier le JSON">Copier</button>
+              <button type="button" class="btn btn-chamfer btn-accent btn-sm" id="btn-download-json">
+                <span>⬇ Télécharger</span>
+              </button>
+            </div>
+          </div>
+          <div class="json-viewer-container" id="json-viewer-box">
+            <pre><code id="json-preview-code">Chargement des données...</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

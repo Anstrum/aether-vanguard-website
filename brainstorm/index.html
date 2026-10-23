@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Antigravity — Studio de Brainstorming &amp; Équilibrage (Classes &amp; Sorts)</title>
-  <meta name="description" content="Outil de brainstorming et d'analyse game design pour Antigravity RPG : exploration des classes, évaluation des redondances, moyens d'obtention et catalogue indépendant des sorts.">
+  <title>Aether Vanguard — Manifeste de Conception &amp; Scope Officiel</title>
+  <meta name="description" content="Manifeste officiel de game design pour Aether Vanguard : cadrage fondamental, 12 mercenaires, grille 3x4, boucle de gambits en temps réel, éther commun et règle des 100% de survie.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -14,14 +14,14 @@
   <!-- Subtle Orthogonal Grid Backdrop -->
   <div class="voxel-grid-overlay" aria-hidden="true"></div>
 
-  <!-- App Header & KPI Bar (Optimized Full-Widescreen 16:9) -->
+  <!-- App Header & KPI Bar (16:9 Widescreen Optimized) -->
   <header class="app-header">
     <div class="container header-layout">
       <div class="header-brand">
         <span class="brand-crest">❖</span>
         <div>
-          <h1 class="brand-title">ANTIGRAVITY // CODEX STUDIO</h1>
-          <span class="brand-sub">Game Design Studio &bull; 16:9 Widescreen Matrix &bull; Matrice des 28 Classes &amp; Audit des Sorts</span>
+          <h1 class="brand-title">AETHER VANGUARD // CODEX &amp; MANIFESTE</h1>
+          <span class="brand-sub">Game Design Studio &bull; Cadrage Canonique &bull; Piliers Systémiques &amp; Scope Inviolable</span>
         </div>
       </div>
 
@@ -47,412 +47,431 @@
     </div>
   </header>
 
-  <!-- Navigation View Tabs -->
-  <nav class="view-navigation container" aria-label="Modes de consultation">
-    <div class="view-tabs-list" role="tablist">
-      <button type="button" class="view-tab-btn active" data-view="classes" role="tab">
-        <span class="tab-icon">🗂️</span>
+  <!-- Multi-Page Global Navigation Bar -->
+  <nav class="view-navigation container" aria-label="Navigation principale">
+    <div class="view-tabs-list">
+      <a href="index.html" class="view-tab-btn active">
+        <span class="tab-icon">📜</span>
+        <span>Manifeste &amp; Scope du Projet</span>
+      </a>
+      <a href="classes.html" class="view-tab-btn">
+        <span class="tab-icon">🔮</span>
         <span>Classes &amp; Moyens d'Obtention</span>
         <span class="tab-badge" id="tab-badge-classes-count">28</span>
-      </button>
-      <button type="button" class="view-tab-btn" data-view="spells" role="tab">
-        <span class="tab-icon">📜</span>
-        <span>Catalogue des Sorts (Audit &amp; Listing)</span>
-        <span class="tab-badge" id="tab-badge-spells-count">0</span>
-      </button>
-      <button type="button" class="view-tab-btn" data-view="brainstorm" role="tab">
-        <span class="tab-icon">📋</span>
-        <span>Arbitrages &amp; Backlog Futur</span>
-        <span class="tab-badge" id="tab-badge-backlog-count">6</span>
-      </button>
-      <button type="button" class="view-tab-btn" data-view="editor" role="tab">
+      </a>
+      <a href="spells.html" class="view-tab-btn">
         <span class="tab-icon">⚡</span>
-        <span>Créateur &amp; Export JSON</span>
-      </button>
+        <span>Catalogue des Sorts (Audit)</span>
+        <span class="tab-badge" id="tab-badge-spells-count">0</span>
+      </a>
     </div>
   </nav>
 
-  <!-- Main Views Container -->
-  <main class="container main-content">
+  <!-- Main Content : The Great Manifesto -->
+  <main class="container main-content manifesto-wrapper">
 
-    <!-- =========================================================================
-         VIEW 1 : CLASSES & MOYENS D'OBTENTION
-         ========================================================================= -->
-    <section class="app-view active-view" id="view-classes">
-      
-      <!-- Pôles Tactiques Macro Bar -->
-      <div class="poles-macro-bar voxel-bevel">
-        <div class="poles-bar-header">
-          <span class="poles-bar-title">🏛️ Pôles Tactiques &amp; Familles de Combat :</span>
-          <span class="poles-bar-sub">Cliquez sur un pôle pour filtrer instantanément la vue globale</span>
-        </div>
-        <div class="poles-pills-list" id="poles-container">
-          <!-- Dynamically populated by app.js -->
+    <!-- Hero Banner -->
+    <header class="manifesto-hero voxel-bevel">
+      <div class="manifesto-pre-tag">
+        <span>❖ Document de Référence Game Design</span>
+        <span>&bull; Version 1.3.0 Canon</span>
+      </div>
+      <h2 class="manifesto-title">MANIFESTE OFFICIEL // AETHER VANGUARD</h2>
+      <p class="manifesto-subtitle">
+        Ce manifeste synthétise l'ADN fondamental, l'architecture systémique et les règles de conception strictes d'<strong>Aether Vanguard</strong>. Il sert de boussole permanente aux concepteurs et aux agents d'IA pour maintenir le jeu dans son scope, éliminer les confusions de gameplay et garantir la cohérence absolue de l'expérience joueur.
+      </p>
+
+      <!-- Mandatory Agent Directive Callout -->
+      <div class="manifesto-directive-box voxel-bevel">
+        <span class="directive-icon">🛑</span>
+        <div class="directive-content">
+          <h4>Directive de Cadrage Obligatoire (Agents &amp; Concepteurs)</h4>
+          <p>
+            Tout agent ou intervenant démarrant sur ce projet doit <strong>impérativement intégrer les piliers décrits sur cette page</strong> avant de proposer du code ou d'ajuster le design. Le jeu n'est <em>ni un tour par tour</em>, <em>ni un jeu sur case libre</em>, <em>ni un tactical standard</em> : c'est un RPG de gestion de mercenaires automatisé par Gambits en temps réel continu avec une réserve d'éther commune et une règle de survie intégrale.
+          </p>
         </div>
       </div>
+    </header>
 
-      <!-- Classes Toolbar & Controls -->
-      <div class="view-toolbar classes-toolbar">
-        <div class="toolbar-search">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="class-search-input" placeholder="Rechercher une classe, arme, rôle ou prérequis (ex: pavois, masse, poison)..." aria-label="Recherche de classe">
-        </div>
+    <!-- Sticky Anchors Quick Bar -->
+    <nav class="manifesto-anchors-bar voxel-bevel" aria-label="Sommaire du Manifeste">
+      <span class="anchors-label">Sections :</span>
+      <a href="#section-vision" class="anchor-pill">01. Vision &amp; DA</a>
+      <a href="#section-troupes-grid" class="anchor-pill">02. 12 Mercenaires &amp; Grille 3x4</a>
+      <a href="#section-gambits" class="anchor-pill">03. Gambits Temps Réel</a>
+      <a href="#section-ether" class="anchor-pill">04. Éther Collectif</a>
+      <a href="#section-donjons" class="anchor-pill">05. Donjons &amp; Règle 100%</a>
+      <a href="#section-modes" class="anchor-pill">06. Normal vs Hardcore</a>
+      <a href="#section-progression" class="anchor-pill">07. Branches &amp; Économie</a>
+      <a href="#section-scope" class="anchor-pill">08. Scope Guardrails</a>
+    </nav>
 
-        <div class="toolbar-filters">
-          <span class="filter-label">Risque Redondance :</span>
-          <button type="button" class="filter-pill-risk active" data-risk="all">Tous</button>
-          <button type="button" class="filter-pill-risk" data-risk="high">⚠️ Risque Élevé</button>
-          <button type="button" class="filter-pill-risk" data-risk="medium">⚡ Moyen</button>
-          <button type="button" class="filter-pill-risk" data-risk="low">✅ Validé / Faible</button>
-        </div>
-
-        <div class="toolbar-view-mode">
-          <span class="filter-label">Affichage :</span>
-          <div class="btn-group-toggle">
-            <button type="button" class="btn-toggle active" id="btn-mode-cards" title="Vue Fiches Détaillées">🎴 Fiches</button>
-            <button type="button" class="btn-toggle" id="btn-mode-matrix" title="Vue Tableau de Synthèse 16:9">📊 Synthèse 16:9</button>
-          </div>
-        </div>
+    <!-- SECTION 1 : VISION & IDENTITÉ ARTISTIQUE -->
+    <section class="manifesto-section voxel-bevel" id="section-vision">
+      <div class="manifesto-section-header">
+        <h3>01. Vision Globale &amp; Direction Artistique</h3>
+        <span class="section-num-tag">PILIER 01</span>
       </div>
-
-      <!-- Classes Results Info -->
-      <div class="results-meta-row">
-        <span id="classes-results-count" class="results-count-text">Chargement des classes...</span>
-      </div>
-
-      <!-- Mode 1 : Cards Grid Container -->
-      <div class="classes-matrix-grid" id="classes-cards-container">
-        <!-- Rendered dynamically by app.js -->
-      </div>
-
-      <!-- Mode 2 : Compact Matrix Table Container (Hidden by default) -->
-      <div class="classes-table-wrapper voxel-bevel" id="classes-matrix-table-container" style="display: none;">
-        <table class="classes-matrix-table" id="classes-matrix-table">
-          <thead>
-            <tr>
-              <th>Classe</th>
-              <th>Pôle &amp; Palier</th>
-              <th>Arme Signature</th>
-              <th>Rôle Tactique</th>
-              <th>Moyen d'Obtention</th>
-              <th>Risque Redondance</th>
-              <th>Arbitrage / Différenciation Clé</th>
-              <th>Sorts</th>
-            </tr>
-          </thead>
-          <tbody id="classes-matrix-tbody">
-            <!-- Rendered dynamically by app.js -->
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         VIEW 2 : CATALOGUE INDÉPENDANT DES SORTS (AUDIT & LISTING)
-         ========================================================================= -->
-    <section class="app-view" id="view-spells">
-      <!-- Spells Summary Banner -->
-      <div class="spells-summary-card voxel-bevel">
-        <div class="summary-info">
-          <h3>Catalogue Unifié de Toutes les Compétences</h3>
-          <p>Consultez, filtrez et auditez l'ensemble des sorts du jeu indépendamment des classes. Repérez les trous de conception (manque de sorts de zone, manque de stuns ou doublons d'effets).</p>
+      <p class="manifesto-lead-text">
+        <strong>Aether Vanguard</strong> est un <strong>RPG tactique sombre de gestion de mercenaires</strong> en <strong>vue top-down dézoomée</strong> avec un <strong>rendu voxel stylisé et technique</strong>.
+      </p>
+      <div class="card-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 16px;">
+        <div class="voxel-bevel" style="background:#11141b; border:1px solid var(--border-steel); padding:20px;">
+          <h4 style="font-family:var(--font-serif); color:var(--accent-gold-light); margin-bottom:10px;">🌑 Ambiance &amp; Matières</h4>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">
+            Dark Medieval Fantasy austère et géométrique : dalles de pierre de taille sombre, fer forgé lourd, acier froid brossé, enluminures gravées et lueurs arcaniques bleutées et dorées. Aucune fioriture bariolée.
+          </p>
         </div>
-        <div class="spells-stat-breakdown">
-          <div class="breakdown-item done">
-            <span class="dot-status"></span>
-            <span class="bd-label">Fait &bull; Validé :</span>
-            <strong id="stat-done-count">0</strong>
-          </div>
-          <div class="breakdown-item balance">
-            <span class="dot-status"></span>
-            <span class="bd-label">À Équilibrer / Prototype :</span>
-            <strong id="stat-balance-count">0</strong>
-          </div>
-          <div class="breakdown-item todo">
-            <span class="dot-status"></span>
-            <span class="bd-label">À Concevoir :</span>
-            <strong id="stat-todo-count">0</strong>
-          </div>
-        </div>
-      </div>
-
-      <!-- Spells Filter Bar -->
-      <div class="view-toolbar spells-toolbar">
-        <div class="toolbar-search">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="spell-search-input" placeholder="Rechercher par nom, classe, effet (ex: stun, poison, soin, brise-armure, zone)..." aria-label="Recherche de sort">
-        </div>
-
-        <div class="toolbar-filters">
-          <span class="filter-label">Statut :</span>
-          <button type="button" class="filter-pill-status active" data-status="all">Tous</button>
-          <button type="button" class="filter-pill-status" data-status="Fait">Fait</button>
-          <button type="button" class="filter-pill-status" data-status="À Équilibrer">À Équilibrer</button>
-          <button type="button" class="filter-pill-status" data-status="À Concevoir">À Concevoir</button>
-        </div>
-
-        <div class="toolbar-filters">
-          <span class="filter-label">Type :</span>
-          <select id="spell-type-filter" class="toolbar-select">
-            <option value="all">Tous les Types</option>
-            <option value="offensif">Offensif / Dégâts</option>
-            <option value="soin">Soins &amp; Soutien</option>
-            <option value="defensif">Défensif &amp; Blocage</option>
-            <option value="controle">Contrôle (Stun / Taunt / Entrave)</option>
-            <option value="dot">Altération (Poison / Saignement / Brûlure)</option>
-            <option value="mobilite">Mobilité &amp; Téléportation</option>
-          </select>
-        </div>
-
-        <div class="toolbar-view-mode">
-          <span class="filter-label">Mode Sorts :</span>
-          <div class="btn-group-toggle">
-            <button type="button" class="btn-toggle active" id="btn-spells-table" title="Mode Tableau Dense">📋 Tableau</button>
-            <button type="button" class="btn-toggle" id="btn-spells-cards" title="Mode Cartes">🗂️ Fiches</button>
-            <button type="button" class="btn-toggle" id="btn-spells-grouped" title="Mode Groupé par Classe">📁 Par Classe</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Spells Results Meta -->
-      <div class="results-meta-row">
-        <span id="spells-results-count" class="results-count-text">Chargement des sorts...</span>
-      </div>
-
-      <!-- View Mode A : Spells Table Wrapper (Dense & Fast Scanning) -->
-      <div class="spells-table-wrapper voxel-bevel" id="spells-table-container">
-        <table class="spells-table" id="spells-table">
-          <thead>
-            <tr>
-              <th>Sort</th>
-              <th>Classe &amp; Pôle</th>
-              <th>Type de Compétence</th>
-              <th>Coût &amp; Cooldown</th>
-              <th>Portée</th>
-              <th>Description Tactique</th>
-              <th>Tags &amp; Effets</th>
-              <th>Statut Dev</th>
-            </tr>
-          </thead>
-          <tbody id="spells-tbody">
-            <!-- Rendered dynamically by app.js -->
-          </tbody>
-        </table>
-      </div>
-
-      <!-- View Mode B : Spells Cards Grid (Hidden by default) -->
-      <div class="spells-cards-grid" id="spells-cards-container" style="display: none;">
-        <!-- Rendered dynamically by app.js -->
-      </div>
-
-      <!-- View Mode C : Spells Grouped by Class Container (Hidden by default) -->
-      <div class="spells-grouped-container" id="spells-grouped-container" style="display: none;">
-        <!-- Rendered dynamically by app.js -->
-      </div>
-    </section>
-
-    <!-- =========================================================================
-         VIEW 3 : ARBITRAGES DE REDONDANCE & BACKLOG ROADMAP
-         ========================================================================= -->
-    <section class="app-view" id="view-brainstorm">
-      <div class="brainstorm-intro-card voxel-bevel">
-        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-          <div>
-            <h3>⚖️ Arbitrages des Redondances &amp; 📋 Backlog Futur</h3>
-            <p>Cet espace sépare les arbitrages immédiats sur les classes à risque et le backlog des fonctionnalités d'évolution (Hybridation Dual-Wield Niv. 100, Mentorat, Parchemins, Gambits, Loot).</p>
-          </div>
-          <div class="btn-group-toggle">
-            <button type="button" class="btn-toggle active" id="btn-show-arbitrages">⚖️ Arbitrages (5)</button>
-            <button type="button" class="btn-toggle" id="btn-show-backlog">📋 Backlog Fonctionnalités (6)</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sub-Section 1 : Arbitrages Grid -->
-      <div id="section-arbitrages">
-        <div class="results-meta-row">
-          <span class="results-count-text">Analyse comparative des classes à risque de chevauchement</span>
-        </div>
-        <div class="arbitrages-grid" id="arbitrages-container">
-          <!-- Rendered dynamically by app.js from data.json brainstormBacklog -->
-        </div>
-      </div>
-
-      <!-- Sub-Section 2 : Feature Backlog Container (Hidden by default) -->
-      <div id="section-backlog" style="display: none;">
-        <!-- Backlog Category Filters Toolbar -->
-        <div class="view-toolbar" style="margin-bottom: 16px;">
-          <div class="toolbar-filters">
-            <span class="filter-label">Catégorie :</span>
-            <button type="button" class="filter-pill-backlog active" data-cat="all">Toutes</button>
-            <button type="button" class="filter-pill-backlog" data-cat="Combat">Combat &amp; Gambits</button>
-            <button type="button" class="filter-pill-backlog" data-cat="Bastion">Bastion &amp; Mentorat</button>
-            <button type="button" class="filter-pill-backlog" data-cat="Progression">Progression &amp; XP</button>
-            <button type="button" class="filter-pill-backlog" data-cat="Loot">Loot &amp; Objets</button>
-            <button type="button" class="filter-pill-backlog" data-cat="Contenu">End-Game (Palier 3)</button>
-          </div>
-        </div>
-
-        <div class="arbitrages-grid" id="backlog-features-container">
-          <!-- Rendered dynamically by app.js from data.json featureBacklog -->
+        <div class="voxel-bevel" style="background:#11141b; border:1px solid var(--border-steel); padding:20px;">
+          <h4 style="font-family:var(--font-serif); color:var(--accent-gold-light); margin-bottom:10px;">🎮 Sentiment Joueur Visé</h4>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">
+            Fascination de l'ingénieur et tension du commandant : optimiser une mécanique d'horlogerie (les Gambits et la formation 3x4) puis assister à l'exécution impitoyable de ses ordres en temps réel dans les couloirs du donjon.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- =========================================================================
-         VIEW 4 : CRÉATEUR & EXPORT JSON
-         ========================================================================= -->
-    <section class="app-view" id="view-editor">
-      <div class="editor-grid">
-        <!-- Left : Add New Class / Spell Form -->
-        <div class="editor-form-card voxel-bevel">
-          <h3>Ajouter une Entité au Brainstorm</h3>
-          <p class="form-sub">Testez une nouvelle classe ou un nouveau sort. L'entité sera immédiatement injectée dans le studio et téléchargeable au format JSON.</p>
+    <!-- SECTION 2 : 12 MERCENAIRES & GRILLE 3x4 -->
+    <section class="manifesto-section voxel-bevel" id="section-troupes-grid">
+      <div class="manifesto-section-header">
+        <h3>02. Compagnies de 12 Mercenaires &amp; Grille 3x4</h3>
+        <span class="section-num-tag">PILIER 02</span>
+      </div>
+      <p class="manifesto-lead-text">
+        Le joueur ne contrôle pas une simple escouade de 4 aventuriers, mais gère de <strong>véritables compagnies militaires</strong> composées de <strong>12 mercenaires par troupe</strong>, avec la capacité de déployer plusieurs troupes en simultané.
+      </p>
 
-          <div class="form-toggle-row">
-            <button type="button" class="form-type-btn active" id="form-type-spell">Nouveau Sort</button>
-            <button type="button" class="form-type-btn" id="form-type-class">Nouvelle Classe</button>
-          </div>
+      <ul style="margin-left: 20px; font-size: 14px; line-height: 1.7; color: var(--text-muted); margin-bottom: 20px;">
+        <li><strong style="color:#fff;">Déploiement Multi-Troupes :</strong> Le joueur peut envoyer simultanément plusieurs troupes de 12 dans des donjons distincts. Les affrontements se déroulent en temps réel parallèle, avec bascule de caméra fluide d'une troupe à l'autre à volonté.</li>
+        <li><strong style="color:#fff;">Raids Coopératifs Multi-Troupes :</strong> Sur les donjons de fin de jeu ou les forteresses arcaniques, plusieurs troupes du joueur peuvent converger ensemble.</li>
+        <li><strong style="color:#fff;">Préparation Tactique Spatiale :</strong> Avant d'engager un combat, chaque mercenaire est assigné à une case précise sur la <strong>Grille de Formation 3x4</strong>.</li>
+      </ul>
 
-          <!-- Spell Form -->
-          <form id="form-new-spell" class="editor-form">
-            <div class="form-group">
-              <label for="new-spell-name">Nom du Sort :</label>
-              <input type="text" id="new-spell-name" required placeholder="Ex: Choc Tellurique, Météore Divin...">
-            </div>
-
-            <div class="form-row-2">
-              <div class="form-group">
-                <label for="new-spell-class">Classe Affiliée :</label>
-                <select id="new-spell-class" required>
-                  <!-- Populated dynamically -->
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="new-spell-type">Type de Compétence :</label>
-                <input type="text" id="new-spell-type" placeholder="Ex: Offensif Zone, Soin Direct...">
-              </div>
-            </div>
-
-            <div class="form-row-2">
-              <div class="form-group">
-                <label for="new-spell-cost">Coût en Ressource :</label>
-                <input type="text" id="new-spell-cost" placeholder="Ex: 20 Éther, 0 Éther...">
-              </div>
-              <div class="form-group">
-                <label for="new-spell-cooldown">Recharge :</label>
-                <input type="text" id="new-spell-cooldown" placeholder="Ex: 8s, Instantané...">
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="new-spell-desc">Description &amp; Effets :</label>
-              <textarea id="new-spell-desc" rows="3" placeholder="Décrivez l'effet tactique, les dégâts, les cibles affectées..."></textarea>
-            </div>
-
-            <div class="form-row-2">
-              <div class="form-group">
-                <label for="new-spell-tags">Tags &amp; Altérations (séparés par virgules) :</label>
-                <input type="text" id="new-spell-tags" placeholder="Ex: Poison, Zone, Étourdissement...">
-              </div>
-              <div class="form-group">
-                <label for="new-spell-status">Statut de Développement :</label>
-                <select id="new-spell-status">
-                  <option value="Fait">Fait &bull; Validé</option>
-                  <option value="À Équilibrer">À Équilibrer / Prototype</option>
-                  <option value="À Concevoir" selected>À Concevoir / Idée</option>
-                </select>
-              </div>
-            </div>
-
-            <button type="submit" class="btn btn-chamfer btn-primary">
-              <span>+ Enregistrer le Sort dans le Codex</span>
-            </button>
-          </form>
-
-          <!-- Class Form (Hidden by default) -->
-          <form id="form-new-class" class="editor-form" style="display: none;">
-            <div class="form-row-2">
-              <div class="form-group">
-                <label for="new-class-name">Nom de la Classe :</label>
-                <input type="text" id="new-class-name" required placeholder="Ex: Druide, Nécromancien, Barde...">
-              </div>
-              <div class="form-group">
-                <label for="new-class-avatar">Émoji / Glyphe :</label>
-                <input type="text" id="new-class-avatar" placeholder="Ex: 🌿, 💀, 🎵...">
-              </div>
-            </div>
-
-            <div class="form-row-2">
-              <div class="form-group">
-                <label for="new-class-pole">Pôle Tactique :</label>
-                <select id="new-class-pole">
-                  <option value="frontline">Frontline &amp; Remparts</option>
-                  <option value="hast">Hast &amp; Allonge</option>
-                  <option value="balistique">Balistique &amp; Tir</option>
-                  <option value="furtivite">Ombre &amp; Furtivité</option>
-                  <option value="divin">Ordre Sacré &amp; Foi</option>
-                  <option value="arcanique">Arcanes &amp; Éléments</option>
-                  <option value="occulte">Magie Sombre &amp; Mort</option>
-                  <option value="invocation">Invocations &amp; Totems</option>
-                  <option value="acoustique">Acoustique &amp; Rythme</option>
-                  <option value="hybride" selected>Voies Croisées Hybrides</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="new-class-tier">Palier :</label>
-                <select id="new-class-tier">
-                  <option value="1">Palier 1 (Base)</option>
-                  <option value="2" selected>Palier 2 (Spécialisation / Hybride)</option>
-                  <option value="3">Palier 3 (Ascension Parangon)</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label for="new-class-weapon">Arme Signature :</label>
-              <input type="text" id="new-class-weapon" placeholder="Ex: Pavois à deux mains, Grande masse étoile, Flûte...">
-            </div>
-
-            <div class="form-group">
-              <label for="new-class-obtainment">Moyens d'Obtention &amp; Prérequis :</label>
-              <textarea id="new-class-obtainment" rows="2" placeholder="Ex: Guerrier Niv. 20 + 1000 Pièces d'Acier"></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="new-class-summary">Rôle &amp; Résumé Tactique :</label>
-              <textarea id="new-class-summary" rows="2" placeholder="Ex: Combattant de choc brisant les dalles voxel de combat..."></textarea>
-            </div>
-
-            <div class="form-group">
-              <label for="new-class-arbitrage">Arbitrage / Risque de Redondance :</label>
-              <textarea id="new-class-arbitrage" rows="2" placeholder="Ex: À différencier de la Sentinelle par la lenteur et la destruction d'armure..."></textarea>
-            </div>
-
-            <button type="submit" class="btn btn-chamfer btn-primary">
-              <span>+ Enregistrer la Classe dans le Codex</span>
-            </button>
-          </form>
+      <!-- Interactive / Visual 3x4 Grid Representation -->
+      <div class="tactical-grid-demo voxel-bevel">
+        <div class="tactical-grid-title">
+          <span>📐 Grille de Formation Tactique (12 Slots d'Engagement)</span>
+          <span style="color:var(--text-dim);">Sens de Progression du Combat ➔ Ennemis Frontaux</span>
         </div>
+        <div class="tactical-grid-visual">
+          <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); text-align:center;">
+            Ligne de Contact ➔
+          </div>
+          <div class="grid-rows-container">
+            <!-- Frontline -->
+            <div class="grid-row-block">
+              <span class="grid-row-label front">FRONTLINE</span>
+              <div class="grid-cells-row">
+                <div class="grid-slot front-slot voxel-bevel">Slot 01<br><small>Rempart / Taunt</small></div>
+                <div class="grid-slot front-slot voxel-bevel">Slot 02<br><small>Guerrier / Choc</small></div>
+                <div class="grid-slot front-slot voxel-bevel">Slot 03<br><small>Sentinelle / Pavois</small></div>
+                <div class="grid-slot front-slot voxel-bevel">Slot 04<br><small>Briseur de Ligne</small></div>
+              </div>
+            </div>
+            <!-- Midline -->
+            <div class="grid-row-block">
+              <span class="grid-row-label mid">MIDLINE</span>
+              <div class="grid-cells-row">
+                <div class="grid-slot mid-slot voxel-bevel">Slot 05<br><small>Hast / Allonge</small></div>
+                <div class="grid-slot mid-slot voxel-bevel">Slot 06<br><small>Flanc Furtif</small></div>
+                <div class="grid-slot mid-slot voxel-bevel">Slot 07<br><small>Soutien Direct</small></div>
+                <div class="grid-slot mid-slot voxel-bevel">Slot 08<br><small>Contrôle Contact</small></div>
+              </div>
+            </div>
+            <!-- Backline -->
+            <div class="grid-row-block">
+              <span class="grid-row-label back">BACKLINE</span>
+              <div class="grid-cells-row">
+                <div class="grid-slot back-slot voxel-bevel">Slot 09<br><small>Archer / Portée</small></div>
+                <div class="grid-slot back-slot voxel-bevel">Slot 10<br><small>Arbalétrier Lourd</small></div>
+                <div class="grid-slot back-slot voxel-bevel">Slot 11<br><small>Soin à Distance</small></div>
+                <div class="grid-slot back-slot voxel-bevel">Slot 12<br><small>Magie Arcanique</small></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <!-- Right : Contained Raw JSON View & Actions -->
-        <div class="editor-json-card voxel-bevel">
-          <div class="json-card-header">
-            <div>
-              <h4>Fichier de Données : data.json</h4>
-              <span class="json-sub-text">Données actualisées en temps réel &bull; Conteneur sécurisé</span>
-            </div>
-            <div class="json-actions">
-              <button type="button" class="btn-hud" id="btn-toggle-json" title="Replier ou déplier le visualiseur">Masquer</button>
-              <button type="button" class="btn-hud" id="btn-copy-json" title="Copier le JSON">Copier</button>
-              <button type="button" class="btn btn-chamfer btn-accent btn-sm" id="btn-download-json">
-                <span>⬇ Télécharger</span>
-              </button>
-            </div>
-          </div>
-          <div class="json-viewer-container" id="json-viewer-box">
-            <pre><code id="json-preview-code">Chargement des données...</code></pre>
-          </div>
+    <!-- SECTION 3 : GAMBITS TEMPS RÉEL -->
+    <section class="manifesto-section voxel-bevel" id="section-gambits">
+      <div class="manifesto-section-header">
+        <h3>03. Boucle de Combat Temps Réel &amp; Gambits Programmables</h3>
+        <span class="section-num-tag">PILIER 03</span>
+      </div>
+      <p class="manifesto-lead-text">
+        Les combats ne sont <strong>pas au tour par tour</strong>. Les mercenaires exécutent des <strong>cycles de décision en boucle continue et sans délai</strong>.
+      </p>
+
+      <div class="gambits-pipeline-visual voxel-bevel">
+        <div style="font-family:var(--font-mono); font-size:11px; color:var(--accent-gold); text-transform:uppercase;">
+          ⚙️ Logique d'Évaluation en Cascade Continue (Priorité Décroissante 1 ➔ 10) :
+        </div>
+        <div class="pipeline-rule voxel-bevel">
+          <span class="rule-priority">RÈGLE #1 (TOP)</span>
+          <span class="rule-condition">SI [Allié PV &lt; 30%] &amp;&amp; [Éther &gt;= 25]</span>
+          <span class="rule-arrow">➔</span>
+          <span class="rule-action">LANCER [Toucher Guérisseur] sur [Allié le plus bas]</span>
+          <span class="rule-state">(Vérifié en continu)</span>
+        </div>
+        <div class="pipeline-rule voxel-bevel">
+          <span class="rule-priority">RÈGLE #2 (MID)</span>
+          <span class="rule-condition">SI [Ennemi le plus proche &lt; 3 dalles] &amp;&amp; [CD Recharge = 0]</span>
+          <span class="rule-arrow">➔</span>
+          <span class="rule-action">LANCER [Bash au Bouclier] sur [Ennemi Ciblé]</span>
+          <span class="rule-state">(Si Règle 1 fausse)</span>
+        </div>
+        <div class="pipeline-rule voxel-bevel">
+          <span class="rule-priority">RÈGLE #3 (BASE)</span>
+          <span class="rule-condition">SI [Toujours Vrai / Aucun Prérequis]</span>
+          <span class="rule-arrow">➔</span>
+          <span class="rule-action">LANCER [Attaque de Base au Corps-à-Corps]</span>
+          <span class="rule-state">(Action par défaut)</span>
+        </div>
+      </div>
+
+      <div class="card-grid-2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+        <div class="voxel-bevel" style="background:#11141b; border:1px solid var(--border-steel); padding:18px;">
+          <h4 style="font-family:var(--font-serif); color:var(--accent-gold-light); margin-bottom:8px;">⏱️ Temps d'Incantation &amp; Animations</h4>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">
+            L'évaluation de la condition est instantanée, mais chaque action a son <strong>temps d'incantation</strong> et sa <strong>durée d'animation propre</strong>. Une unité en cours d'action ne peut pas en déclencher une autre avant la fin de son cycle.
+          </p>
+        </div>
+        <div class="voxel-bevel" style="background:#11141b; border:1px solid var(--border-steel); padding:18px;">
+          <h4 style="font-family:var(--font-serif); color:var(--accent-gold-light); margin-bottom:8px;">🔒 Gambits Figés en Raid</h4>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">
+            Les Gambits sont <strong>verrouillés pendant toute la durée du donjon</strong>. Zéro micromanagement en panique : le génie stratégique du joueur s'exprime avant le raid, au Quartier Général.
+          </p>
+        </div>
+        <div class="voxel-bevel" style="background:#11141b; border:1px solid var(--border-steel); padding:18px;">
+          <h4 style="font-family:var(--font-serif); color:var(--accent-gold-light); margin-bottom:8px;">🎯 Slots de Gambits (3 ➔ 10)</h4>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">
+            Un mercenaire recruté commence avec <strong>3 slots de conditions</strong>. Il peut débloquer jusqu'à <strong>10 slots</strong> via des sessions d'entraînement au QG (formation payante en or et en temps, accessible organiquement en cours de progression).
+          </p>
+        </div>
+        <div class="voxel-bevel" style="background:#11141b; border:1px solid var(--border-steel); padding:18px;">
+          <h4 style="font-family:var(--font-serif); color:var(--accent-gold-light); margin-bottom:8px;">⚔️ Condition Matérielle Requise</h4>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.5;">
+            Un mercenaire peut programmer n'importe quel sort acquis dans son historique de classes, <strong>à condition stricte d'équiper l'arme requise par ce sort</strong> (ex: bouclier pour un bash, arc pour une volée).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4 : ÉTHER COLLECTIF -->
+    <section class="manifesto-section voxel-bevel" id="section-ether">
+      <div class="manifesto-section-header">
+        <h3>04. Réserve d'Éther Commune d'Escouade &amp; Affinité</h3>
+        <span class="section-num-tag">PILIER 04</span>
+      </div>
+      <p class="manifesto-lead-text">
+        Dans Aether Vanguard, le mana n'est pas individuel : la troupe puise dans un <strong>réservoir d'Éther commun et solidaire</strong>.
+      </p>
+
+      <div class="voxel-bevel" style="background:#0f1218; border:1px solid var(--border-steel); padding:20px; margin-bottom:16px;">
+        <div style="font-family:var(--font-mono); font-size:13px; color:var(--accent-blue); margin-bottom:8px;">
+          🔮 Équation Fondamentale du Réservoir d'Éther :
+        </div>
+        <div style="font-family:var(--font-mono); font-size:16px; color:#fff; background:#08090c; padding:12px; border:1px solid var(--border-steel-bright);">
+          Éther Maximum de la Troupe = ∑ (Statistique d'Affinité d'Éther des 12 Mercenaires)
+        </div>
+      </div>
+
+      <div class="card-grid-3" style="display:grid; grid-template-columns: repeat(3, 1fr); gap:16px;">
+        <div class="voxel-bevel" style="background:#11141b; border:1px solid var(--border-steel); padding:16px;">
+          <strong style="color:var(--accent-gold-light); display:block; margin-bottom:6px;">100% au Départ</strong>
+          <span style="font-size:12px; color:var(--text-muted); line-height:1.5;">
+            La réserve démarre au maximum dès le premier engagement du donjon. Le joueur peut ouvrir le combat avec ses capacités maîtresses.
+          </span>
+        </div>
+        <div class="voxel-bevel" style="background:#11141b; border:1px solid var(--border-steel); padding:16px;">
+          <strong style="color:var(--accent-blue); display:block; margin-bottom:6px;">Recharge Passive 1% / sec</strong>
+          <span style="font-size:12px; color:var(--text-muted); line-height:1.5;">
+            L'Éther se régénère naturellement à cadence fixe de 1% du réservoir maximal par seconde, récompensant les compositions endurantes.
+          </span>
+        </div>
+        <div class="voxel-bevel" style="background:#11141b; border:1px solid var(--border-green); padding:16px;">
+          <strong style="color:var(--accent-green); display:block; margin-bottom:6px;">Unités Génératrices Actives</strong>
+          <span style="font-size:12px; color:var(--text-muted); line-height:1.5;">
+            Rôle capital des unités spécialisées de canalisation : dédier 1 ou 2 mercenaires à la génération d'éther pour alimenter les gros sorts de zone.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5 : DONJONS & RÈGLE D'OR 100% -->
+    <section class="manifesto-section voxel-bevel" id="section-donjons">
+      <div class="manifesto-section-header">
+        <h3>05. Donjons Procéduraux en Salles &amp; Règle d'Or de Survie</h3>
+        <span class="section-num-tag">PILIER 05</span>
+      </div>
+      <p class="manifesto-lead-text">
+        Les donjons sont des <strong>couloirs procéduraux linéaires découpés en « Salles »</strong> (points d'arrêt provoqués par la présence d'un pack d'ennemis). La troupe progresse de salle en salle (de 5 salles pour les premiers raids à 20+ pour l'endgame).
+      </p>
+
+      <div class="voxel-bevel" style="background:rgba(239, 68, 68, 0.08); border:2px solid var(--accent-red); padding:22px; margin:20px 0;">
+        <h4 style="font-family:var(--font-serif); font-size:18px; color:var(--accent-red); margin-bottom:8px; display:flex; align-items:center; gap:8px;">
+          <span>💀 LA RÈGLE D'OR ABSOLUE : RÉUSSITE = 100% DE SURVIE</span>
+        </h4>
+        <p style="font-size:14px; color:#fff; line-height:1.6;">
+          Un donjon n'est considéré comme réussi <strong>QUE SI 100% DES 12 MERCENAIRES SURVIVENT</strong>.<br>
+          <strong>Un mort (même relevé par un sort de résurrection au cours de l'affrontement) invalide définitivement la réussite parfaite du donjon.</strong>
+        </p>
+      </div>
+
+      <div class="card-grid-2" style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+        <div class="voxel-bevel" style="background:#11141b; border:1px solid var(--border-steel); padding:18px;">
+          <h4 style="font-family:var(--font-serif); color:var(--accent-gold-light); margin-bottom:8px;">📊 Distribution de l'XP par Salle</h4>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">
+            L'expérience est octroyée à chaque fin de combat / salle aux mercenaires survivants. <strong>Un mercenaire mort ne reçoit AUCUNE XP</strong> pour le combat où il a chuté.
+          </p>
+        </div>
+        <div class="voxel-bevel" style="background:#11141b; border:1px solid var(--border-steel); padding:18px;">
+          <h4 style="font-family:var(--font-serif); color:var(--accent-gold-light); margin-bottom:8px;">🔄 Résurrection en Combat</h4>
+          <p style="font-size:13px; color:var(--text-muted); line-height:1.6;">
+            Possible via des sorts de très haut niveau extrêmement coûteux en Éther avant la fin du combat. Permet de sauver le mercenaire et continuer le raid, mais <strong>le bonus 100% sans mort reste invalidé</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6 : NORMAL VS HARDCORE -->
+    <section class="manifesto-section voxel-bevel" id="section-modes">
+      <div class="manifesto-section-header">
+        <h3>06. Matrice des Modes de Jeu : Normal vs Hardcore</h3>
+        <span class="section-num-tag">PILIER 06</span>
+      </div>
+      <p class="manifesto-lead-text">
+        Aether Vanguard propose deux philosophies d'expérience rigoureusement contrastées :
+      </p>
+
+      <table class="manifesto-table voxel-bevel">
+        <thead>
+          <tr>
+            <th>Mécanique</th>
+            <th>Mode Normal (Stratégique Économique)</th>
+            <th>Mode Hardcore (Perte Définitive Absolue)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="feature-name">Retraite Tactique</td>
+            <td class="mode-normal">
+              <strong style="color:var(--accent-green);">✅ Autorisée en direct :</strong> Le combat se termine normalement, la troupe évacue sans poursuivre. Donjon non validé.
+            </td>
+            <td class="mode-hardcore">
+              <strong style="color:var(--accent-red);">❌ Bouton désactivé :</strong> Victoire totale ou anéantissement sur place. Zéro repli.
+            </td>
+          </tr>
+          <tr>
+            <td class="feature-name">Statut des Morts (KO)</td>
+            <td class="mode-normal">
+              <strong>Téléportation d'urgence arcanique :</strong> Les mercenaires KO sont ramenés blessés au Quartier Général.
+            </td>
+            <td class="mode-hardcore">
+              <strong style="color:var(--accent-red);">Permadeath Définitive :</strong> Tout mercenaire mort est perdu pour toujours, avec son historique et ses niveaux.
+            </td>
+          </tr>
+          <tr>
+            <td class="feature-name">Conservation du Butin</td>
+            <td class="mode-normal">
+              <strong>Préservé à 100% :</strong> L'or et les artefacts récoltés durant le raid sont conservés même en cas de repli ou de wipe.
+            </td>
+            <td class="mode-hardcore">
+              <strong style="color:var(--accent-red);">Perte Partielle :</strong> Chaque mort entraîne la perte irrémédiable d'une part de l'or et des items portés.
+            </td>
+          </tr>
+          <tr>
+            <td class="feature-name">Coût de Réanimation &amp; Échec</td>
+            <td class="mode-normal">
+              <strong>Réanimation payante en or au QG :</strong> Risque réel de <em>Game Over Économique</em> si le trésor est vide et qu'aucun mercenaire ne peut être relevé.
+            </td>
+            <td class="mode-hardcore">
+              <strong>Irréversible :</strong> Pas de réanimation. Seul le recrutement de nouvelles recrues de Niveau 1 permet de reconstituer une troupe.
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- SECTION 7 : BRANCHES CANONIQUES & ÉCONOMIE -->
+    <section class="manifesto-section voxel-bevel" id="section-progression">
+      <div class="manifesto-section-header">
+        <h3>07. Branches Canoniques &amp; Économie Mercenaire</h3>
+        <span class="section-num-tag">PILIER 07</span>
+      </div>
+      <p class="manifesto-lead-text">
+        Les mercenaires sont recrutés au <strong>Niveau 1</strong> sur les classes de base. Le jeu instaure une progression d'expertise permanente :
+      </p>
+
+      <ul style="margin-left: 20px; font-size: 14px; line-height: 1.7; color: var(--text-muted); margin-bottom: 20px;">
+        <li><strong style="color:#fff;">Plafond Niveau 100 :</strong> Chaque classe se monte jusqu'au Niveau 100.</li>
+        <li><strong style="color:#fff;">Conservation Définitive des Acquis :</strong> Toutes les statistiques et tous les sorts débloqués dans l'historique d'un mercenaire restent acquis à vie.</li>
+        <li><strong style="color:#fff;">Bascule de Classe Gratuite :</strong> Le premier déblocage vers une nouvelle classe coûte de l'or. Une fois débloquée, la bascule entre classes est <strong>totalement gratuite</strong>.</li>
+      </ul>
+
+      <div class="canon-branches-grid">
+        <div class="canon-branch-card voxel-bevel">
+          <div class="canon-branch-header">Branche Martiale</div>
+          <div class="canon-branch-path">Guerrier ➔ Sentinelle</div>
+          <p class="canon-branch-desc">
+            Du combattant de choc avec taunt et charge au spécialiste défensif au pavois lourd avec renfort d'armure et déséquilibre au bouclier.
+          </p>
+        </div>
+        <div class="canon-branch-card voxel-bevel">
+          <div class="canon-branch-header">Branche Balistique</div>
+          <div class="canon-branch-path">Archer ➔ Arbalétrier</div>
+          <p class="canon-branch-desc">
+            De la visée précise et mobilité vive aux carreaux lourds perforants, explosifs et neutralisants préparés par recharge tactique.
+          </p>
+        </div>
+        <div class="canon-branch-card voxel-bevel">
+          <div class="canon-branch-header">Branche Furtivité</div>
+          <div class="canon-branch-path">Rogue ➔ Assassin</div>
+          <p class="canon-branch-desc">
+            De l'attaque sournoise, saignement et stun aux lames empoisonnées létales, foulées d'ombre et perforation de vulnérabilité.
+          </p>
+        </div>
+        <div class="canon-branch-card voxel-bevel">
+          <div class="canon-branch-header">Branche Mystique</div>
+          <div class="canon-branch-path">Acolyte ➔ Magicien</div>
+          <p class="canon-branch-desc">
+            Du soutien divin avec soins d'urgence et purification aux traits arcaniques élémentaires de feu persistant, givre et foudre en chaîne.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8 : SCOPE GUARDRAILS -->
+    <section class="manifesto-section voxel-bevel" id="section-scope" style="margin-bottom: 40px;">
+      <div class="manifesto-section-header">
+        <h3>08. Scope Guardrails &amp; Backlog Évolutif</h3>
+        <span class="section-num-tag">PILIER 08</span>
+      </div>
+      <p class="manifesto-lead-text">
+        Pour éviter le <em>feature creep</em> et maintenir un rythme de production net, les mécaniques sont strictement réparties entre le <strong>Cœur V1</strong> et le <strong>Backlog Post-Alpha</strong> :
+      </p>
+
+      <div class="card-grid-2" style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+        <div class="voxel-bevel" style="background:#11141b; border:1px solid var(--accent-green); padding:20px;">
+          <h4 style="font-family:var(--font-serif); color:var(--accent-green); margin-bottom:10px;">✅ Cœur Absolu V1 (Priorité Immédiate)</h4>
+          <ul style="font-size:13px; color:#cbd5e1; line-height:1.7; margin-left:18px;">
+            <li>Compagnie de 12 unités et grille tactique préparatoire 3x4.</li>
+            <li>Boucle de Gambits continus sans délai (3 à 10 slots).</li>
+            <li>Réservoir commun d'Éther et régénération passive.</li>
+            <li>Donjons en couloirs par salles et condition 100% de survie.</li>
+            <li>4 branches canoniques de base et spécialisations (8 classes initiales).</li>
+            <li>Gestion du trésor et risque de Game Over économique.</li>
+          </ul>
+        </div>
+        <div class="voxel-bevel" style="background:#11141b; border:1px solid var(--border-steel); padding:20px;">
+          <h4 style="font-family:var(--font-serif); color:var(--accent-gold-light); margin-bottom:10px;">📋 Backlog Post-Alpha (Phases Ultérieures)</h4>
+          <ul style="font-size:13px; color:var(--text-muted); line-height:1.7; margin-left:18px;">
+            <li>Hybridation double-mains libre et croisement de classes avancées.</li>
+            <li>Mentorat en salle d'étude au QG (professeur / élèves).</li>
+            <li>Parchemins d'expérience et butins arcaniques modulaires.</li>
+            <li>Pôles tactiques exotiques (Acoustique, Invocations, Occulte).</li>
+          </ul>
         </div>
       </div>
     </section>

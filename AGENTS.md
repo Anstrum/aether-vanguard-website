@@ -1,5 +1,12 @@
 # AGENTS.md — Directives & Documentation du Projet "Aether Vanguard"
 
+> [!IMPORTANT]
+> ### 🛑 DIRECTIVE OBLIGATOIRE POUR TOUT NOUVEL AGENT (DÈS LA PREMIÈRE RÉPONSE)
+> Lors de sa toute première intervention ou au démarrage d'une session, **chaque agent DOIT OBLIGATOIREMENT consulter et lire le contenu du site de brainstorming (`/brainstorm`)**, en particulier la grande page Manifeste de Conception (`brainstorm/index.html` ou `brainstorm/manifesto.html`) ainsi que la base de données de référence (`brainstorm/data.json`).
+> Cette lecture est indispensable pour saisir immédiatement le contexte complet, la vision créative, le scope rigoureux du jeu (12 mercenaires, Gambits continus, Éther commun, donjons 100% survie, etc.) et ne jamais dériver du cap fixé.
+
+---
+
 ## 1. Vue d'Ensemble du Projet
 * **Titre :** Aether Vanguard
 * **Genre :** RPG tactique sombre de gestion de mercenaires en vue top-down dézoomée avec rendu voxel stylisé.
