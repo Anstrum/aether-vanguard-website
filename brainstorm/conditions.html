@@ -81,53 +81,59 @@
     <section class="app-view active-view" id="view-conditions">
 
       <!-- Gambits Core Principles Hero Card -->
-      <div class="manifesto-card voxel-bevel" style="margin-bottom: 24px; border-left: 3px solid var(--accent-gold);">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
-          <div style="max-width: 880px;">
-            <div style="display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:11px; color:var(--accent-gold); margin-bottom:8px;">
-              <span>❖ MOTEUR TACTIQUE CONTINU</span>
-              <span>&bull;</span>
-              <span>ZÉRO TOUR PAR TOUR</span>
-              <span>&bull;</span>
-              <span>ÉVALUATION CASCADE 60 HZ</span>
+      <div class="gambit-hero-card voxel-bevel">
+        <div class="gambit-hero-layout">
+          <div class="gambit-hero-content">
+            <div>
+              <div class="gambit-hero-meta">
+                <span>❖ MOTEUR TACTIQUE CONTINU</span>
+                <span>&bull;</span>
+                <span>ZÉRO TOUR PAR TOUR</span>
+                <span>&bull;</span>
+                <span>ÉVALUATION CASCADE 60 HZ</span>
+              </div>
+              <h2 class="gambit-hero-title">
+                Architecture de l'IA Mercenaire : Les Gambits en Cascade
+              </h2>
+              <p class="gambit-hero-desc">
+                Chaque mercenaire exécute en boucle continue un automate programmable composé de <strong>3 à 10 règles ordonnées</strong> (déblocage progressif par entraînement au QG). Dès que le mercenaire a fini son action ou incantation en cours, il réévalue sa liste de Gambits <strong>de la ligne 1 à la ligne N</strong>. La première condition vérifiée dont l'arme requise est équipée et l'Éther disponible déclenche immédiatement l'action.
+              </p>
             </div>
-            <h2 style="font-family:var(--font-serif); font-size:22px; color:#fff; margin-bottom:8px; letter-spacing:0.02em;">
-              Architecture de l'IA Mercenaire : Les Gambits en Cascade
-            </h2>
-            <p style="color:var(--text-muted); font-size:13px; line-height:1.6; margin-bottom:12px;">
-              Chaque mercenaire exécute en boucle continue un automate programmable composé de <strong>3 à 10 règles ordonnées</strong> (déblocage progressif par entraînement au QG). Dès que le mercenaire a fini son action ou incantation en cours, il réévalue sa liste de Gambits <strong>de la ligne 1 à la ligne N</strong>. La première condition vérifiée dont l'arme requise est équipée et l'Éther disponible déclenche immédiatement l'action.
-            </p>
-            <div style="display:flex; flex-wrap:wrap; gap:12px; font-size:12px;">
-              <span class="badge-custom" style="background:#1e2430; border:1px solid #3b465c; color:#93c5fd; padding:4px 10px; border-radius:3px;">
-                🗝️ <strong>Condition Matérielle :</strong> Sort inactif si l'arme requise n'est pas portée
-              </span>
-              <span class="badge-custom" style="background:#1e2430; border:1px solid #3b465c; color:#fed7aa; padding:4px 10px; border-radius:3px;">
-                ⚡ <strong>Éther Commun :</strong> Le coût est déduit de la jauge commune de l'escouade
-              </span>
-              <span class="badge-custom" style="background:#1e2430; border:1px solid #3b465c; color:#a7f3d0; padding:4px 10px; border-radius:3px;">
-                🔒 <strong>Règles Figées :</strong> Aucune modification possible une fois le raid engagé
-              </span>
-              <span class="badge-custom" style="background:#1e2430; border:1px solid #3b465c; color:#fbcfe8; padding:4px 10px; border-radius:3px;">
-                👑 <strong>Hybridation Totale (36/36) :</strong> Débloque la fusion libre de tous les sorts et armes
-              </span>
+            <div class="gambit-hero-badges">
+              <div class="gambit-rule-pill pill-weapon">
+                <span class="pill-icon">🗝️</span>
+                <div><strong>Condition Matérielle :</strong> Sort inactif si l'arme requise n'est pas portée</div>
+              </div>
+              <div class="gambit-rule-pill pill-ether">
+                <span class="pill-icon">⚡</span>
+                <div><strong>Éther Commun :</strong> Le coût est déduit de la jauge commune de l'escouade</div>
+              </div>
+              <div class="gambit-rule-pill pill-frozen">
+                <span class="pill-icon">🔒</span>
+                <div><strong>Règles Figées :</strong> Aucune modification possible une fois le raid engagé</div>
+              </div>
+              <div class="gambit-rule-pill pill-hybrid">
+                <span class="pill-icon">👑</span>
+                <div><strong>Hybridation Totale (36/36) :</strong> Débloque la fusion libre de tous les sorts et armes</div>
+              </div>
             </div>
           </div>
 
           <!-- Mini Gambit Syntax Box -->
-          <div style="background:#0c0e13; border:1px solid var(--border-steel-bright); padding:16px; border-radius:4px; min-width:300px; max-width:340px;">
-            <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); margin-bottom:8px; border-bottom:1px solid var(--border-steel); padding-bottom:4px;">
+          <aside class="gambit-hero-syntax-box">
+            <div class="gambit-hero-syntax-header">
               SYNTAXE GAMBIT CANONIQUE
             </div>
-            <div style="font-family:var(--font-mono); font-size:12px; line-height:1.7; color:#cbd5e1;">
-              <div style="color:#f59e0b;">L1: SI [Allié PV &lt; 30%]</div>
-              <div style="padding-left:14px; color:#38bdf8;">➔ Lancer [Prière Curative]</div>
-              <div style="color:#94a3b8; font-size:11px;">&nbsp;&nbsp;&nbsp;&nbsp;↳ <em>Requis: Sceptre/Bâton</em></div>
-              <div style="color:#f59e0b; margin-top:6px;">L2: SI [Éther Commun &lt; 20%]</div>
-              <div style="padding-left:14px; color:#38bdf8;">➔ Lancer [Canalisation Éthérée]</div>
-              <div style="color:#f59e0b; margin-top:6px;">L3: SI [Toujours]</div>
-              <div style="padding-left:14px; color:#38bdf8;">➔ Lancer [Attaque de Base]</div>
+            <div class="gambit-hero-syntax-body">
+              <div class="syntax-row">L1: SI <span style="color:#fde047;">[Allié PV &lt; 30%]</span></div>
+              <div class="syntax-action">➔ Lancer [Prière Curative]</div>
+              <div class="syntax-req">&nbsp;&nbsp;&nbsp;&nbsp;↳ <em>Requis: Sceptre/Bâton</em></div>
+              <div class="syntax-row mt-sm">L2: SI <span style="color:#fde047;">[Éther Commun &lt; 20%]</span></div>
+              <div class="syntax-action">➔ Lancer [Canalisation Éthérée]</div>
+              <div class="syntax-row mt-sm">L3: SI <span style="color:#fde047;">[Toujours]</span></div>
+              <div class="syntax-action">➔ Lancer [Attaque de Base]</div>
             </div>
-          </div>
+          </aside>
         </div>
       </div>
 
@@ -193,9 +199,9 @@
           <button type="button" class="filter-pill-type" data-target="Escouade">Escouade</button>
         </div>
 
-        <div class="view-mode-toggle">
-          <button type="button" class="mode-toggle-btn active" id="btn-view-cond-cards" title="Vue Fiches Cartes">🗂️ Fiches</button>
-          <button type="button" class="mode-toggle-btn" id="btn-view-cond-table" title="Vue Tableau Synthétique">📋 Tableau</button>
+        <div class="view-mode-toggle btn-group-toggle">
+          <button type="button" class="mode-toggle-btn btn-toggle active" id="btn-view-cond-cards" title="Vue Fiches Cartes">🗂️ Fiches</button>
+          <button type="button" class="mode-toggle-btn btn-toggle" id="btn-view-cond-table" title="Vue Tableau Synthétique">📋 Tableau</button>
         </div>
       </div>
 

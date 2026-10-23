@@ -547,16 +547,21 @@ body {
 
 .toolbar-select:focus {
   border-color: var(--accent-gold);
-}
-
-.btn-group-toggle {
+.btn-group-toggle,
+.view-mode-toggle {
   display: inline-flex;
   border: 1px solid var(--border-steel);
   background: #0d0f14;
+  border-radius: 3px;
+  overflow: hidden;
 }
 
-.btn-toggle {
-  padding: 6px 12px;
+.btn-toggle,
+.mode-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
   background: transparent;
   border: none;
   border-right: 1px solid var(--border-steel);
@@ -565,21 +570,27 @@ body {
   font-size: 11px;
   cursor: pointer;
   transition: all var(--transition-fast);
+  user-select: none;
 }
 
-.btn-toggle:last-child {
+.btn-toggle:last-child,
+.mode-toggle-btn:last-child {
   border-right: none;
 }
 
-.btn-toggle:hover {
+.btn-toggle:hover,
+.mode-toggle-btn:hover {
   color: #fff;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(212, 175, 55, 0.08);
 }
 
-.btn-toggle.active {
-  background: var(--bg-stone-surface);
+.btn-toggle.active,
+.mode-toggle-btn.active {
+  background: rgba(212, 175, 55, 0.18);
   color: var(--accent-gold-light);
   font-weight: 700;
+  box-shadow: inset 0 0 10px rgba(212, 175, 55, 0.25);
+  border-bottom: 2px solid var(--accent-gold);
 }
 
 .results-meta-row {
@@ -2003,6 +2014,164 @@ body {
   background: rgba(255, 255, 255, 0.04);
   padding: 2px 6px;
   border-radius: 2px;
+}
+
+/* ==========================================================================
+   Gambits Hero Architecture Card (Responsive & Modern)
+   ========================================================================== */
+.gambit-hero-card {
+  margin-bottom: 24px;
+  border-left: 3px solid var(--accent-gold);
+  background: linear-gradient(135deg, #141822 0%, #0d0e13 100%);
+  padding: 24px;
+}
+
+.gambit-hero-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.gambit-hero-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.gambit-hero-meta {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent-gold);
+  margin-bottom: 8px;
+  letter-spacing: 0.05em;
+}
+
+.gambit-hero-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 8px;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.gambit-hero-desc {
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  margin-bottom: 4px;
+}
+
+.gambit-hero-badges {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.gambit-rule-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(20, 24, 32, 0.9);
+  border: 1px solid var(--border-steel);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #cbd5e1;
+  transition: all var(--transition-fast);
+}
+
+.gambit-rule-pill:hover {
+  border-color: var(--border-steel-bright);
+  background: rgba(30, 36, 48, 0.95);
+  transform: translateY(-1px);
+}
+
+.gambit-rule-pill .pill-icon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.gambit-rule-pill strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+.gambit-rule-pill.pill-weapon { border-left: 2px solid #60a5fa; }
+.gambit-rule-pill.pill-ether { border-left: 2px solid #fbbf24; }
+.gambit-rule-pill.pill-frozen { border-left: 2px solid #34d399; }
+.gambit-rule-pill.pill-hybrid { border-left: 2px solid #f472b6; }
+
+.gambit-hero-syntax-box {
+  background: #090b10;
+  border: 1px solid var(--border-steel-bright);
+  padding: 18px;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: inset 0 0 16px rgba(0, 0, 0, 0.6);
+}
+
+.gambit-hero-syntax-header {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border-steel);
+  padding-bottom: 6px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.gambit-hero-syntax-body {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.7;
+  color: #cbd5e1;
+}
+
+.syntax-row {
+  color: #f59e0b;
+}
+
+.syntax-action {
+  padding-left: 14px;
+  color: #38bdf8;
+}
+
+.syntax-req {
+  color: #94a3b8;
+  font-size: 11px;
+  padding-left: 14px;
+}
+
+.syntax-row.mt-sm {
+  margin-top: 6px;
+}
+
+@media (max-width: 1180px) {
+  .gambit-hero-layout {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+}
+
+@media (max-width: 720px) {
+  .gambit-hero-badges {
+    grid-template-columns: 1fr;
+  }
+  .gambit-hero-title {
+    font-size: 18px;
+  }
 }
 
 /* ==========================================================================
