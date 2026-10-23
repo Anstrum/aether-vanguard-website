@@ -81,53 +81,54 @@
     <section class="app-view active-view" id="view-classes">
 
       <!-- Crossed Progression & Hybridization Banner -->
-      <div class="manifesto-card voxel-bevel" style="margin-bottom: 24px; border-left: 3px solid var(--accent-gold);">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
-          <div style="max-width: 860px;">
+      <div class="manifesto-card voxel-bevel" style="margin-bottom: 24px; border-left: 3px solid var(--accent-gold); padding: 22px 26px;">
+        <div style="display:flex; justify-content:space-between; align-items:stretch; flex-wrap:wrap; gap:24px;">
+          <div style="max-width: 820px; display:flex; flex-direction:column; justify-content:center;">
             <div style="display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:11px; color:var(--accent-gold); margin-bottom:8px;">
               <span>❖ MATRICE CROISÉE DES 36 CLASSES</span>
               <span>&bull;</span>
-              <span>DÉBLOCAGE PAR CROISEMENT DE PRÉREQUIS</span>
+              <span>PROGRESSION PAR PRÉREQUIS DE NIVEAUX CROISÉS</span>
             </div>
-            <h2 style="font-family:var(--font-serif); font-size:22px; color:#fff; margin-bottom:8px; letter-spacing:0.02em;">
-              Arbre de Spécialisations Croisées &amp; Règle d'Hybridation Totale
+            <h2 style="font-family:var(--font-serif); font-size:24px; color:#fff; margin-bottom:10px; letter-spacing:0.02em;">
+              Arborescence des 36 Classes &amp; Jalon d'Hybridation
             </h2>
-            <p style="color:var(--text-muted); font-size:13px; line-height:1.6; margin-bottom:12px;">
-              Les mercenaires débutent sur l'une des <strong>4 classes de base</strong> (Guerrier, Archer, Rogue, Acolyte). La progression ne suit pas un arbre rigide en escalier, mais un <strong>graphe d'interconnexions</strong> : les classes hybrides exigent de monter <strong>deux classes mères</strong> à un niveau seuil (ex: <em>Paladin = Guerrier 35 + Prêtre 35</em>, <em>Nécromancien = Mage Noir 45 + Invocateur 45</em>).
+            <p style="color:var(--text-muted); font-size:13px; line-height:1.65; margin-bottom:14px;">
+              Les mercenaires sont recrutés au <strong>Niveau 1</strong> sur l'une des 4 classes de base. Les nouvelles classes se débloquent organiquement dès qu'un mercenaire atteint les niveaux requis sur une ou deux autres classes (ex: <em>Paladin = Guerrier Niv. 35 + Prêtre Niv. 35</em>, <em>Nécromancien = Mage Noir Niv. 45 + Invocateur Niv. 45</em>). Une fois une classe débloquée pour la troupe, la bascule au QG est libre et gratuite.
             </p>
-            <div style="display:flex; flex-wrap:wrap; gap:10px; font-size:12px;">
-              <span class="badge-custom" style="background:#1e2430; border:1px solid #3b465c; color:#93c5fd; padding:4px 10px; border-radius:3px;">
-                ⚔️ <strong>Arme Requise :</strong> Un sort acquis ne s'exécute que si l'arme associée est portée
-              </span>
-              <span class="badge-custom" style="background:#1e2430; border:1px solid #d4af37; color:#fef08a; padding:4px 10px; border-radius:3px;">
-                👑 <strong>Jalon Suprême (36/36) :</strong> L'Hybridation libre (tous sorts + toutes armes) est verrouillée jusqu'au déblocage des 36 classes !
+            <div style="display:flex; flex-wrap:wrap; gap:12px; font-size:12px;">
+              <span class="badge-custom" style="background:#1e2430; border:1px solid #3b465c; color:#93c5fd; padding:6px 12px; border-radius:3px;">
+                ⚔️ <strong>Condition Matérielle :</strong> Chaque sort lancé dans les Gambits exige d'équiper son arme requise
               </span>
             </div>
           </div>
 
-          <!-- Quick Tier Breakdown Box -->
-          <div style="background:#0c0e13; border:1px solid var(--border-steel-bright); padding:16px; border-radius:4px; min-width:300px; max-width:340px;">
-            <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); margin-bottom:8px; border-bottom:1px solid var(--border-steel); padding-bottom:4px;">
-              STRUCTURE DES PALIERS DE DÉBLOCAGE
-            </div>
-            <div style="font-family:var(--font-mono); font-size:12px; line-height:1.7; color:#cbd5e1;">
-              <div><strong style="color:#ef4444;">Palier 0 (4 Classes) :</strong> Bases Niv. 1</div>
-              <div><strong style="color:#f97316;">Palier 1 (8 Classes) :</strong> Spécialisations Directes</div>
-              <div><strong style="color:#38bdf8;">Palier 2 (16 Classes) :</strong> Hybrides Croisés (X + Y)</div>
-              <div><strong style="color:#c084fc;">Palier 3 (8 Classes) :</strong> Maîtrises d'Élite / Rituels</div>
-              <div style="margin-top:6px; padding-top:6px; border-top:1px dashed #2c3342; color:#d4af37;">
-                <strong>Objectif :</strong> 36/36 pour l'Hybridation Libre
+          <!-- Hybridation Lock/Unlock Box -->
+          <div style="background:#0c0e14; border:1px solid var(--accent-gold); padding:20px; border-radius:4px; min-width:320px; max-width:380px; display:flex; flex-direction:column; justify-content:space-between;">
+            <div>
+              <div style="font-family:var(--font-mono); font-size:11px; color:var(--accent-gold-light); margin-bottom:6px; letter-spacing:0.05em; display:flex; align-items:center; gap:6px;">
+                <span>👑 JALON SUPRÊME</span>
+                <span>&bull;</span>
+                <span>HYBRIDATION TOTALE</span>
               </div>
+              <div style="font-family:var(--font-serif); font-size:16px; font-weight:700; color:#fff; margin-bottom:8px;">
+                Déblocage Libre (36 / 36 Classes)
+              </div>
+              <p style="color:#cbd5e1; font-size:12px; line-height:1.6; margin-bottom:10px;">
+                L'<strong>Hybridation</strong> est la liberté ultime : équiper n'importe quelle arme et lancer n'importe quel sort correspondant sans restriction de classe.
+              </p>
+            </div>
+            <div style="background:rgba(212,175,55,0.08); border-left:2px solid var(--accent-gold); padding:8px 12px; font-size:11px; color:#fef08a; font-family:var(--font-mono);">
+              🔒 Verrouillée tant que les 36 classes ne sont pas toutes débloquées au QG.
             </div>
           </div>
         </div>
       </div>
       
       <!-- Pôles Tactiques Macro Bar -->
-      <div class="poles-macro-bar voxel-bevel">
-        <div class="poles-bar-header">
-          <span class="poles-bar-title">🏛️ Pôles Tactiques &amp; Familles de Combat :</span>
-          <span class="poles-bar-sub">Cliquez sur un pôle pour filtrer instantanément la matrice</span>
+      <div class="poles-macro-bar voxel-bevel" style="padding: 16px 20px; margin-bottom: 20px;">
+        <div class="poles-bar-header" style="margin-bottom: 12px;">
+          <span class="poles-bar-title" style="font-size: 13px;">🏛️ Pôles Tactiques &amp; Familles de Combat :</span>
+          <span class="poles-bar-sub" style="font-size: 12px;">Cliquez sur un pôle pour filtrer instantanément la matrice</span>
         </div>
         <div class="poles-pills-list" id="poles-container">
           <!-- Dynamically populated by app.js -->
@@ -135,19 +136,18 @@
       </div>
 
       <!-- Classes Toolbar & Controls -->
-      <div class="view-toolbar classes-toolbar">
-        <div class="toolbar-search">
+      <div class="view-toolbar classes-toolbar" style="padding: 12px 18px; background: var(--bg-iron); border: 1px solid var(--border-steel); margin-bottom: 20px; border-radius: 3px;">
+        <div class="toolbar-search" style="max-width: 440px; min-width: 280px;">
           <span class="search-icon">🔍</span>
-          <input type="text" id="class-search-input" placeholder="Rechercher une classe, arme, rôle ou prérequis (ex: pavois, masse, poison, paladin)..." aria-label="Recherche de classe">
+          <input type="text" id="class-search-input" placeholder="Rechercher une classe, arme, rôle ou prérequis (ex: paladin, pavois, masse, guerrier)..." aria-label="Recherche de classe">
         </div>
 
         <div class="toolbar-filters">
-          <span class="filter-label">Palier :</span>
-          <button type="button" class="filter-pill-tier active" data-tier="all">Tous (36)</button>
-          <button type="button" class="filter-pill-tier" data-tier="1">Palier 0 &bull; Base (4)</button>
-          <button type="button" class="filter-pill-tier" data-tier="2">Palier 1 &bull; Spé (8)</button>
-          <button type="button" class="filter-pill-tier" data-tier="3">Palier 2 &bull; Croisées (16)</button>
-          <button type="button" class="filter-pill-tier" data-tier="4">Palier 3 &bull; Maîtrises (8)</button>
+          <span class="filter-label">Prérequis :</span>
+          <button type="button" class="filter-pill-req active" data-req="all">Toutes (36)</button>
+          <button type="button" class="filter-pill-req" data-req="base">Départ (4)</button>
+          <button type="button" class="filter-pill-req" data-req="single">1 Prérequis (8)</button>
+          <button type="button" class="filter-pill-req" data-req="crossed">Prérequis Croisés (24)</button>
         </div>
 
         <div class="toolbar-view-mode">
@@ -161,8 +161,8 @@
       </div>
 
       <!-- Classes Results Info -->
-      <div class="results-meta-row">
-        <span id="classes-results-count" class="results-count-text">Chargement des classes...</span>
+      <div class="results-meta-row" style="margin: 0 0 20px 0; padding: 0 4px;">
+        <span id="classes-results-count" class="results-count-text" style="font-size: 13px; color: #cbd5e1; font-family: var(--font-mono);">Chargement des classes...</span>
       </div>
 
       <!-- Mode 1 : Cards Grid Container -->

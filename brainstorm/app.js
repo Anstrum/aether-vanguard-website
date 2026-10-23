@@ -11,7 +11,8 @@
 let codexData = null;
 let currentPoleFilter = 'all';
 let currentRiskFilter = 'all';
-let currentClassTierFilter = 'all';
+let currentClassReqFilter = 'all'; // 'all' | 'base' | 'single' | 'crossed'
+let selectedNetworkClassId = 'guerrier';
 let classesViewMode = 'cards'; // 'cards' | 'network' | 'matrix'
 
 let currentSpellStatusFilter = 'all';
@@ -1926,6 +1927,9 @@ function renderPolesBar() {
 // =============================================================================
 // VIEW 1 : CLASSES & MOYENS D'OBTENTION (CARDS, NETWORK & 16:9 MATRIX)
 // =============================================================================
+// =============================================================================
+// VIEW 1 : CLASSES & MOYENS D'OBTENTION (CARDS, INTERACTIVE NETWORK & MATRIX)
+// =============================================================================
 function renderClassesView() {
   const cardsContainer = document.getElementById('classes-cards-container');
   const networkContainer = document.getElementById('classes-network-container');
@@ -1938,8 +1942,14 @@ function renderClassesView() {
 
   const filtered = (codexData.classes || []).filter(cls => {
     const matchPole = currentPoleFilter === 'all' || cls.pole === currentPoleFilter;
-    const matchTier = currentClassTierFilter === 'all' || cls.tier.toString() === currentClassTierFilter;
     
+    // Requirement type filter
+    const prereqCount = (cls.obtainment && cls.obtainment.prereqClasses) ? cls.obtainment.prereqClasses.length : 0;
+    let matchReq = true;
+    if (currentClassReqFilter === 'base') matchReq = prereqCount === 0;
+    if (currentClassReqFilter === 'single') matchReq = prereqCount === 1;
+    if (currentClassReqFilter === 'crossed') matchReq = prereqCount >= 2;
+
     // Risk Filter
     let matchRisk = true;
     if (currentRiskFilter !== 'all') {
@@ -1957,11 +1967,11 @@ function renderClassesView() {
       (cls.obtainment && cls.obtainment.requirements.toLowerCase().includes(query)) ||
       (cls.designEvaluation && cls.designEvaluation.arbitrage && cls.designEvaluation.arbitrage.toLowerCase().includes(query));
 
-    return matchPole && matchTier && matchRisk && matchQuery;
+    return matchPole && matchReq && matchRisk && matchQuery;
   });
 
   if (countLabel) {
-    countLabel.textContent = `Affichage de ${filtered.length} classe(s) sur ${codexData.classes.length} concept(s) répertorié(s)`;
+    countLabel.textContent = `Affichage de ${filtered.length} classe(s) sur ${codexData.classes.length} répertoriée(s) au Codex`;
   }
 
   // Helper for risk badge
@@ -2008,9 +2018,9 @@ function renderClassesView() {
         ? prereqs.map(p => {
             const parent = (codexData.classes || []).find(c => c.id === p.classId);
             const pName = parent ? parent.name : p.classId;
-            return `<span class="prereq-link-badge" data-class-id="${p.classId}" title="Cliquez pour afficher cette classe">🔗 ${pName} (Niv. ${p.level})</span>`;
+            return `<span class="prereq-link-badge" data-class-id="${p.classId}" title="Cliquez pour filtrer sur ${pName}">🔗 ${pName} (Niv. ${p.level})</span>`;
           }).join(' <span style="color:var(--text-dim);">&bull;</span> ')
-        : '<span style="color:#22c55e; font-size:11px;">🌱 Classe de Départ (Niveau 1)</span>';
+        : '<span style="color:#22c55e; font-size:11px;">🌱 Classe de Départ Mercenaire (Niveau 1)</span>';
 
       // Unlocked Children Classes
       const unlocked = (codexData.classes || []).filter(c => 
@@ -2018,7 +2028,7 @@ function renderClassesView() {
       );
       const unlockedHtml = unlocked.length > 0
         ? unlocked.map(u => `<span class="unlocks-link-badge" data-class-id="${u.id}" title="Permet de débloquer ${u.name}">${u.avatar} ${u.name}</span>`).join(' ')
-        : '<span style="color:var(--text-dim); font-size:11px;">Palier Terminal</span>';
+        : '<span style="color:var(--text-dim); font-size:11px;">Spécialisation Finale</span>';
 
       return `
         <div class="class-analytic-card voxel-bevel" data-pole="${cls.pole}">
@@ -2027,7 +2037,7 @@ function renderClassesView() {
               <div class="class-avatar-badge">${cls.avatar}</div>
               <div class="class-title-text">
                 <h3>${cls.name}</h3>
-                <span class="class-pole-tag">${poleName} &bull; Palier ${cls.tier}</span>
+                <span class="class-pole-tag">${poleName} &bull; ${cls.category}</span>
               </div>
             </div>
             ${getStatusBadgeHtml(cls.status)}
@@ -2047,15 +2057,15 @@ function renderClassesView() {
           <!-- Crossed Obtainment Box -->
           <div class="obtainment-box">
             <div class="obtainment-title">🗝️ Déblocage &bull; ${cls.obtainment.method}</div>
-            <div class="obtainment-text" style="margin-bottom:6px;"><strong>Prérequis Croisés :</strong><br>${prereqsHtml}</div>
-            <div class="obtainment-text" style="margin-bottom:6px;"><strong>Permet de Débloquer :</strong><br>${unlockedHtml}</div>
-            <div class="obtainment-cost">Coût au 1er déblocage : ${cls.obtainment.unlockCost}</div>
+            <div class="obtainment-text" style="margin-bottom:8px;"><strong>Prérequis Croisés :</strong><br>${prereqsHtml}</div>
+            <div class="obtainment-text" style="margin-bottom:6px;"><strong>Permet de Débloquer Ensuite :</strong><br>${unlockedHtml}</div>
+            <div class="obtainment-cost">Coût au 1er déblocage : ${cls.obtainment.unlockCost} (Bascule gratuite au QG)</div>
           </div>
 
           <!-- Redundancy & Arbitrage Box -->
           <div class="arbitrage-box">
             <div class="risk-header-row">
-              <span class="risk-lbl">Rôle &amp; Positionnement :</span>
+              <span class="risk-lbl">Rôle &amp; Spécificité :</span>
               ${getRiskBadgeHtml(cls.designEvaluation.redundancyRisk)}
             </div>
             <p class="arbitrage-text">
@@ -2075,35 +2085,185 @@ function renderClassesView() {
     }).join('');
   }
 
-  // --- Render Mode 2 : Crossed Network / Progression Tree View ---
+  // --- Render Mode 2 : Interactive Crossed Network View ---
   if (networkContainer) {
-    const tiersDef = [
-      { tier: 1, label: "Palier 0 : Classes de Départ (Fondations)", badge: "tier-badge-0", desc: "Accessibles dès l'embauche de mercenaires Niv. 1 sans coût de déblocage." },
-      { tier: 2, label: "Palier 1 : Spécialisations Directes", badge: "tier-badge-1", desc: "Évolutions directes d'une classe de base (Niveau 25 requis)." },
-      { tier: 3, label: "Palier 2 : Voies Hybrides Croisées", badge: "tier-badge-2", desc: "Nécessitent la montée en niveau conjointe de 2 classes distinctes (Niv. 30 à 35)." },
-      { tier: 4, label: "Palier 3 : Maîtrises d'Élite & Rituels", badge: "tier-badge-3", desc: "Sommet de la spécialisation (2 classes avancées Niv. 45 à 50 requises)." }
+    const focusClass = (codexData.classes || []).find(c => c.id === selectedNetworkClassId) || (codexData.classes || [])[0];
+
+    let focusPanelHtml = '';
+    if (focusClass) {
+      const poleObj = codexData.poles.find(p => p.id === focusClass.pole);
+      const poleName = poleObj ? `${poleObj.icon} ${poleObj.name}` : focusClass.pole;
+
+      // Parents (Prérequis requis)
+      const prereqs = focusClass.obtainment && focusClass.obtainment.prereqClasses ? focusClass.obtainment.prereqClasses : [];
+      let parentsHtml = '';
+      if (prereqs.length === 0) {
+        parentsHtml = `<span style="color:#4ade80; font-family:var(--font-mono); font-size:12px;">🌱 Classe de Départ Mercenaire (Niveau 1, disponible d'office)</span>`;
+      } else {
+        parentsHtml = prereqs.map(p => {
+          const parent = (codexData.classes || []).find(c => c.id === p.classId);
+          const pName = parent ? parent.name : p.classId;
+          const pAvatar = parent ? parent.avatar : '❖';
+          return `
+            <button type="button" class="network-conn-pill parent-pill" data-network-focus="${p.classId}" title="Focaliser sur ${pName}">
+              <span>${pAvatar}</span>
+              <strong>${pName}</strong>
+              <span style="color:#fff; opacity:0.8;">(Niv. ${p.level})</span>
+            </button>
+          `;
+        }).join('');
+      }
+
+      // Children (Classes débloquées par focusClass)
+      const children = (codexData.classes || []).filter(c => 
+        c.obtainment && c.obtainment.prereqClasses && c.obtainment.prereqClasses.some(p => p.classId === focusClass.id)
+      );
+      let childrenHtml = '';
+      if (children.length === 0) {
+        childrenHtml = `<span style="color:var(--text-dim); font-family:var(--font-mono); font-size:12px;">Spécialisation terminale (ne débloque pas d'autre classe)</span>`;
+      } else {
+        childrenHtml = children.map(c => {
+          const reqInfo = c.obtainment.prereqClasses.find(p => p.classId === focusClass.id);
+          const reqLvl = reqInfo ? reqInfo.level : '';
+          return `
+            <button type="button" class="network-conn-pill child-pill" data-network-focus="${c.id}" title="Focaliser sur ${c.name}">
+              <span>${c.avatar}</span>
+              <strong>${c.name}</strong>
+              <span style="color:#fff; opacity:0.8;">(Requis Niv. ${reqLvl})</span>
+            </button>
+          `;
+        }).join('');
+      }
+
+      // Spells for focus class
+      const spells = (codexData.spells || []).filter(s => s.classId === focusClass.id);
+      const spellsHtml = spells.map(s => `
+        <span class="spell-chip-item" title="${s.type} • ${s.cost}">
+          <strong>${s.name}</strong> &bull; <em style="color:#93c5fd;">${s.type}</em> (${s.cost})
+        </span>
+      `).join(' ');
+
+      focusPanelHtml = `
+        <div class="network-focus-panel voxel-bevel">
+          <div class="network-focus-header">
+            <div class="network-focus-identity">
+              <div class="network-focus-avatar">${focusClass.avatar}</div>
+              <div>
+                <h3 class="network-focus-title">${focusClass.name}</h3>
+                <span style="font-family:var(--font-mono); font-size:12px; color:var(--accent-gold-light);">
+                  ${poleName} &bull; ${focusClass.category}
+                </span>
+              </div>
+            </div>
+            <div style="text-align:right;">
+              <span style="font-size:11px; color:var(--text-dim); display:block; font-family:var(--font-mono);">Arme Requise :</span>
+              <strong style="color:#fff; font-size:13px; font-family:var(--font-mono);">${focusClass.signatureWeapon}</strong>
+            </div>
+          </div>
+
+          <p style="color:var(--text-muted); font-size:13px; line-height:1.5; margin-bottom:18px;">
+            ${focusClass.summary}
+          </p>
+
+          <div class="network-focus-columns">
+            <!-- Left: Prerequisites to Unlock This Class -->
+            <div class="network-conn-box">
+              <span class="network-conn-title parents">⬅️ PRÉREQUIS POUR DÉBLOQUER (${prereqs.length}) :</span>
+              <div class="network-conn-list">
+                ${parentsHtml}
+              </div>
+            </div>
+
+            <!-- Right: Classes Unlocked by This Class -->
+            <div class="network-conn-box">
+              <span class="network-conn-title children">➔ DÉBLOQUE ENSUITE DANS L'ARBRE (${children.length}) :</span>
+              <div class="network-conn-list">
+                ${childrenHtml}
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:16px; padding-top:14px; border-top:1px solid #252a36;">
+            <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); margin-bottom:8px;">
+              SORTS ATTACHÉS À LA CLASSE (${spells.length}) :
+            </div>
+            <div class="spells-chips-wrap">
+              ${spellsHtml}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Categorized groups of classes
+    const groups = [
+      {
+        id: "base",
+        title: "🌱 Classes Fondamentales de Départ (Niveau 1)",
+        desc: "Accessibles dès le recrutement au QG sans aucun prérequis de classe.",
+        filterFn: c => !c.obtainment || !c.obtainment.prereqClasses || c.obtainment.prereqClasses.length === 0
+      },
+      {
+        id: "single",
+        title: "⚡ Spécialisations Directes (1 Prérequis de Classe)",
+        desc: "Évolutions nécessitant d'avoir atteint un niveau seuil sur une classe de base (Niv. 25).",
+        filterFn: c => c.obtainment && c.obtainment.prereqClasses && c.obtainment.prereqClasses.length === 1
+      },
+      {
+        id: "crossed",
+        title: "❖ Classes à Prérequis Croisés (2 Classes Conjointes)",
+        desc: "Combinaisons tactiques profondes (ex: Paladin = Guerrier 35 + Prêtre 35, Nécromancien = Mage Noir 45 + Invocateur 45).",
+        filterFn: c => c.obtainment && c.obtainment.prereqClasses && c.obtainment.prereqClasses.length >= 2
+      }
     ];
 
-    networkContainer.innerHTML = tiersDef.map(td => {
-      const tierClasses = (codexData.classes || []).filter(c => c.tier === td.tier);
-      if (tierClasses.length === 0) return '';
+    const currentFocusId = focusClass ? focusClass.id : '';
+    const focusParents = (focusClass && focusClass.obtainment && focusClass.obtainment.prereqClasses)
+      ? focusClass.obtainment.prereqClasses.map(p => p.classId)
+      : [];
+    const focusChildren = (codexData.classes || [])
+      .filter(c => c.obtainment && c.obtainment.prereqClasses && c.obtainment.prereqClasses.some(p => p.classId === currentFocusId))
+      .map(c => c.id);
 
-      const nodesHtml = tierClasses.map(cls => {
+    const treeGroupsHtml = groups.map(grp => {
+      const groupClasses = (codexData.classes || []).filter(grp.filterFn);
+      if (groupClasses.length === 0) return '';
+
+      const cardsHtml = groupClasses.map(cls => {
+        const isCurrent = cls.id === currentFocusId;
+        const isParent = focusParents.includes(cls.id);
+        const isChild = focusChildren.includes(cls.id);
+
+        let highlightClass = '';
+        let badgeHighlight = '';
+        if (isCurrent) {
+          highlightClass = 'is-active-focus';
+          badgeHighlight = '<span style="color:#d4af37; font-size:10px; font-family:var(--font-mono); font-weight:700;">❖ FOCUS ACTIF</span>';
+        } else if (isParent) {
+          highlightClass = 'is-parent-focus';
+          badgeHighlight = '<span style="color:#38bdf8; font-size:10px; font-family:var(--font-mono); font-weight:700;">⬅ PRÉREQUIS REQUIS</span>';
+        } else if (isChild) {
+          highlightClass = 'is-child-focus';
+          badgeHighlight = '<span style="color:#fef08a; font-size:10px; font-family:var(--font-mono); font-weight:700;">➔ DÉBLOQUÉE PAR FOCUS</span>';
+        }
+
         const prereqs = cls.obtainment && cls.obtainment.prereqClasses ? cls.obtainment.prereqClasses : [];
-        const prereqsList = prereqs.map(p => {
-          const parent = (codexData.classes || []).find(c => c.id === p.classId);
-          return `${parent ? parent.name : p.classId} (${p.level})`;
-        }).join(' + ');
+        const prereqsText = prereqs.length > 0
+          ? prereqs.map(p => {
+              const pCls = (codexData.classes || []).find(c => c.id === p.classId);
+              return `${pCls ? pCls.name : p.classId} (${p.level})`;
+            }).join(' + ')
+          : '🌱 Départ Libre';
 
         return `
-          <div class="network-node-card">
+          <div class="network-node-card voxel-bevel ${highlightClass}" data-network-focus="${cls.id}">
             <div class="network-node-top">
               <span class="network-node-name">${cls.avatar} ${cls.name}</span>
-              <span style="font-family:var(--font-mono); font-size:10px; color:var(--accent-gold);">${cls.pole}</span>
+              ${badgeHighlight || `<span style="font-family:var(--font-mono); font-size:10px; color:var(--text-dim);">${cls.pole}</span>`}
             </div>
             <div style="font-size:11px; color:#cbd5e1; line-height:1.4;">${cls.role}</div>
             <div style="font-size:10px; font-family:var(--font-mono); color:#93c5fd; margin-top:4px;">
-              ${prereqsList ? `Exige : ${prereqsList}` : '🌱 Départ Mercenaire'}
+              <strong>Exige :</strong> ${prereqsText}
             </div>
             <div style="font-size:10px; color:var(--text-dim); margin-top:2px;">
               Arme : <span style="color:#e2e8f0;">${cls.signatureWeapon}</span>
@@ -2113,29 +2273,47 @@ function renderClassesView() {
       }).join('');
 
       return `
-        <div class="network-tier-block">
-          <div class="network-tier-header">
-            <div class="network-tier-title">
-              <span class="network-tier-badge ${td.badge}">Palier ${td.tier - 1}</span>
-              <span>${td.label}</span>
+        <div class="network-category-block">
+          <div class="network-category-header">
+            <div class="network-category-title">
+              <span>${grp.title}</span>
+              <span class="network-category-count">${groupClasses.length} Classes</span>
             </div>
-            <span style="font-size:12px; color:var(--text-dim);">${td.desc}</span>
+            <span style="font-size:12px; color:var(--text-dim);">${grp.desc}</span>
           </div>
           <div class="network-classes-grid">
-            ${nodesHtml}
+            ${cardsHtml}
           </div>
         </div>
       `;
-    }).join('') + `
-      <div style="background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(20,22,27,0.9) 100%); border: 2px solid var(--accent-gold); padding: 22px; border-radius: 4px; text-align: center; margin-top: 28px;">
+    }).join('');
+
+    networkContainer.innerHTML = `
+      ${focusPanelHtml}
+      ${treeGroupsHtml}
+      <div style="background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(18,20,26,0.95) 100%); border: 2px solid var(--accent-gold); padding: 24px; border-radius: 4px; text-align: center; margin-top: 28px;">
         <div style="font-family:var(--font-serif); font-size:18px; font-weight:700; color:#fff; margin-bottom:8px;">
           👑 JALON SUPRÊME : DÉBLOCAGE DE L'HYBRIDATION TOTALE (36 / 36 CLASSES)
         </div>
-        <p style="color:#e2e8f0; font-size:13px; max-width:800px; margin:0 auto; line-height:1.6;">
-          Tant que la troupe n'a pas débloqué les 36 classes, chaque sort reste lié à l'équipement strict de l'arme requise par sa classe d'origine. Une fois la 36ème classe débloquée, la barrière tombe : vos mercenaires accèdent à l'<strong>Hybridation Libre Totale</strong> (combinaison sans restriction de sorts et d'armes dans les Gambits).
+        <p style="color:#e2e8f0; font-size:13px; max-width:820px; margin:0 auto; line-height:1.6;">
+          Tant que la troupe n'a pas débloqué la totalité des 36 classes, chaque mercenaire est soumis à la condition matérielle stricte (porter l'arme requise par le sort de sa classe). Dès que la 36ème classe est débloquée, la barrière tombe définitivement : vos mercenaires accèdent à l'<strong>Hybridation Libre</strong> (équiper n'importe quelle arme et lancer n'importe quel sort correspondant sans restriction de classe).
         </p>
       </div>
     `;
+
+    // Attach click events on network cards and pills
+    networkContainer.querySelectorAll('[data-network-focus]').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const targetId = btn.dataset.networkFocus;
+        if (targetId && targetId !== selectedNetworkClassId) {
+          selectedNetworkClassId = targetId;
+          renderClassesView();
+          // Smooth scroll to focus panel
+          networkContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
   }
 
   // --- Render Mode 3 : Compact Matrix Table (16:9) ---
@@ -2163,7 +2341,7 @@ function renderClassesView() {
           </td>
           <td>
             <span style="color:var(--accent-gold-light); font-family:var(--font-mono); font-size:11px;">${poleName}</span>
-            <div style="font-size:10px; color:var(--text-dim);">Palier ${cls.tier} (${cls.category})</div>
+            <div style="font-size:10px; color:var(--text-dim);">${cls.category}</div>
           </td>
           <td style="font-family:var(--font-mono); color:#fff; font-size:11px;">
             ${cls.signatureWeapon || 'N/A'}
@@ -2664,13 +2842,13 @@ function setupClassControls() {
     searchInput.addEventListener('input', () => renderClassesView());
   }
 
-  // Tier Filter Pills
-  const tierPills = document.querySelectorAll('.filter-pill-tier');
-  tierPills.forEach(pill => {
+  // Requirement Filter Pills (Base, Single, Crossed)
+  const reqPills = document.querySelectorAll('.filter-pill-req');
+  reqPills.forEach(pill => {
     pill.addEventListener('click', () => {
-      tierPills.forEach(p => p.classList.remove('active'));
+      reqPills.forEach(p => p.classList.remove('active'));
       pill.classList.add('active');
-      currentClassTierFilter = pill.dataset.tier;
+      currentClassReqFilter = pill.dataset.req;
       renderClassesView();
     });
   });

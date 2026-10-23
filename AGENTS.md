@@ -21,20 +21,17 @@
 
 ## 2. Système de Progression, Économie & Donjons
 
-## 2. Système de Progression, Économie & Donjons
-
 ### Structure de Progression & Graphe de Prérequis Croisés (36 Classes)
-* **Classes de Départ (4 Bases — Palier 0, Niveau 1) :**
+* **Classes de Départ (4 Bases — Niveau 1) :**
   - **Guerrier** (Frontline / Provocation)
   - **Archer** (Balistique / Tir à distance)
   - **Rogue** (Furtivité / Dagues & DoT)
   - **Acolyte** (Ordre Sacré / Soins d'urgence)
-* **Spécialisations Directes (8 Classes — Palier 1, Niveau 25 requis) :**
+* **Spécialisations Directes (8 Classes — 1 Prérequis de Classe, Niveau 25 requis) :**
   - Évolutions canoniques : Sentinelle, Gardien, Arbalétrier, Chasseur, Assassin, Duelliste, Mage Élémentaire, Prêtre.
-* **Voies Hybrides Croisées (16 Classes — Palier 2, Niveau 30 à 35 requis sur 2 classes distinctes) :**
-  - Exemples : **Paladin** (*Guerrier 35 + Prêtre 35*), **Chevalier Noir** (*Guerrier 35 + Sorcier Maudit 35*), **Bretteur** (*Rogue 30 + Duelliste 30*), **Rôdeur** (*Archer 30 + Druide 30*), **Danseur de Guerre** (*Barde 30 + Duelliste 30*), **Invocateur** (*Mage Élémentaire 35 + Druide 35*), **Mage de Guerre** (*Sentinelle 35 + Thaumaturge 35*), **Sanguinaire** (*Assassin 35 + Chevalier Noir 35*), etc.
-* **Maîtrises d'Élite & Rituels (8 Classes — Palier 3, Niveau 45 à 50 requis sur 2 classes avancées) :**
-  - Exemples : **Nécromancien** (*Mage Noir 45 + Invocateur 45*), **Archimage** (*Thaumaturge 45 + Mage Temporel 45*), **Champion Suprême** (*Paladin 45 + Sentinelle 45*), **Maître des Ombres** (*Assassin 45 + Traqueur 45*), **Faucheur d'Âmes** (*Sanguinaire 45 + Chevalier Noir 45*), **Grand Hiérophante** (*Templier 45 + Mage Blanc 45*), **Seigneur de Guerre** (*Gladiateur 45 + Berserker 45*), **Chronomancien** (*Mage Temporel 50 + Archimage 50*).
+* **Classes Avancées à Prérequis Croisés (24 Classes — 2 Prérequis Conjoints, Niveau 30 à 50) :**
+  - **Paladin** (*Guerrier 35 + Prêtre 35*), **Nécromancien** (*Mage Noir 45 + Invocateur 45*), **Chevalier Noir** (*Guerrier 35 + Sorcier Maudit 35*), **Archimage** (*Thaumaturge 45 + Mage Temporel 45*), **Bretteur** (*Rogue 30 + Duelliste 30*), **Rôdeur** (*Archer 30 + Druide 30*), **Danseur de Guerre** (*Barde 30 + Duelliste 30*), **Invocateur** (*Mage Élémentaire 35 + Druide 35*), **Mage de Guerre** (*Sentinelle 35 + Thaumaturge 35*), **Sanguinaire** (*Assassin 35 + Chevalier Noir 35*), **Champion Suprême** (*Paladin 45 + Sentinelle 45*), etc.
+  - *Note conceptuelle :* Ces classes (dont le Paladin ou le Nécromancien) sont des classes complètes à part entière, avec leurs 5 sorts et leur rôle dédié, et non une hybridation.
 
 ### Système Fondamental des Mercenaires, Armes & Gambits
 * **Recrutement & Niveaux :** Achat de mercenaires Niv. 1 sur les 4 classes de base. Plafond au **Niveau 100** par classe avec conservation permanente de toutes les statistiques et sorts débloqués.
@@ -43,7 +40,7 @@
 * **RÈGLE MAJEURE D'HYBRIDATION TOTALE (JALON 36/36) :**
   - **L'Hybridation libre est strictement verrouillée tant que l'ensemble des 36 classes du jeu n'a pas été débloqué.**
   - Tant que la 36ème classe n'est pas acquise, les sorts restent soumis à la compatibilité de classe et d'arme requise.
-  - **Dès que les 36 classes sont débloquées**, la barrière tombe définitivement : le mercenaire peut combiner n'importe quelle arme et n'importe quel sort dans ses Gambits sans aucune restriction de classe !
+  - **Dès que les 36 classes sont débloquées**, la barrière tombe définitivement : le mercenaire accède à l'**Hybridation Totale** (il peut équiper n'importe quelle arme de son choix et lui associer tous les sorts correspondant à ses armes équipées sans restriction de classe).
 * **Slots de Gambits (3 ➔ 10) :** Un mercenaire commence avec **3 slots de règles conditionnelles**. Il peut débloquer jusqu'à 10 slots via des sessions d'entraînement payantes au QG.
 * **Catalogue de 42 Conditions de Gambits :** Déclencheurs classés en 6 familles (`Alliés`, `Ennemis`, `Éther`, `Spatial`, `Cooldowns`, `Matériel`) pour programmer finement l'IA autonome de l'escouade.
 * **Sorts Générateurs d'Éther :** Chaque spécialisation dispose de moyens ou de sorts dédiés pour canaliser ou restaurer l'Éther de la réserve commune (ex: *Canalisation Éthérée*, *Convergence*, *Offrande Sanglante*, *Hymne d'Éther*, *Totem de Restitution*).

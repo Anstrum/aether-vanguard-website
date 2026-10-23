@@ -2077,37 +2077,238 @@ body {
 .network-tier-badge {
   font-family: var(--font-mono);
   font-size: 11px;
-  padding: 3px 9px;
-  border-radius: 3px;
+.filter-pill-req {
+  background: var(--bg-stone);
+  border: 1px solid var(--border-steel);
+  color: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border-radius: 2px;
 }
 
-.tier-badge-0 { background: #b91c1c; color: #fecaca; }
-.tier-badge-1 { background: #c2410c; color: #fed7aa; }
-.tier-badge-2 { background: #0369a1; color: #bae6fd; }
-.tier-badge-3 { background: #6b21a8; color: #f3e8ff; }
+.filter-pill-req:hover {
+  border-color: var(--accent-gold);
+  color: #fff;
+}
+
+.filter-pill-req.active {
+  background: var(--accent-gold);
+  color: #0d0f14;
+  font-weight: 700;
+  border-color: var(--accent-gold);
+}
+
+/* ==========================================================================
+   Crossed Network Interactive Visualizer & Focus Panel
+   ========================================================================== */
+.network-focus-panel {
+  background: #0f1218;
+  border: 2px solid var(--border-steel-bright);
+  border-top: 3px solid var(--accent-gold);
+  padding: 24px;
+  border-radius: 4px;
+  margin-bottom: 28px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.network-focus-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-steel);
+  margin-bottom: 20px;
+}
+
+.network-focus-identity {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.network-focus-avatar {
+  font-size: 32px;
+  background: #191e29;
+  border: 1px solid var(--border-steel-bright);
+  width: 54px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+}
+
+.network-focus-title {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.network-focus-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .network-focus-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.network-conn-box {
+  background: #141720;
+  border: 1px solid var(--border-steel);
+  padding: 16px;
+  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.network-conn-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.network-conn-title.parents { color: #38bdf8; }
+.network-conn-title.children { color: var(--accent-gold-light); }
+
+.network-conn-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.network-conn-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 3px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.network-conn-pill.parent-pill {
+  background: rgba(56, 189, 248, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  color: #bae6fd;
+}
+
+.network-conn-pill.parent-pill:hover {
+  background: rgba(56, 189, 248, 0.25);
+  border-color: #38bdf8;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.network-conn-pill.child-pill {
+  background: rgba(212, 175, 55, 0.12);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  color: #fef08a;
+}
+
+.network-conn-pill.child-pill:hover {
+  background: rgba(212, 175, 55, 0.25);
+  border-color: var(--accent-gold);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Network Nodes Grid */
+.network-category-block {
+  margin-bottom: 28px;
+}
+
+.network-category-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--border-steel);
+}
+
+.network-category-title {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.network-category-count {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent-gold-light);
+  background: #141822;
+  border: 1px solid var(--border-steel);
+  padding: 2px 8px;
+  border-radius: 2px;
+}
 
 .network-classes-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 14px;
 }
 
 .network-node-card {
   background: #11141c;
   border: 1px solid var(--border-steel);
-  border-left: 3px solid var(--accent-gold);
+  border-left: 3px solid #384257;
   padding: 14px;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  cursor: pointer;
   transition: all var(--transition-fast);
+  position: relative;
 }
 
 .network-node-card:hover {
   border-color: var(--accent-gold-light);
   transform: translateY(-2px);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Active Highlight States in Network */
+.network-node-card.is-active-focus {
+  border: 2px solid var(--accent-gold) !important;
+  border-left: 4px solid var(--accent-gold) !important;
+  background: #1a1e28 !important;
+  box-shadow: 0 0 16px var(--accent-gold-glow);
+  transform: translateY(-2px);
+}
+
+.network-node-card.is-parent-focus {
+  border-color: #38bdf8 !important;
+  border-left: 3px solid #38bdf8 !important;
+  background: rgba(56, 189, 248, 0.08) !important;
+}
+
+.network-node-card.is-child-focus {
+  border-color: var(--accent-gold) !important;
+  border-left: 3px solid var(--accent-gold) !important;
+  background: rgba(212, 175, 55, 0.08) !important;
 }
 
 .network-node-top {
@@ -2126,28 +2327,5 @@ body {
   gap: 6px;
 }
 
-.filter-pill-tier {
-  background: var(--bg-stone);
-  border: 1px solid var(--border-steel);
-  color: var(--text-muted);
-  font-family: var(--font-mono);
-  font-size: 11px;
-  padding: 4px 10px;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  border-radius: 2px;
-}
-
-.filter-pill-tier:hover {
-  border-color: var(--accent-gold);
-  color: #fff;
-}
-
-.filter-pill-tier.active {
-  background: var(--accent-gold);
-  color: #0d0f14;
-  font-weight: 700;
-  border-color: var(--accent-gold);
-}
 
 
