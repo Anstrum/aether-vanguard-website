@@ -1,5 +1,5 @@
 /**
- * ANTIGRAVITY — RPG TACTIQUE VOXEL
+ * AETHER VANGUARD — RPG TACTIQUE VOXEL
  * Client Application Logic: Grab-to-Pan Tree Viewport, Sticky Edge Overflow Animations,
  * Interactive Grimoire & Class Sheet Updates, Web Audio Micro-Interactions.
  */

@@ -1,7 +1,7 @@
 # AGENTS.md — Directives & Documentation du Projet "Aether Vanguard"
 
 ## 1. Vue d'Ensemble du Projet
-* **Titre :** Aether Vanguard (Anciennement nommé sous code "Antigravity")
+* **Titre :** Aether Vanguard
 * **Genre :** RPG tactique sombre de gestion de mercenaires en vue top-down dézoomée avec rendu voxel stylisé.
 * **Ambiance :** Dark Medieval Fantasy & géométrie voxel technique (dalles de pierre, fer forgé, acier froid, enluminures et lueurs arcaniques).
 * **Piliers Fondamentaux de Gameplay :**
@@ -153,7 +153,7 @@
 
 ## 4. Architecture de la One-Page
 1. **En-tête & Barre de Navigation :**
-   * Logo & blason Antigravity, navigation fluide (`#intro`, `#class-tree`, `#class-details`, `#lore`), statut de déploiement.
+   * Logo & blason Aether Vanguard, navigation fluide (`#intro`, `#class-tree`, `#class-details`, `#lore`), tiroir devlog latéral, statut de déploiement.
 2. **Section 1 : Hero & Brief Projet :**
    * Titre immersif, phrase d'accroche, présentation du lore et du gameplay tactique.
    * Rendu visuel d'arène voxel top-down (asset d'arène de combat).
@@ -197,3 +197,18 @@ Le projet sépare strictement l'expérience publique et l'espace de conception g
   - **Catalogue des Sorts Multi-Modes :** Vue Tableau Dense (audit rapide), Vue Fiches et Vue Groupée par Classe avec filtres par type (Offensif, Soin, Défense, Contrôle, Altérations/DoT, Mobilité) et statut de développement.
   - **Matrice des Redondances & Arbitrages :** Analyse comparative des classes à risque (Gardien vs Sentinelle, Clerc vs Prêtre vs Mage Blanc, Lancier vs Hallebardier, Barde vs Vocaliste, Démolisseur vs Fracasseur).
   - **Bac à sable & Exportation JSON :** Création dynamique et visualiseur JSON contenu avec bouton de repliage/dépliage et téléchargement.
+
+---
+
+## 7. Gestion du Dépôt Git & Règles de Déploiement
+
+* **Dépôt distant :** `https://github.com/Anstrum/aether-vanguard-website.git`
+* **Architecture des Branches :**
+  - `master` : Branche publique de production avec déploiement GitHub Pages.
+  - `dev` : Branche d'intégration et de tests avant merge vers `master`.
+  - `feature-*` (ex: `feature-feat1`) : Branches de développement pour implémenter les nouvelles fonctionnalités et itérations.
+* **RÈGLE STRICTE ABSOLUE — PUSH SUR MASTER :**
+  - **AUCUN push sur la branche `master` ne sera JAMAIS effectué sans l'accord explicite et préalable de l'utilisateur.**
+  - Tout développement s'effectue systématiquement sur les branches de feature dédiées.
+  - La bascule et le push sur `master` (pour publication publique) requièrent systématiquement une instruction ou validation explicite formulée par l'utilisateur.
+
