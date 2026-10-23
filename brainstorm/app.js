@@ -2908,13 +2908,24 @@ function renderConditionsView() {
 
   const conditions = codexData.gambitConditions || [];
   const filtered = conditions.filter(cond => {
+    const label = cond.label || cond.name || '';
+    const desc = cond.desc || cond.description || '';
+    const targetType = cond.targetType || cond.target || 'N/A';
+    const tagList = Array.isArray(cond.tags) ? cond.tags : (cond.tag ? [cond.tag] : []);
+
     const matchCat = currentConditionCatFilter === 'all' || cond.category === currentConditionCatFilter;
-    const matchTarget = currentConditionTargetFilter === 'all' || cond.target === currentConditionTargetFilter;
+    
+    let matchTarget = true;
+    if (currentConditionTargetFilter !== 'all') {
+      matchTarget = targetType.toLowerCase().includes(currentConditionTargetFilter.toLowerCase());
+    }
+
     const matchQuery = !query ||
-      cond.name.toLowerCase().includes(query) ||
-      cond.description.toLowerCase().includes(query) ||
-      (cond.example && cond.example.toLowerCase().includes(query)) ||
-      (cond.tags && cond.tags.some(t => t.toLowerCase().includes(query)));
+      label.toLowerCase().includes(query) ||
+      desc.toLowerCase().includes(query) ||
+      targetType.toLowerCase().includes(query) ||
+      cond.id.toLowerCase().includes(query) ||
+      tagList.some(t => t.toLowerCase().includes(query));
 
     return matchCat && matchTarget && matchQuery;
   });
@@ -2923,40 +2934,62 @@ function renderConditionsView() {
     countLabel.textContent = `Affichage de ${filtered.length} condition(s) sur ${conditions.length} déclencheur(s) répertorié(s)`;
   }
 
+  // Helper for canonical gambit example
+  function getExampleAction(cond) {
+    if (cond.example) return cond.example;
+    const cat = cond.category || '';
+    const id = cond.id || '';
+    if (id.includes('heal') || id.includes('hp_lt') && cat === 'Alliés') return 'Lancer [Prière Curative / Soin d\'Urgence]';
+    if (id.includes('debuff') || id.includes('purge')) return 'Lancer [Purification Sacrée]';
+    if (id.includes('stun') && cat === 'Ennemis') return 'Lancer [Frappe Étourdissante / Bash]';
+    if (cat === 'Éther' && (id.includes('lt_') || id.includes('priorite'))) return 'Lancer [Canalisation Éthérée / Siphon]';
+    if (id.includes('taunt') || id.includes('protect')) return 'Lancer [Provocation Voxel / Garde]';
+    if (id.includes('boss')) return 'Lancer [Sort Ultime / Contrat Létal]';
+    if (id.includes('pack')) return 'Lancer [Volée de Flèches / Tempête AOE]';
+    if (cat === 'Alliés') return 'Lancer [Buff / Soin Adapté]';
+    return 'Lancer [Attaque Signature / Sort Prioritaire]';
+  }
+
   // Render Mode 1 : Cards
   if (cardsContainer) {
     if (filtered.length === 0) {
       cardsContainer.innerHTML = `
-        <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--text-dim);">
+        <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--text-dim); background: var(--bg-iron); border: 1px dashed var(--border-steel); border-radius: 4px;">
           Aucune condition de Gambit ne correspond à vos critères de recherche.
         </div>
       `;
     } else {
       cardsContainer.innerHTML = filtered.map(cond => {
-        const tagsHtml = (cond.tags || []).map(t => `<span class="condition-tag-item">#${t}</span>`).join(' ');
+        const label = cond.label || cond.name || 'Condition Inconnue';
+        const desc = cond.desc || cond.description || 'Description en cours de rédaction.';
+        const targetType = cond.targetType || cond.target || 'Indéfini';
+        const tagList = Array.isArray(cond.tags) ? cond.tags : (cond.tag ? [cond.tag] : []);
+        const exampleAction = getExampleAction(cond);
+
+        const tagsHtml = tagList.map(t => `<span class="condition-tag-item">#${t}</span>`).join(' ');
 
         return `
           <div class="condition-card voxel-bevel" data-cat="${cond.category}">
             <div class="condition-header">
               <div>
                 <span class="condition-id-tag">[${cond.id}]</span>
-                <h3 class="condition-name">${cond.name}</h3>
+                <h3 class="condition-name">${label}</h3>
               </div>
               <span class="condition-cat-badge cat-${cond.category}">${cond.category}</span>
             </div>
 
             <div style="display:flex; align-items:center; gap:8px;">
-              <span class="condition-target-badge">🎯 Cible : ${cond.target}</span>
+              <span class="condition-target-badge">🎯 Cible : ${targetType}</span>
             </div>
 
-            <p class="condition-desc">${cond.description}</p>
+            <p class="condition-desc">${desc}</p>
 
             <div class="gambit-syntax-box">
               <div style="color:var(--text-dim); font-size:10px; margin-bottom:3px;">SYNTAXE GAMBIT :</div>
               <div class="gambit-syntax-line">
-                <span>SI [${cond.name}]</span>
+                <span>SI [${label}]</span>
                 <span class="gambit-syntax-arrow">➔</span>
-                <span style="color:#93c5fd;">${cond.example}</span>
+                <span style="color:#93c5fd;">${exampleAction}</span>
               </div>
             </div>
 
@@ -2981,7 +3014,13 @@ function renderConditionsView() {
       `;
     } else {
       tbody.innerHTML = filtered.map(cond => {
-        const tagsHtml = (cond.tags || []).map(t => `<span class="condition-tag-item">#${t}</span>`).join(' ');
+        const label = cond.label || cond.name || 'Condition Inconnue';
+        const desc = cond.desc || cond.description || 'Description en cours de rédaction.';
+        const targetType = cond.targetType || cond.target || 'Indéfini';
+        const tagList = Array.isArray(cond.tags) ? cond.tags : (cond.tag ? [cond.tag] : []);
+        const exampleAction = getExampleAction(cond);
+
+        const tagsHtml = tagList.map(t => `<span class="condition-tag-item">#${t}</span>`).join(' ');
 
         return `
           <tr>
@@ -2990,16 +3029,16 @@ function renderConditionsView() {
               <span class="condition-cat-badge cat-${cond.category}">${cond.category}</span>
             </td>
             <td>
-              <strong style="color:#fff; font-family:var(--font-serif); font-size:13px;">${cond.name}</strong>
+              <strong style="color:#fff; font-family:var(--font-serif); font-size:13px;">${label}</strong>
             </td>
             <td>
-              <span class="condition-target-badge">${cond.target}</span>
+              <span class="condition-target-badge">${targetType}</span>
             </td>
             <td style="color:var(--text-muted); font-size:12px; line-height:1.4;">
-              ${cond.description}
+              ${desc}
             </td>
             <td style="font-family:var(--font-mono); font-size:11px; color:#38bdf8;">
-              ${cond.example}
+              ${exampleAction}
             </td>
             <td>
               <div style="display:flex; flex-wrap:wrap; gap:4px;">
@@ -3022,8 +3061,20 @@ function setupConditionsControls() {
   // Category Filter Pills
   const catContainer = document.getElementById('conditions-categories-container');
   if (catContainer) {
+    const conditions = codexData && codexData.gambitConditions ? codexData.gambitConditions : [];
     const catPills = catContainer.querySelectorAll('.pole-pill-btn');
     catPills.forEach(pill => {
+      const cat = pill.dataset.cat;
+      const countTag = pill.querySelector('.pole-count-tag');
+      if (countTag) {
+        if (cat === 'all') {
+          countTag.textContent = conditions.length;
+        } else {
+          const count = conditions.filter(c => c.category === cat).length;
+          countTag.textContent = count;
+        }
+      }
+
       pill.addEventListener('click', () => {
         catPills.forEach(p => p.classList.remove('active'));
         pill.classList.add('active');
