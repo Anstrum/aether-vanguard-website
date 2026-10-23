@@ -29,8 +29,11 @@
         <a href="#hero" class="nav-link active">Vision</a>
         <a href="#class-tree-section" class="nav-link">Arbre de Classes</a>
         <a href="#class-details" class="nav-link">Grimoire & Détails</a>
-        <a href="#tactics" class="nav-link">Mécaniques</a>
-        <a href="#devlogs" class="nav-link">Devlogs</a>
+        <button type="button" class="nav-devlog-btn" id="nav-btn-devlogs" aria-label="Ouvrir le journal des Devlogs">
+          <span class="btn-icon">📜</span>
+          <span>Devlogs</span>
+          <span class="nav-ver-chip">v0.1.1</span>
+        </button>
       </nav>
 
       <div class="header-actions">
@@ -811,162 +814,6 @@
       </div>
     </section>
 
-    <!-- Section 4 : Mécaniques & Piliers de Combat -->
-    <section class="section-tactics" id="tactics">
-      <div class="container">
-        <div class="section-header text-center">
-          <div class="section-subtitle">Système de Combat &amp; Stratégie</div>
-          <h2 class="section-title">Temps Réel Automatisé &amp; Formation Tactique</h2>
-          <p class="section-desc">
-            Aether Vanguard n'est ni du tour par tour, ni du déplacement case par case. Vos mercenaires combattent en temps réel continu selon votre formation préparatoire et leurs arbres de décision programmés.
-          </p>
-        </div>
-
-        <div class="tactics-grid">
-          <!-- Pilier 1 : Gambits & Boucle Temps Réel -->
-          <div class="tactic-card voxel-bevel">
-            <div class="tactic-icon-box amber-box">⚡</div>
-            <h3>Boucle de Gambits Temps Réel</h3>
-            <p>Cycles d'action continus et sans délai. Chaque unité évalue sa liste ordonnée de conditions en cascade (« Si [Condition] alors [Sort] »), chaque action déclenchant son propre temps d'incantation et d'animation.</p>
-            <div class="tactic-badge">3 à 10 Slots de Règles Programmables</div>
-          </div>
-
-          <!-- Pilier 2 : Grille de Formation 3x4 -->
-          <div class="tactic-card voxel-bevel">
-            <div class="tactic-icon-box blue-box">🛡️</div>
-            <h3>Grille de Formation 3x4</h3>
-            <p>Placement stratégique préparatoire des 12 mercenaires avant l'engagement sur 3 rangées de 4 cases (Frontline / Midline / Backline) pour structurer le contact, les armes d'allonge et la ligne arrière.</p>
-            <div class="tactic-badge">12 Mercenaires par Troupe</div>
-          </div>
-
-          <!-- Pilier 3 : Éther Commun & Affinité -->
-          <div class="tactic-card voxel-bevel">
-            <div class="tactic-icon-box green-box">✨</div>
-            <h3>Réserve d'Éther Collective</h3>
-            <p>La capacité maximale d'Éther est la somme des statistiques d'Affinité des 12 mercenaires. Démarrage au maximum, régénération passive à 1%/s et compétences actives de canalisateurs dédiés.</p>
-            <div class="tactic-badge">Affinité Commune d'Escouade</div>
-          </div>
-
-          <!-- Pilier 4 : Donjons Procéduraux, Salles & 100% Survie -->
-          <div class="tactic-card voxel-bevel">
-            <div class="tactic-icon-box red-box">🏰</div>
-            <h3>Donjons en Salles &amp; 100% Survie</h3>
-            <p>Progression en couloirs rythmée par des points d'arrêt (Salles d'ennemis, de 5 à 20+). Une réussite exige 100% de survie sans aucun mort. Repli tactique en Mode Normal et permadeath sans pitié en Mode Hardcore.</p>
-            <div class="tactic-badge">Raids Multi-Troupes en Simultané</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 5 : Chroniques & Devlogs Officiels (Timeline Frise) -->
-    <section class="section-devlogs" id="devlogs">
-      <div class="container">
-        <div class="section-header text-center">
-          <div class="hero-tag">
-            <span class="tag-dot"></span>
-            <span>Journal Officiel de Développement</span>
-          </div>
-          <h2 class="section-title">Chroniques du Front &amp; Devlogs</h2>
-          <p class="section-desc centered-desc">
-            Suivi officiel et horodaté de la conception d'Aether Vanguard. Jalons techniques, arbitrages de design et déploiements documentés au fil de l'expédition.
-          </p>
-        </div>
-
-        <!-- Vertical Timeline Frise (Design conforme au schéma) -->
-        <div class="timeline-container">
-          <div class="timeline-spine" aria-hidden="true">
-            <div class="timeline-spine-glow"></div>
-          </div>
-
-          <!-- Devlog Entry 1 : Création du projet (23/10/2026) -->
-          <article class="timeline-entry" id="devlog-01">
-            <div class="timeline-node">
-              <span class="node-crest">❖</span>
-            </div>
-
-            <div class="timeline-card voxel-bevel">
-              <div class="timeline-header">
-                <div class="timeline-date-badge">
-                  <span class="date-icon">📅</span>
-                  <time datetime="2026-10-23">23 / 10 / 2026</time>
-                </div>
-                <span class="timeline-tag tag-genesis">Devlog #01 • Création du Projet</span>
-                <span class="timeline-status-pill">Canon Officiel</span>
-              </div>
-
-              <h3 class="timeline-title">
-                Création Officielle du Projet : Aether Vanguard
-              </h3>
-              <div class="timeline-codename">
-                Nom de code initial : <span class="text-gold">« Antigravity »</span>
-              </div>
-
-              <p class="timeline-summary">
-                Lancement officiel et fixation des piliers de conception pour <strong>Aether Vanguard</strong>, RPG tactique sombre de gestion de mercenaires en vue top-down dézoomée avec rendu voxel stylisé.
-              </p>
-
-              <div class="timeline-pillars-grid">
-                <div class="pillar-item">
-                  <div class="pillar-icon">⚔️</div>
-                  <div class="pillar-text">
-                    <strong>Troupes de 12 &amp; Grille 3x4 :</strong> Organisation des mercenaires en escouades de 12 sur une formation tactique préparatoire (Frontline, Midline, Backline). Multi-troupes en temps réel et raids coopératifs.
-                  </div>
-                </div>
-
-                <div class="pillar-item">
-                  <div class="pillar-icon">📜</div>
-                  <div class="pillar-text">
-                    <strong>Gambits Programmables :</strong> Boucle continue de prise de décision sans délai. De 3 slots initiaux jusqu'à 10 slots débloqués via des formations d'entraînement au QG.
-                  </div>
-                </div>
-
-                <div class="pillar-item">
-                  <div class="pillar-icon">✨</div>
-                  <div class="pillar-text">
-                    <strong>Affinité &amp; Éther Collectif :</strong> Réserve commune d'Éther calculée par la somme des stats d'Affinité des 12 unités. Démarrage au maximum, recharge passive à 1% et compétences de canalisation.
-                  </div>
-                </div>
-
-                <div class="pillar-item">
-                  <div class="pillar-icon">🏰</div>
-                  <div class="pillar-text">
-                    <strong>Donjons Procéduraux &amp; Salles :</strong> Couloirs linéaires ponctués par des points d'arrêt (Salles d'ennemis, de 5 à 20+). Condition absolue de réussite : 100% de survie sans aucun mort.
-                  </div>
-                </div>
-              </div>
-
-              <div class="timeline-footer">
-                <div class="timeline-author">
-                  <span class="author-avatar">🛡️</span>
-                  <span>Commandement de l'Avant-Garde</span>
-                </div>
-                <div class="timeline-version-tag">
-                  Version Initiale : <code>v0.1.0</code>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Jalon de Version sur la Frise (Correspond au "- v0.1.1" du schéma) -->
-          <div class="timeline-milestone-marker">
-            <div class="milestone-line-left"></div>
-            <div class="milestone-badge">
-              <span class="milestone-icon">❖</span>
-              <span>Jalon v0.1.1 — Socle Pré-Alpha</span>
-            </div>
-            <div class="milestone-line-right"></div>
-          </div>
-
-          <!-- Nœud En Attente (Boîte [...] du schéma) -->
-          <div class="timeline-pending-node">
-            <div class="pending-card voxel-bevel">
-              <div class="pending-dots">. . .</div>
-              <span class="pending-text">Prochain jalon de développement en cours de rédaction</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
   <!-- Site Footer -->
@@ -982,9 +829,161 @@
         <a href="#hero">Haut de Page</a>
         <a href="#class-tree-section">Arbre de Classes</a>
         <a href="#class-details">Grimoire</a>
-        <a href="#tactics">Mécaniques</a>
-        <a href="#devlogs">Devlogs</a>
+        <button type="button" class="footer-devlog-btn" id="footer-btn-devlogs">Chroniques &amp; Devlogs (v0.1.1)</button>
       </div>
+
+      <div class="footer-meta">
+        <div class="build-badge">
+          <span class="badge-dot"></span>
+          <span>Prototype Alpha • One-Page Vitrine</span>
+        </div>
+        <p class="copyright">© 2026 Aether Vanguard. Tous droits réservés.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating Trigger Pill for Devlog Drawer (Bord droit) -->
+  <button type="button" class="devlog-float-pill" id="btn-open-devlogs" aria-label="Ouvrir le panneau des Chroniques et Devlogs">
+    <span class="pill-shimmer" aria-hidden="true"></span>
+    <span class="pill-crest">❖</span>
+    <span class="pill-text-wrap">
+      <span class="pill-title">DEVLOGS</span>
+      <code class="pill-ver">v0.1.1</code>
+    </span>
+  </button>
+
+  <!-- Off-Canvas Devlog Side Drawer (Tiroir coulissant à droite) -->
+  <div class="drawer-backdrop" id="drawer-backdrop" aria-hidden="true"></div>
+  <aside class="devlog-drawer" id="devlog-drawer" aria-hidden="true" role="dialog" aria-label="Journal des Chroniques et Devlogs">
+    <div class="drawer-header">
+      <div class="drawer-title-group">
+        <div class="drawer-tag">
+          <span class="tag-dot"></span>
+          <span>JOURNAL OFFICIEL DE BORD</span>
+        </div>
+        <h3 class="drawer-title">Chroniques du Front</h3>
+      </div>
+      <button type="button" class="drawer-close-btn" id="btn-close-drawer" aria-label="Fermer le panneau des devlogs">✕</button>
+    </div>
+
+    <div class="drawer-body">
+      <!-- Vertical Timeline Frise (Conforme au schéma du joueur) -->
+      <div class="drawer-timeline">
+        <div class="drawer-spine" aria-hidden="true">
+          <div class="drawer-spine-glow"></div>
+        </div>
+
+        <!-- Devlog 1 : Carte Concise Cliquable pour Pop-up -->
+        <article class="drawer-card voxel-bevel" id="drawer-card-devlog-01" tabindex="0" role="button" aria-label="Ouvrir le Devlog #01 du 23/10/2026">
+          <div class="drawer-card-node">
+            <span class="node-crest">❖</span>
+          </div>
+
+          <div class="drawer-card-header">
+            <div class="drawer-card-badge">23 / 10 / 2026</div>
+            <span class="drawer-card-num">DEV #01</span>
+            <span class="drawer-card-ver">v0.1.0</span>
+          </div>
+
+          <h4 class="drawer-card-title">Création Officielle : Aether Vanguard</h4>
+          <div class="drawer-card-codename">Nom de code initial : <span class="text-gold">« Antigravity »</span></div>
+
+          <p class="drawer-card-snippet">
+            Lancement officiel : Troupes de 12 sur grille 3x4, boucle de Gambits en temps réel, réserve d'éther commune et donjons procéduraux en salles.
+          </p>
+
+          <div class="drawer-card-action">
+            <span class="action-text">Ouvrir le rapport complet</span>
+            <span class="action-arrow">➔</span>
+          </div>
+        </article>
+
+        <!-- Jalon de Version sur la Frise (- v0.1.1) -->
+        <div class="drawer-milestone">
+          <div class="milestone-crossbar"></div>
+          <span class="milestone-badge">❖ Jalon v0.1.1 — Socle Pré-Alpha</span>
+        </div>
+
+        <!-- Nœud En Attente [...] -->
+        <div class="drawer-pending-box voxel-bevel">
+          <div class="pending-dots">. . .</div>
+          <span class="pending-text">Prochain jalon en cours de rédaction</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Devlog Detail Modal (Pop-up complète avec tous les changements) -->
+  <div class="devlog-modal" id="devlog-modal" aria-hidden="true" role="dialog" aria-label="Détail complet du devlog">
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-wrapper">
+      <button type="button" class="modal-close-btn" id="btn-close-modal" aria-label="Fermer la pop-up">✕</button>
+      <div class="modal-card voxel-bevel">
+        <div class="modal-header">
+          <div class="modal-badge-row">
+            <span class="badge badge-amber">Devlog Officiel #01</span>
+            <span class="badge badge-blue">Version Initiale v0.1.0</span>
+            <span class="badge badge-green">Canon Validé</span>
+          </div>
+          <h2 class="modal-title">Création Officielle du Projet : Aether Vanguard</h2>
+          <div class="modal-meta-row">
+            <span class="modal-meta-item">📅 23 Octobre 2026</span>
+            <span class="modal-meta-item">🛡️ Commandement de l'Avant-Garde</span>
+            <span class="modal-meta-item">Nom de code initial : <strong class="text-gold">« Antigravity »</strong></span>
+          </div>
+        </div>
+
+        <div class="modal-body">
+          <div class="modal-lead-box">
+            <p>
+              Ce premier billet officiel acte la fondation et le démarrage du développement d'<strong>Aether Vanguard</strong>. Le jeu est un RPG tactique sombre de gestion de mercenaires en vue top-down dézoomée avec un rendu voxel stylisé.
+            </p>
+          </div>
+
+          <h4 class="modal-section-title">⚔️ 1. Gestion des Troupes &amp; Grille de Formation 3x4</h4>
+          <ul class="modal-list">
+            <li><strong>Organisation en Compagnies :</strong> Recrutement de mercenaires de Niveau 1 sur les classes de base et structuration en troupes de 12 unités maximum.</li>
+            <li><strong>Grille Préparatoire 3x4 (12 slots) :</strong> Avant d'engager le combat, les 12 unités se placent sur 3 rangées de 4 cases (Frontline / Midline / Backline) pour organiser le premier rideau, les armes d'allonge et la ligne arrière.</li>
+            <li><strong>Multi-Troupes Simultanées :</strong> Possibilité de déployer plusieurs troupes autonomes dans différents donjons en temps réel simultané (avec bascule de caméra fluide à volonté) et raids coopératifs multi-troupes.</li>
+          </ul>
+
+          <h4 class="modal-section-title">📜 2. Boucle de Combat Temps Réel &amp; Gambits Programmables</h4>
+          <ul class="modal-list">
+            <li><strong>Temps Réel Continu :</strong> Zéro tour par tour, zéro déplacement case par case. Les mercenaires exécutent des cycles de décision en boucle continue et sans aucun délai d'attente.</li>
+            <li><strong>Évaluation en Cascade :</strong> Chaque règle est évaluée de haut en bas selon la priorité définie (« Si [Condition] alors [Action] »). Si la condition n'est pas remplie, l'unité passe immédiatement à la règle suivante.</li>
+            <li><strong>Temps d'Action :</strong> Chaque sort ou compétence possède son temps d'incantation (cast) et d'animation propre.</li>
+            <li><strong>Slots de Gambits (3 ➔ 10) :</strong> Chaque unité commence avec 3 slots de règles et peut débloquer jusqu'à 10 slots via des sessions d'entraînement au QG (investissement en temps et en or). Les règles sont strictement figées pendant les raids.</li>
+          </ul>
+
+          <h4 class="modal-section-title">✨ 3. Économie Collective d'Éther &amp; Affinité</h4>
+          <ul class="modal-list">
+            <li><strong>Plafond d'Éther d'Escouade :</strong> Le réservoir maximal d'Éther de la troupe est la somme exacte des statistiques d'<em>Affinité d'Éther</em> des 12 mercenaires.</li>
+            <li><strong>Dynamique Énergétique :</strong> La réserve démarre au maximum au début du combat, se recharge passivement à 1% par seconde et via des compétences actives de canalisation (rôle clé des unités génératrices).</li>
+            <li><strong>Condition d'Arme Requise :</strong> Un mercenaire peut lancer n'importe quel sort acquis au cours de son parcours de classes (plafond Niv. 100) à condition stricte d'équiper l'arme requise par ce sort.</li>
+          </ul>
+
+          <h4 class="modal-section-title">🏰 4. Donjons Procéduraux, Salles &amp; Règle 100% Survie</h4>
+          <ul class="modal-list">
+            <li><strong>Structure Linéaire par « Salles » :</strong> Donjons en couloirs rythmés par des points d'arrêt (Salles d'ennemis, de 5 à 20+).</li>
+            <li><strong>Condition Absolue de Réussite :</strong> Un donjon n'est validé comme réussi que si 100% de la troupe survit. Un mort (même réanimé en cours de combat) invalide la réussite parfaite.</li>
+            <li><strong>Mode Normal vs Mode Hardcore :</strong> En normal, téléportation d'urgence arcanique préservant le butin en cas de wipe avec coût de réanimation au QG (risque de Game Over économique). En hardcore, permadeath irréversible, perte partielle du butin porté par le défunt et retraite impossible.</li>
+          </ul>
+
+          <h4 class="modal-section-title">💻 5. Déploiement &amp; Dépôt Officiel GitHub</h4>
+          <ul class="modal-list">
+            <li>Dépôt public configuré sur <code>https://github.com/Anstrum/aether-vanguard-website</code>.</li>
+            <li>Branches établies : <code>master</code> (production GitHub Pages), <code>dev</code> (tests/intégration) et <code>feature-feat1</code> (développement actif).</li>
+          </ul>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-chamfer btn-primary btn-sm" id="btn-modal-close-action">
+            <span>Fermer le Rapport</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
 
       <div class="footer-meta">
         <div class="build-badge">

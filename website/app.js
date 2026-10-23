@@ -1105,13 +1105,144 @@ class LightboxManager {
 }
 
 // =============================================================================
-// 6. APPLICATION BOOTSTRAP
+// 6. DEVLOG DRAWER & POPUP MODAL MANAGER
+// =============================================================================
+class DevlogManager {
+  constructor() {
+    // Drawer elements
+    this.drawer = document.getElementById('devlog-drawer');
+    this.drawerBackdrop = document.getElementById('drawer-backdrop');
+    this.closeDrawerBtn = document.getElementById('btn-close-drawer');
+    this.openFloatBtn = document.getElementById('btn-open-devlogs');
+    this.openNavBtn = document.getElementById('nav-btn-devlogs');
+    this.openFooterBtn = document.getElementById('footer-btn-devlogs');
+
+    // Modal elements
+    this.modal = document.getElementById('devlog-modal');
+    this.modalBackdrop = document.getElementById('modal-backdrop');
+    this.closeModalBtn = document.getElementById('btn-close-modal');
+    this.modalCloseActionBtn = document.getElementById('btn-modal-close-action');
+    this.devlogCard1 = document.getElementById('drawer-card-devlog-01');
+
+    this.init();
+  }
+
+  init() {
+    // Open Drawer events
+    if (this.openFloatBtn) {
+      this.openFloatBtn.addEventListener('click', () => this.openDrawer());
+    }
+    if (this.openNavBtn) {
+      this.openNavBtn.addEventListener('click', () => {
+        // Close mobile nav menu if open
+        const navMenu = document.getElementById('nav-menu');
+        const mobileNavBtn = document.getElementById('btn-mobile-nav');
+        if (navMenu && navMenu.classList.contains('mobile-open')) {
+          navMenu.classList.remove('mobile-open');
+          if (mobileNavBtn) {
+            mobileNavBtn.setAttribute('aria-expanded', 'false');
+            mobileNavBtn.classList.remove('is-active');
+          }
+        }
+        this.openDrawer();
+      });
+    }
+    if (this.openFooterBtn) {
+      this.openFooterBtn.addEventListener('click', () => this.openDrawer());
+    }
+
+    // Close Drawer events
+    if (this.closeDrawerBtn) {
+      this.closeDrawerBtn.addEventListener('click', () => this.closeDrawer());
+    }
+    if (this.drawerBackdrop) {
+      this.drawerBackdrop.addEventListener('click', () => this.closeDrawer());
+    }
+
+    // Open Modal from Drawer Card
+    if (this.devlogCard1) {
+      this.devlogCard1.addEventListener('click', () => this.openModal());
+      this.devlogCard1.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.openModal();
+        }
+      });
+    }
+
+    // Close Modal events
+    if (this.closeModalBtn) {
+      this.closeModalBtn.addEventListener('click', () => this.closeModal());
+    }
+    if (this.modalCloseActionBtn) {
+      this.modalCloseActionBtn.addEventListener('click', () => this.closeModal());
+    }
+    if (this.modalBackdrop) {
+      this.modalBackdrop.addEventListener('click', () => this.closeModal());
+    }
+
+    // Keyboard navigation (Escape key)
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (this.modal && this.modal.classList.contains('is-open')) {
+          this.closeModal();
+        } else if (this.drawer && this.drawer.classList.contains('is-open')) {
+          this.closeDrawer();
+        }
+      }
+    });
+  }
+
+  openDrawer() {
+    soundEngine.playArcaneSelect();
+    if (this.drawer) {
+      this.drawer.classList.add('is-open');
+      this.drawer.setAttribute('aria-hidden', 'false');
+    }
+    if (this.drawerBackdrop) {
+      this.drawerBackdrop.classList.add('is-open');
+    }
+    document.body.style.overflow = 'hidden';
+  }
+
+  closeDrawer() {
+    soundEngine.playStoneClick();
+    if (this.drawer) {
+      this.drawer.classList.remove('is-open');
+      this.drawer.setAttribute('aria-hidden', 'true');
+    }
+    if (this.drawerBackdrop) {
+      this.drawerBackdrop.classList.remove('is-open');
+    }
+    document.body.style.overflow = '';
+  }
+
+  openModal() {
+    soundEngine.playArcaneSelect();
+    if (this.modal) {
+      this.modal.classList.add('is-open');
+      this.modal.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  closeModal() {
+    soundEngine.playStoneClick();
+    if (this.modal) {
+      this.modal.classList.remove('is-open');
+      this.modal.setAttribute('aria-hidden', 'true');
+    }
+  }
+}
+
+// =============================================================================
+// 7. APPLICATION BOOTSTRAP
 // =============================================================================
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Viewport, Class Sheet & Lightbox
+  // Initialize Viewport, Class Sheet, Lightbox & Devlog Manager
   const viewportMgr = new TreeViewportManager();
   const detailsMgr = new ClassDetailsManager();
   const lightboxMgr = new LightboxManager();
+  const devlogMgr = new DevlogManager();
 
   // Active Navbar links tracking on scroll
   const sections = document.querySelectorAll('section[id]');
