@@ -54,7 +54,7 @@
         <div class="hero-content">
           <div class="hero-tag">
             <span class="tag-dot"></span>
-            <span>RPG Tactique Dark Medieval • Vue Top-Down Voxel</span>
+            <span>RPG Tactique de Mercenaires • Vue Top-Down Voxel • Combats Temps Réel</span>
           </div>
 
           <h1 class="hero-title">
@@ -62,23 +62,28 @@
           </h1>
 
           <p class="hero-description">
-            Plongez au cœur d'un univers où l'acier froid, les dalles de pierre taillée et l'éther incandescent s'affrontent sur un échiquier tactique. Dirigez vos escouades, personnalisez votre lignée et débloquez la puissance des classes avancées.
+            Plongez au cœur d'un univers où l'acier froid, les dalles de pierre et l'éther incandescent s'affrontent en temps réel continu. Formez vos escouades de 12 mercenaires sur grille préparatoire 3x4, programmez leurs Gambits d'action sans délai et menez des raids parallèles dans des donjons procéduraux.
           </p>
 
           <div class="hero-stats-row">
             <div class="stat-card">
-              <span class="stat-number">28</span>
-              <span class="stat-label">Classes &amp; Concepts</span>
+              <span class="stat-number">12 Unités</span>
+              <span class="stat-label">Troupes &amp; Grille 3x4</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <span class="stat-number">Temps Réel</span>
+              <span class="stat-label">Gambits &amp; Éther Commun</span>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-card">
+              <span class="stat-number">100% Survie</span>
+              <span class="stat-label">Zéro Mort pour Victoire</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat-card">
               <span class="stat-number">Niv. 100</span>
-              <span class="stat-label">Plafond par Classe</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-card">
-              <span class="stat-number">Gambits</span>
-              <span class="stat-label">IA &amp; Mana Commun</span>
+              <span class="stat-label">Plafond &amp; Sorts Conservés</span>
             </div>
           </div>
 
@@ -128,7 +133,7 @@
         <div class="section-subtitle">Progression & Spécialisations</div>
         <h2 class="section-title">Arbre Tactique des Classes</h2>
         <p class="section-desc">
-          Naviguez librement dans l'arborescence à travers les échelons martiaux et mystiques. Maintenez le clic pour faire glisser la vue.
+          Naviguez librement dans l'arborescence des classes canoniques. Chaque mercenaire peut atteindre le Niveau 100 dans chaque classe et conserve ses compétences débloquées, utilisables en raid sous condition d'équiper l'arme requise.
         </p>
       </div>
 
@@ -774,7 +779,7 @@
                       <span class="cost-item cd-cost">18s Recharge</span>
                     </div>
                   </div>
-                  <p class="skill-desc">Renforce l'armure et les résistances magiques de la Sentinelle et des alliés adjacents pendant plusieurs tours.</p>
+                  <p class="skill-desc">Renforce l'armure et les résistances magiques de la Sentinelle et des alliés proches durant 12 secondes.</p>
                   <div class="skill-footer">
                     <span class="effect-chip chip-blue">✨ Armure &amp; Résistances Magiques</span>
                     <span class="effect-chip chip-amber">👥 Synergie d'Escouade</span>
@@ -793,7 +798,7 @@
                       <span class="cost-item cd-cost">8s Recharge</span>
                     </div>
                   </div>
-                  <p class="skill-desc">Coup violent asséné avec le pavois, repoussant la cible de quelques cases et lui infligeant l'état Déséquilibre.</p>
+                  <p class="skill-desc">Coup violent asséné avec le pavois, repoussant violemment la cible en arrière et lui infligeant l'état Déséquilibre.</p>
                   <div class="skill-footer">
                     <span class="effect-chip chip-red">💥 Déséquilibre Majeur</span>
                     <span class="effect-chip chip-blue">⚓ Répulsion Voxel</span>
@@ -806,44 +811,48 @@
       </div>
     </section>
 
-    <!-- Section 4 : Mécaniques & Synergies Tactiques -->
+    <!-- Section 4 : Mécaniques & Piliers de Combat -->
     <section class="section-tactics" id="tactics">
       <div class="container">
         <div class="section-header text-center">
-          <div class="section-subtitle">Profondeur de Jeu</div>
-          <h2 class="section-title">Synergies &amp; Altérations d'État</h2>
+          <div class="section-subtitle">Système de Combat &amp; Stratégie</div>
+          <h2 class="section-title">Temps Réel Automatisé &amp; Formation Tactique</h2>
           <p class="section-desc">
-            Chaque classe combine des états critiques pour déclencher des réactions en chaîne au combat.
+            Aether Vanguard n'est ni du tour par tour, ni du déplacement case par case. Vos mercenaires combattent en temps réel continu selon votre formation préparatoire et leurs arbres de décision programmés.
           </p>
         </div>
 
         <div class="tactics-grid">
+          <!-- Pilier 1 : Gambits & Boucle Temps Réel -->
           <div class="tactic-card voxel-bevel">
-            <div class="tactic-icon-box green-box">☠️</div>
-            <h3>Poisons &amp; Neurotoxines</h3>
-            <p>Infligés par le Rogue et l'Assassin. Dégâts d'érosion continus contournant les défenses physiques et réduisant les soins ennemis.</p>
-            <div class="tactic-badge">Appliqué par : Rogue, Assassin</div>
+            <div class="tactic-icon-box amber-box">⚡</div>
+            <h3>Boucle de Gambits Temps Réel</h3>
+            <p>Cycles d'action continus et sans délai. Chaque unité évalue sa liste ordonnée de conditions en cascade (« Si [Condition] alors [Sort] »), chaque action déclenchant son propre temps d'incantation et d'animation.</p>
+            <div class="tactic-badge">3 à 10 Slots de Règles Programmables</div>
           </div>
 
+          <!-- Pilier 2 : Grille de Formation 3x4 -->
           <div class="tactic-card voxel-bevel">
-            <div class="tactic-icon-box red-box">🩸</div>
-            <h3>Saignements &amp; Lacérations</h3>
-            <p>Provoqués par les lames effilées et pointes d'acier. Les dégâts s'intensifient chaque fois que la cible se déplace sur la grille voxel.</p>
-            <div class="tactic-badge">Appliqué par : Guerrier, Rogue</div>
+            <div class="tactic-icon-box blue-box">🛡️</div>
+            <h3>Grille de Formation 3x4</h3>
+            <p>Placement stratégique préparatoire des 12 mercenaires avant l'engagement sur 3 rangées de 4 cases (Frontline / Midline / Backline) pour structurer le contact, les armes d'allonge et la ligne arrière.</p>
+            <div class="tactic-badge">12 Mercenaires par Troupe</div>
           </div>
 
+          <!-- Pilier 3 : Éther Commun & Affinité -->
           <div class="tactic-card voxel-bevel">
-            <div class="tactic-icon-box blue-box">⚡</div>
-            <h3>Déséquilibre &amp; Vulnérabilité</h3>
-            <p>Fracas au bouclier et tirs de rupture neutralisent la garde adverse, augmentant tous les dégâts critiques subis de 35%.</p>
-            <div class="tactic-badge">Appliqué par : Sentinelle, Arbalétrier</div>
+            <div class="tactic-icon-box green-box">✨</div>
+            <h3>Réserve d'Éther Collective</h3>
+            <p>La capacité maximale d'Éther est la somme des statistiques d'Affinité des 12 mercenaires. Démarrage au maximum, régénération passive à 1%/s et compétences actives de canalisateurs dédiés.</p>
+            <div class="tactic-badge">Affinité Commune d'Escouade</div>
           </div>
 
+          <!-- Pilier 4 : Donjons Procéduraux, Salles & 100% Survie -->
           <div class="tactic-card voxel-bevel">
-            <div class="tactic-icon-box amber-box">⚙️</div>
-            <h3>Recharges Préparées</h3>
-            <p>L'Arbalétrier charge tactiquement ses munitions (transperçantes, explosives, neutralisantes) pour s'adapter à la menace en temps réel.</p>
-            <div class="tactic-badge">Appliqué par : Arbalétrier</div>
+            <div class="tactic-icon-box red-box">🏰</div>
+            <h3>Donjons en Salles &amp; 100% Survie</h3>
+            <p>Progression en couloirs rythmée par des points d'arrêt (Salles d'ennemis, de 5 à 20+). Une réussite exige 100% de survie sans aucun mort. Repli tactique en Mode Normal et permadeath sans pitié en Mode Hardcore.</p>
+            <div class="tactic-badge">Raids Multi-Troupes en Simultané</div>
           </div>
         </div>
       </div>

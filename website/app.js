@@ -125,7 +125,7 @@ const CLASSES_DATA = {
         typeTag: "tag-buff",
         ether: "25 Éther",
         cooldown: "18s Recharge",
-        desc: "Renforce l'armure et les résistances magiques de la Sentinelle et des alliés adjacents pendant plusieurs tours.",
+        desc: "Renforce l'armure et les résistances magiques de la Sentinelle et des alliés proches durant 12 secondes.",
         chips: [
           { text: "✨ Armure & Résistances Magiques", class: "chip-blue" },
           { text: "👥 Synergie d'Escouade", class: "chip-amber" }
@@ -137,7 +137,7 @@ const CLASSES_DATA = {
         typeTag: "tag-atk",
         ether: "20 Éther",
         cooldown: "8s Recharge",
-        desc: "Coup violent asséné avec le pavois, repoussant la cible de quelques cases et lui infligeant l'état Déséquilibre.",
+        desc: "Coup violent asséné avec le pavois, repoussant violemment la cible en arrière et lui infligeant l'état Déséquilibre.",
         chips: [
           { text: "💥 Déséquilibre Majeur", class: "chip-red" },
           { text: "⚓ Répulsion Voxel", class: "chip-blue" }
@@ -615,7 +615,7 @@ const CLASSES_DATA = {
         typeTag: "tag-buff",
         ether: "0 Éther",
         cooldown: "Passif",
-        desc: "Tous les alliés dans un rayon de 2 cases bénéficient d'une régénération continue de points de vie et d'un bonus de résistance aux altérations.",
+        desc: "Tous les alliés proches dans le rayon de l'aura bénéficient d'une régénération continue de points de vie et d'un bonus de résistance aux altérations.",
         chips: [
           { text: "✨ Aura Permanente", class: "chip-blue" },
           { text: "🌿 Régénération Continue", class: "chip-green" }
