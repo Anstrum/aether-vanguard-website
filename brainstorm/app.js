@@ -2115,9 +2115,9 @@ function renderSpellsView() {
       const typeStr = (spell.type + ' ' + (spell.tags || []).join(' ')).toLowerCase();
       if (currentSpellTypeFilter === 'offensif') matchType = typeStr.includes('offensif') || typeStr.includes('dégât') || typeStr.includes('frappe') || typeStr.includes('tir');
       if (currentSpellTypeFilter === 'soin') matchType = typeStr.includes('soin') || typeStr.includes('curati') || typeStr.includes('bouclier') || typeStr.includes('régénération');
-      if (currentSpellTypeFilter === 'defensif') matchType = typeStr.includes('défens') || typeStr.includes('blocage') || typeStr.includes('garde') || typeStr.includes('mur');
-      if (currentSpellTypeFilter === 'controle') matchType = typeStr.includes('taunt') || typeStr.includes('stun') || typeStr.includes('étourdissement') || typeStr.includes('provocation') || typeStr.includes('repoussement') || typeStr.includes('interruption');
-      if (currentSpellTypeFilter === 'dot') matchType = typeStr.includes('poison') || typeStr.includes('saignement') || typeStr.includes('brûlure') || typeStr.includes('malédiction') || typeStr.includes('dot');
+      if (currentSpellTypeFilter === 'defense' || currentSpellTypeFilter === 'defensif') matchType = typeStr.includes('défens') || typeStr.includes('blocage') || typeStr.includes('garde') || typeStr.includes('mur') || typeStr.includes('armure');
+      if (currentSpellTypeFilter === 'controle') matchType = typeStr.includes('taunt') || typeStr.includes('stun') || typeStr.includes('étourdissement') || typeStr.includes('provocation') || typeStr.includes('repoussement') || typeStr.includes('interruption') || typeStr.includes('ralentissement') || typeStr.includes('gel');
+      if (currentSpellTypeFilter === 'alteration' || currentSpellTypeFilter === 'dot') matchType = typeStr.includes('poison') || typeStr.includes('saignement') || typeStr.includes('brûlure') || typeStr.includes('malédiction') || typeStr.includes('dot') || typeStr.includes('altération') || typeStr.includes('vulnérabilité');
       if (currentSpellTypeFilter === 'mobilite') matchType = typeStr.includes('dash') || typeStr.includes('charge') || typeStr.includes('téléportation') || typeStr.includes('repli');
     }
 
@@ -2607,7 +2607,18 @@ function setupSpellControls() {
     });
   });
 
-  // Type Filter Select
+  // Type Filter Pills
+  const typePills = document.querySelectorAll('.filter-pill-type');
+  typePills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      typePills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      currentSpellTypeFilter = pill.dataset.type;
+      renderSpellsView();
+    });
+  });
+
+  // Type Filter Select (if present)
   const typeSelect = document.getElementById('spell-type-filter');
   if (typeSelect) {
     typeSelect.addEventListener('change', () => {

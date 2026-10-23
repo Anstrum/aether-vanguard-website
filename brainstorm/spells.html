@@ -101,36 +101,42 @@
       </div>
 
       <!-- Spells Toolbar & Filter Controls -->
-      <div class="view-toolbar spells-toolbar">
-        <div class="toolbar-search">
-          <span class="search-icon">🔍</span>
-          <input type="text" id="spell-search-input" placeholder="Filtrer par nom de sort, classe (ex: Sentinelle), type (Soin, DoT) ou altération..." aria-label="Recherche de sort">
+      <div class="spells-toolbar-box voxel-bevel">
+        <!-- Top Row : Search + View Mode Switcher -->
+        <div class="spells-toolbar-top-row">
+          <div class="toolbar-search">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="spell-search-input" placeholder="Rechercher un sort, classe (ex: Sentinelle), type (Soin, DoT) ou altération..." aria-label="Recherche de sort">
+          </div>
+
+          <div class="toolbar-view-mode">
+            <span class="filter-label">Mode d'Affichage :</span>
+            <div class="btn-group-toggle">
+              <button type="button" class="btn-toggle active" id="btn-spells-table" title="Vue Tableau Dense (Audit Rapide)">📋 Tableau</button>
+              <button type="button" class="btn-toggle" id="btn-spells-cards" title="Vue Fiches Sorts">🎴 Fiches</button>
+              <button type="button" class="btn-toggle" id="btn-spells-grouped" title="Vue Groupée par Classe">🏛️ Par Classe</button>
+            </div>
+          </div>
         </div>
 
-        <div class="toolbar-filters">
-          <span class="filter-label">Statut :</span>
-          <button type="button" class="filter-pill-status active" data-status="all">Tous</button>
-          <button type="button" class="filter-pill-status" data-status="Fait">✅ Fait</button>
-          <button type="button" class="filter-pill-status" data-status="À Équilibrer">⚡ À Équilibrer</button>
-          <button type="button" class="filter-pill-status" data-status="À Concevoir">📝 À Concevoir</button>
-        </div>
+        <!-- Filters Row : Status & Type Filter Pills -->
+        <div class="spells-toolbar-filters-row">
+          <div class="toolbar-filters">
+            <span class="filter-label">Statut Dev :</span>
+            <button type="button" class="filter-pill-status active" data-status="all">Tous</button>
+            <button type="button" class="filter-pill-status" data-status="Fait">✅ Fait</button>
+            <button type="button" class="filter-pill-status" data-status="À Équilibrer">⚡ À Équilibrer</button>
+            <button type="button" class="filter-pill-status" data-status="À Concevoir">📝 À Concevoir</button>
+          </div>
 
-        <div class="toolbar-filters">
-          <span class="filter-label">Type :</span>
-          <button type="button" class="filter-pill-type active" data-type="all">Tous</button>
-          <button type="button" class="filter-pill-type" data-type="offensif">Offensif</button>
-          <button type="button" class="filter-pill-type" data-type="soin">Soin</button>
-          <button type="button" class="filter-pill-type" data-type="defense">Défense</button>
-          <button type="button" class="filter-pill-type" data-type="controle">Contrôle</button>
-          <button type="button" class="filter-pill-type" data-type="alteration">Altérations</button>
-        </div>
-
-        <div class="toolbar-view-mode">
-          <span class="filter-label">Mode :</span>
-          <div class="btn-group-toggle">
-            <button type="button" class="btn-toggle active" id="btn-spells-table" title="Vue Tableau Dense (Audit Rapide)">📋 Tableau</button>
-            <button type="button" class="btn-toggle" id="btn-spells-cards" title="Vue Fiches Sorts">🎴 Fiches</button>
-            <button type="button" class="btn-toggle" id="btn-spells-grouped" title="Vue Groupée par Classe">🏛️ Par Classe</button>
+          <div class="toolbar-filters">
+            <span class="filter-label">Type &amp; Rôle :</span>
+            <button type="button" class="filter-pill-type active" data-type="all">Tous</button>
+            <button type="button" class="filter-pill-type" data-type="offensif">⚔️ Offensif</button>
+            <button type="button" class="filter-pill-type" data-type="soin">💚 Soin</button>
+            <button type="button" class="filter-pill-type" data-type="defense">🛡️ Défense</button>
+            <button type="button" class="filter-pill-type" data-type="controle">💫 Contrôle</button>
+            <button type="button" class="filter-pill-type" data-type="alteration">🧪 Altérations</button>
           </div>
         </div>
       </div>

@@ -406,7 +406,7 @@ body {
   margin-right: 2px;
 }
 
-.filter-pill-risk, .filter-pill-status {
+.filter-pill-risk, .filter-pill-status, .filter-pill-type, .filter-pill-backlog {
   padding: 6px 12px;
   background: var(--bg-stone);
   border: 1px solid var(--border-steel);
@@ -417,15 +417,121 @@ body {
   transition: all var(--transition-fast);
 }
 
-.filter-pill-risk:hover, .filter-pill-status:hover {
+.filter-pill-risk:hover, .filter-pill-status:hover, .filter-pill-type:hover, .filter-pill-backlog:hover {
   background: var(--bg-stone-surface);
   color: #fff;
+  border-color: var(--border-steel-bright);
 }
 
-.filter-pill-risk.active, .filter-pill-status.active {
+.filter-pill-risk.active, .filter-pill-status.active, .filter-pill-type.active, .filter-pill-backlog.active {
   background: rgba(212, 175, 55, 0.15);
   border-color: var(--accent-gold);
   color: var(--accent-gold-light);
+}
+
+/* ==========================================================================
+   Spells Audit Summary Row & Cards
+   ========================================================================== */
+.spells-stats-summary-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.audit-stat-card {
+  background: var(--bg-stone);
+  border: 1px solid var(--border-steel);
+  padding: 18px 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  transition: transform var(--transition-fast), border-color var(--transition-fast);
+}
+
+.audit-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-steel-bright);
+}
+
+.audit-stat-card:nth-child(1) {
+  border-left: 4px solid var(--accent-green);
+}
+
+.audit-stat-card:nth-child(2) {
+  border-left: 4px solid var(--accent-amber);
+}
+
+.audit-stat-card:nth-child(3) {
+  border-left: 4px solid var(--border-steel-bright);
+}
+
+.audit-stat-card .stat-number {
+  font-family: var(--font-mono);
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1;
+  min-width: 50px;
+  text-align: center;
+}
+
+.audit-stat-card .stat-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.audit-stat-card .stat-meta strong {
+  color: #fff;
+  font-family: var(--font-serif);
+  font-size: 14px;
+  letter-spacing: 0.02em;
+}
+
+.audit-stat-card .stat-meta span {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .spells-stats-summary-row {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* Spells Dedicated Structured Toolbar */
+.spells-toolbar-box {
+  background: var(--bg-iron);
+  border: 1px solid var(--border-steel);
+  padding: 16px 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.spells-toolbar-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.spells-toolbar-top-row .toolbar-search {
+  flex: 1;
+  max-width: 600px;
+}
+
+.spells-toolbar-filters-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .toolbar-select {
