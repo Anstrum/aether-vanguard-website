@@ -21,35 +21,33 @@
 
 ## 2. Système de Progression, Économie & Donjons
 
-### Structure de Progression & Branches Canoniques
-* **Branche Martiale :** Guerrier (Base) ➔ Sentinelle (Spécialisation)
-* **Branche Tir :** Archer (Base) ➔ Arbalétrier (Spécialisation)
-* **Branche Furtivité :** Rogue (Base) ➔ Assassin (Spécialisation)
-* **Branche Magique :** Acolyte (Base) ➔ Magicien (Spécialisation)
+## 2. Système de Progression, Économie & Donjons
 
-### Système Fondamental des Mercenaires & Gambits
-* **Recrutement & Niveaux :** Achat de mercenaires Niv. 1 sur les classes de base. Plafond au Niveau 100 par classe avec conservation permanente de toutes les statistiques et sorts débloqués.
-* **Déblocage de Classes :** Le premier déblocage vers une nouvelle classe coûte de l'argent. Les bascules ultérieures entre classes déjà débloquées sont gratuites.
-* **Condition Matérielle d'Exécution :** Un mercenaire peut intégrer à ses Gambits n'importe quel sort acquis dans son historique de classes, **à condition stricte d'équiper l'arme requise par ce sort**.
-* **Slots de Gambits (3 ➔ 10) :** Un mercenaire commence avec **3 slots de conditions**. Il peut débloquer jusqu'à 10 slots via des sessions d'entraînement au QG (formation payante demandant du temps et de l'or, accessible organiquement en cours de progression).
+### Structure de Progression & Graphe de Prérequis Croisés (36 Classes)
+* **Classes de Départ (4 Bases — Palier 0, Niveau 1) :**
+  - **Guerrier** (Frontline / Provocation)
+  - **Archer** (Balistique / Tir à distance)
+  - **Rogue** (Furtivité / Dagues & DoT)
+  - **Acolyte** (Ordre Sacré / Soins d'urgence)
+* **Spécialisations Directes (8 Classes — Palier 1, Niveau 25 requis) :**
+  - Évolutions canoniques : Sentinelle, Gardien, Arbalétrier, Chasseur, Assassin, Duelliste, Mage Élémentaire, Prêtre.
+* **Voies Hybrides Croisées (16 Classes — Palier 2, Niveau 30 à 35 requis sur 2 classes distinctes) :**
+  - Exemples : **Paladin** (*Guerrier 35 + Prêtre 35*), **Chevalier Noir** (*Guerrier 35 + Sorcier Maudit 35*), **Bretteur** (*Rogue 30 + Duelliste 30*), **Rôdeur** (*Archer 30 + Druide 30*), **Danseur de Guerre** (*Barde 30 + Duelliste 30*), **Invocateur** (*Mage Élémentaire 35 + Druide 35*), **Mage de Guerre** (*Sentinelle 35 + Thaumaturge 35*), **Sanguinaire** (*Assassin 35 + Chevalier Noir 35*), etc.
+* **Maîtrises d'Élite & Rituels (8 Classes — Palier 3, Niveau 45 à 50 requis sur 2 classes avancées) :**
+  - Exemples : **Nécromancien** (*Mage Noir 45 + Invocateur 45*), **Archimage** (*Thaumaturge 45 + Mage Temporel 45*), **Champion Suprême** (*Paladin 45 + Sentinelle 45*), **Maître des Ombres** (*Assassin 45 + Traqueur 45*), **Faucheur d'Âmes** (*Sanguinaire 45 + Chevalier Noir 45*), **Grand Hiérophante** (*Templier 45 + Mage Blanc 45*), **Seigneur de Guerre** (*Gladiateur 45 + Berserker 45*), **Chronomancien** (*Mage Temporel 50 + Archimage 50*).
+
+### Système Fondamental des Mercenaires, Armes & Gambits
+* **Recrutement & Niveaux :** Achat de mercenaires Niv. 1 sur les 4 classes de base. Plafond au **Niveau 100** par classe avec conservation permanente de toutes les statistiques et sorts débloqués.
+* **Déblocage de Classes :** Le premier déblocage d'une nouvelle classe coûte de l'or (dès que ses prérequis croisés sont satisfaits). Une fois débloquée, la bascule de classe pour le mercenaire est **totalement gratuite et libre au QG**.
+* **Condition Matérielle d'Exécution :** Un mercenaire ne peut exécuter un sort dans ses Gambits **qu'à la condition stricte d'équiper l'arme requise par ce sort** (ex: pavois pour un bash, dagues pour une lacération, sceptre/bâton pour une prière).
+* **RÈGLE MAJEURE D'HYBRIDATION TOTALE (JALON 36/36) :**
+  - **L'Hybridation libre est strictement verrouillée tant que l'ensemble des 36 classes du jeu n'a pas été débloqué.**
+  - Tant que la 36ème classe n'est pas acquise, les sorts restent soumis à la compatibilité de classe et d'arme requise.
+  - **Dès que les 36 classes sont débloquées**, la barrière tombe définitivement : le mercenaire peut combiner n'importe quelle arme et n'importe quel sort dans ses Gambits sans aucune restriction de classe !
+* **Slots de Gambits (3 ➔ 10) :** Un mercenaire commence avec **3 slots de règles conditionnelles**. Il peut débloquer jusqu'à 10 slots via des sessions d'entraînement payantes au QG.
+* **Catalogue de 42 Conditions de Gambits :** Déclencheurs classés en 6 familles (`Alliés`, `Ennemis`, `Éther`, `Spatial`, `Cooldowns`, `Matériel`) pour programmer finement l'IA autonome de l'escouade.
+* **Sorts Générateurs d'Éther :** Chaque spécialisation dispose de moyens ou de sorts dédiés pour canaliser ou restaurer l'Éther de la réserve commune (ex: *Canalisation Éthérée*, *Convergence*, *Offrande Sanglante*, *Hymne d'Éther*, *Totem de Restitution*).
 * **Règles Figées en Raid :** Les Gambits ne peuvent pas être modifiés pendant un donjon. La stratégie se prépare en amont au quartier général.
-
-### Donjons, Salles & Conditions de Réussite
-* **Structure Linéaire Procédurale :** Donjons en couloirs avec progression par **« Salles »** (points d'arrêt de la troupe provoqués par la présence d'un pack d'ennemis). Les donjons comptent de 5 salles (début) jusqu'à 20+ salles (haut niveau).
-* **Condition de Réussite Absolue :** Un donjon n'est considéré comme réussi **que si 100% de la troupe survit**. Un mort (même ressuscité par sort au cours du combat) invalide la réussite parfaite du donjon.
-* **Distribution de l'XP :** L'expérience est octroyée à chaque fin de combat/salle aux mercenaires survivants. Un mercenaire mort ne reçoit aucune XP pour le combat où il a chuté.
-
-### Mort, Repli & Modes de Jeu (Normal vs Hardcore)
-* **Mode Normal :**
-  - **Retraite Tactique :** Le joueur peut ordonner le repli en direct. Le combat en cours se termine normalement puis la troupe évacue sans poursuivre le donjon.
-  - **Préservation du Butin :** En cas de repli ou de wipe total, l'argent et les objets récoltés sont conservés (téléportation d'urgence arcanique).
-  - **Coût de Réanimation & Game Over :** Les mercenaires K.O. sont ramenés à la base et leur réanimation coûte de l'argent. Si le trésor est vide et qu'aucun mercenaire ne peut être réanimé, c'est un Game Over économique.
-  - **Résurrection en Combat :** Possible via des sorts de haut niveau très coûteux en Éther avant la fin de l'affrontement (mais invalide le bonus 100% sans mort).
-* **Mode Hardcore :**
-  - **Permadeath :** Toute mort est irréversible (mercenaire perdu définitivement).
-  - **Perte de Butin :** Chaque mort entraîne la perte d'une part des items et de l'or portés.
-  - **Zéro Retraite :** Le bouton de repli est désactivé. L'escouade combat jusqu'à la victoire ou l'anéantissement.
-* **Backlog Évolutif (Phases Ultérieures) :** Hybridation double-mains libre, mentorat en salle d'étude (professeur/élèves), parchemins d'XP et système de loot approfondi.
 
 ---
 

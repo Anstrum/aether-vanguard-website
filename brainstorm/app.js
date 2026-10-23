@@ -11,11 +11,16 @@
 let codexData = null;
 let currentPoleFilter = 'all';
 let currentRiskFilter = 'all';
-let classesViewMode = 'cards'; // 'cards' | 'matrix'
+let currentClassTierFilter = 'all';
+let classesViewMode = 'cards'; // 'cards' | 'network' | 'matrix'
 
 let currentSpellStatusFilter = 'all';
 let currentSpellTypeFilter = 'all';
 let spellsViewMode = 'table'; // 'table' | 'cards' | 'grouped'
+
+let currentConditionCatFilter = 'all';
+let currentConditionTargetFilter = 'all';
+let conditionsViewMode = 'cards'; // 'cards' | 'table'
 
 let currentBacklogCatFilter = 'all';
 let currentBrainstormSection = 'arbitrages'; // 'arbitrages' | 'backlog'
@@ -1814,6 +1819,7 @@ async function initCodexStudio() {
   renderPolesBar();
   renderClassesView();
   renderSpellsView();
+  renderConditionsView();
   renderBrainstormView();
   renderEditorFormClasses();
   updateJsonPreview();
@@ -1822,6 +1828,7 @@ async function initCodexStudio() {
   setupTabs();
   setupClassControls();
   setupSpellControls();
+  setupConditionsControls();
   setupBrainstormControls();
   setupEditor();
 }
@@ -1832,6 +1839,7 @@ async function initCodexStudio() {
 function populateMetrics() {
   const totalClasses = codexData.classes ? codexData.classes.length : 0;
   const totalSpells = codexData.spells ? codexData.spells.length : 0;
+  const totalConditions = codexData.gambitConditions ? codexData.gambitConditions.length : 0;
 
   const doneSpells = codexData.spells ? codexData.spells.filter(s => s.status === 'Fait').length : 0;
   const completionRate = totalSpells > 0 ? Math.round((doneSpells / totalSpells) * 100) : 0;
@@ -1846,6 +1854,9 @@ function populateMetrics() {
   const elSpells = document.getElementById('metric-total-spells');
   if (elSpells) elSpells.textContent = totalSpells;
 
+  const elConditions = document.getElementById('metric-total-conditions');
+  if (elConditions) elConditions.textContent = totalConditions;
+
   const elRedundancy = document.getElementById('metric-redundancy-count');
   if (elRedundancy) elRedundancy.textContent = highRiskClasses;
 
@@ -1857,6 +1868,9 @@ function populateMetrics() {
 
   const badgeClasses = document.getElementById('tab-badge-classes-count');
   if (badgeClasses) badgeClasses.textContent = totalClasses;
+
+  const badgeConditions = document.getElementById('tab-badge-conditions-count');
+  if (badgeConditions) badgeConditions.textContent = totalConditions;
 
   const badgeBacklog = document.getElementById('tab-badge-backlog-count');
   if (badgeBacklog && codexData.featureBacklog) badgeBacklog.textContent = codexData.featureBacklog.length;
@@ -1910,10 +1924,11 @@ function renderPolesBar() {
 }
 
 // =============================================================================
-// VIEW 1 : CLASSES & MOYENS D'OBTENTION (CARDS & 16:9 MATRIX)
+// VIEW 1 : CLASSES & MOYENS D'OBTENTION (CARDS, NETWORK & 16:9 MATRIX)
 // =============================================================================
 function renderClassesView() {
   const cardsContainer = document.getElementById('classes-cards-container');
+  const networkContainer = document.getElementById('classes-network-container');
   const matrixTbody = document.getElementById('classes-matrix-tbody');
   const countLabel = document.getElementById('classes-results-count');
   if (!cardsContainer || !matrixTbody) return;
@@ -1923,6 +1938,7 @@ function renderClassesView() {
 
   const filtered = (codexData.classes || []).filter(cls => {
     const matchPole = currentPoleFilter === 'all' || cls.pole === currentPoleFilter;
+    const matchTier = currentClassTierFilter === 'all' || cls.tier.toString() === currentClassTierFilter;
     
     // Risk Filter
     let matchRisk = true;
@@ -1941,7 +1957,7 @@ function renderClassesView() {
       (cls.obtainment && cls.obtainment.requirements.toLowerCase().includes(query)) ||
       (cls.designEvaluation && cls.designEvaluation.arbitrage && cls.designEvaluation.arbitrage.toLowerCase().includes(query));
 
-    return matchPole && matchRisk && matchQuery;
+    return matchPole && matchTier && matchRisk && matchQuery;
   });
 
   if (countLabel) {
@@ -1969,7 +1985,7 @@ function renderClassesView() {
     return `<span class="status-badge ${statusClass}">${statusText}</span>`;
   }
 
-  // --- Render Mode 1 : Cards ---
+  // --- Render Mode 1 : Cards Grid ---
   if (filtered.length === 0) {
     cardsContainer.innerHTML = `
       <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--text-dim);">
@@ -1985,6 +2001,24 @@ function renderClassesView() {
 
       const poleObj = codexData.poles.find(p => p.id === cls.pole);
       const poleName = poleObj ? `${poleObj.icon} ${poleObj.name}` : cls.pole;
+
+      // Crossed Prerequisites Badges
+      const prereqs = cls.obtainment && cls.obtainment.prereqClasses ? cls.obtainment.prereqClasses : [];
+      const prereqsHtml = prereqs.length > 0
+        ? prereqs.map(p => {
+            const parent = (codexData.classes || []).find(c => c.id === p.classId);
+            const pName = parent ? parent.name : p.classId;
+            return `<span class="prereq-link-badge" data-class-id="${p.classId}" title="Cliquez pour afficher cette classe">🔗 ${pName} (Niv. ${p.level})</span>`;
+          }).join(' <span style="color:var(--text-dim);">&bull;</span> ')
+        : '<span style="color:#22c55e; font-size:11px;">🌱 Classe de Départ (Niveau 1)</span>';
+
+      // Unlocked Children Classes
+      const unlocked = (codexData.classes || []).filter(c => 
+        c.obtainment && c.obtainment.prereqClasses && c.obtainment.prereqClasses.some(p => p.classId === cls.id)
+      );
+      const unlockedHtml = unlocked.length > 0
+        ? unlocked.map(u => `<span class="unlocks-link-badge" data-class-id="${u.id}" title="Permet de débloquer ${u.name}">${u.avatar} ${u.name}</span>`).join(' ')
+        : '<span style="color:var(--text-dim); font-size:11px;">Palier Terminal</span>';
 
       return `
         <div class="class-analytic-card voxel-bevel" data-pole="${cls.pole}">
@@ -2003,24 +2037,25 @@ function renderClassesView() {
           <div class="class-weapon-box">
             <span class="weapon-icon">⚔️</span>
             <div>
-              <span style="color:var(--text-dim); font-size:10px; display:block;">Arme Signature :</span>
+              <span style="color:var(--text-dim); font-size:10px; display:block;">Arme Requise / Signature :</span>
               <strong class="weapon-name">${cls.signatureWeapon || 'Non spécifiée'}</strong>
             </div>
           </div>
 
           <p class="class-summary-desc">${cls.summary}</p>
 
-          <!-- Obtainment Box -->
+          <!-- Crossed Obtainment Box -->
           <div class="obtainment-box">
-            <div class="obtainment-title">🗝️ Obtention &bull; ${cls.obtainment.method}</div>
-            <div class="obtainment-text"><strong>Prérequis :</strong> ${cls.obtainment.requirements}</div>
-            <div class="obtainment-cost">Coût : ${cls.obtainment.unlockCost}</div>
+            <div class="obtainment-title">🗝️ Déblocage &bull; ${cls.obtainment.method}</div>
+            <div class="obtainment-text" style="margin-bottom:6px;"><strong>Prérequis Croisés :</strong><br>${prereqsHtml}</div>
+            <div class="obtainment-text" style="margin-bottom:6px;"><strong>Permet de Débloquer :</strong><br>${unlockedHtml}</div>
+            <div class="obtainment-cost">Coût au 1er déblocage : ${cls.obtainment.unlockCost}</div>
           </div>
 
           <!-- Redundancy & Arbitrage Box -->
           <div class="arbitrage-box">
             <div class="risk-header-row">
-              <span class="risk-lbl">Évaluation Redondance :</span>
+              <span class="risk-lbl">Rôle &amp; Positionnement :</span>
               ${getRiskBadgeHtml(cls.designEvaluation.redundancyRisk)}
             </div>
             <p class="arbitrage-text">
@@ -2030,7 +2065,7 @@ function renderClassesView() {
 
           <!-- Attached Spells -->
           <div class="class-spells-preview">
-            <div class="spells-preview-title">Sorts Rattachés (${spells.length}) :</div>
+            <div class="spells-preview-title">Sorts Rattachés (5) :</div>
             <div class="spells-chips-wrap">
               ${spellsChipsHtml || '<span style="color:var(--text-dim); font-size:11px;">Aucun sort pour le moment</span>'}
             </div>
@@ -2040,7 +2075,70 @@ function renderClassesView() {
     }).join('');
   }
 
-  // --- Render Mode 2 : Compact Matrix Table (16:9) ---
+  // --- Render Mode 2 : Crossed Network / Progression Tree View ---
+  if (networkContainer) {
+    const tiersDef = [
+      { tier: 1, label: "Palier 0 : Classes de Départ (Fondations)", badge: "tier-badge-0", desc: "Accessibles dès l'embauche de mercenaires Niv. 1 sans coût de déblocage." },
+      { tier: 2, label: "Palier 1 : Spécialisations Directes", badge: "tier-badge-1", desc: "Évolutions directes d'une classe de base (Niveau 25 requis)." },
+      { tier: 3, label: "Palier 2 : Voies Hybrides Croisées", badge: "tier-badge-2", desc: "Nécessitent la montée en niveau conjointe de 2 classes distinctes (Niv. 30 à 35)." },
+      { tier: 4, label: "Palier 3 : Maîtrises d'Élite & Rituels", badge: "tier-badge-3", desc: "Sommet de la spécialisation (2 classes avancées Niv. 45 à 50 requises)." }
+    ];
+
+    networkContainer.innerHTML = tiersDef.map(td => {
+      const tierClasses = (codexData.classes || []).filter(c => c.tier === td.tier);
+      if (tierClasses.length === 0) return '';
+
+      const nodesHtml = tierClasses.map(cls => {
+        const prereqs = cls.obtainment && cls.obtainment.prereqClasses ? cls.obtainment.prereqClasses : [];
+        const prereqsList = prereqs.map(p => {
+          const parent = (codexData.classes || []).find(c => c.id === p.classId);
+          return `${parent ? parent.name : p.classId} (${p.level})`;
+        }).join(' + ');
+
+        return `
+          <div class="network-node-card">
+            <div class="network-node-top">
+              <span class="network-node-name">${cls.avatar} ${cls.name}</span>
+              <span style="font-family:var(--font-mono); font-size:10px; color:var(--accent-gold);">${cls.pole}</span>
+            </div>
+            <div style="font-size:11px; color:#cbd5e1; line-height:1.4;">${cls.role}</div>
+            <div style="font-size:10px; font-family:var(--font-mono); color:#93c5fd; margin-top:4px;">
+              ${prereqsList ? `Exige : ${prereqsList}` : '🌱 Départ Mercenaire'}
+            </div>
+            <div style="font-size:10px; color:var(--text-dim); margin-top:2px;">
+              Arme : <span style="color:#e2e8f0;">${cls.signatureWeapon}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      return `
+        <div class="network-tier-block">
+          <div class="network-tier-header">
+            <div class="network-tier-title">
+              <span class="network-tier-badge ${td.badge}">Palier ${td.tier - 1}</span>
+              <span>${td.label}</span>
+            </div>
+            <span style="font-size:12px; color:var(--text-dim);">${td.desc}</span>
+          </div>
+          <div class="network-classes-grid">
+            ${nodesHtml}
+          </div>
+        </div>
+      `;
+    }).join('') + `
+      <div style="background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(20,22,27,0.9) 100%); border: 2px solid var(--accent-gold); padding: 22px; border-radius: 4px; text-align: center; margin-top: 28px;">
+        <div style="font-family:var(--font-serif); font-size:18px; font-weight:700; color:#fff; margin-bottom:8px;">
+          👑 JALON SUPRÊME : DÉBLOCAGE DE L'HYBRIDATION TOTALE (36 / 36 CLASSES)
+        </div>
+        <p style="color:#e2e8f0; font-size:13px; max-width:800px; margin:0 auto; line-height:1.6;">
+          Tant que la troupe n'a pas débloqué les 36 classes, chaque sort reste lié à l'équipement strict de l'arme requise par sa classe d'origine. Une fois la 36ème classe débloquée, la barrière tombe : vos mercenaires accèdent à l'<strong>Hybridation Libre Totale</strong> (combinaison sans restriction de sorts et d'armes dans les Gambits).
+        </p>
+      </div>
+    `;
+  }
+
+  // --- Render Mode 3 : Compact Matrix Table (16:9) ---
   if (filtered.length === 0) {
     matrixTbody.innerHTML = `
       <tr>
@@ -2090,6 +2188,20 @@ function renderClassesView() {
       `;
     }).join('');
   }
+
+  // Attach click events on prereq and unlock badges to quick-search
+  document.querySelectorAll('[data-class-id]').forEach(badge => {
+    badge.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const targetId = badge.dataset.classId;
+      const targetCls = (codexData.classes || []).find(c => c.id === targetId);
+      if (targetCls && searchInput) {
+        searchInput.value = targetCls.name;
+        renderClassesView();
+        window.scrollTo({ top: 300, behavior: 'smooth' });
+      }
+    });
+  });
 }
 
 // =============================================================================
@@ -2552,6 +2664,17 @@ function setupClassControls() {
     searchInput.addEventListener('input', () => renderClassesView());
   }
 
+  // Tier Filter Pills
+  const tierPills = document.querySelectorAll('.filter-pill-tier');
+  tierPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      tierPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      currentClassTierFilter = pill.dataset.tier;
+      renderClassesView();
+    });
+  });
+
   // Risk Filter Pills
   const riskPills = document.querySelectorAll('.filter-pill-risk');
   riskPills.forEach(pill => {
@@ -2563,29 +2686,207 @@ function setupClassControls() {
     });
   });
 
-  // Mode Toggle (Cards vs Matrix Table)
+  // Mode Toggle (Cards vs Network Tree vs Matrix Table)
   const btnModeCards = document.getElementById('btn-mode-cards');
+  const btnModeNetwork = document.getElementById('btn-mode-network');
   const btnModeMatrix = document.getElementById('btn-mode-matrix');
   const cardsContainer = document.getElementById('classes-cards-container');
+  const networkContainer = document.getElementById('classes-network-container');
   const matrixTableContainer = document.getElementById('classes-matrix-table-container');
 
-  if (btnModeCards && btnModeMatrix && cardsContainer && matrixTableContainer) {
-    btnModeCards.addEventListener('click', () => {
-      classesViewMode = 'cards';
-      btnModeCards.classList.add('active');
-      btnModeMatrix.classList.remove('active');
+  function setClassViewMode(mode) {
+    classesViewMode = mode;
+    if (btnModeCards) btnModeCards.classList.toggle('active', mode === 'cards');
+    if (btnModeNetwork) btnModeNetwork.classList.toggle('active', mode === 'network');
+    if (btnModeMatrix) btnModeMatrix.classList.toggle('active', mode === 'matrix');
+
+    if (cardsContainer) cardsContainer.style.display = mode === 'cards' ? 'grid' : 'none';
+    if (networkContainer) networkContainer.style.display = mode === 'network' ? 'block' : 'none';
+    if (matrixTableContainer) matrixTableContainer.style.display = mode === 'matrix' ? 'block' : 'none';
+
+    renderClassesView();
+  }
+
+  if (btnModeCards) btnModeCards.addEventListener('click', () => setClassViewMode('cards'));
+  if (btnModeNetwork) btnModeNetwork.addEventListener('click', () => setClassViewMode('network'));
+  if (btnModeMatrix) btnModeMatrix.addEventListener('click', () => setClassViewMode('matrix'));
+}
+
+// =============================================================================
+// CONDITIONS DE GAMBITS VIEW & CONTROLS
+// =============================================================================
+function renderConditionsView() {
+  const cardsContainer = document.getElementById('conditions-cards-container');
+  const tbody = document.getElementById('conditions-tbody');
+  const countLabel = document.getElementById('conditions-results-count');
+  if (!cardsContainer && !tbody) return;
+
+  const searchInput = document.getElementById('condition-search-input');
+  const query = (searchInput && searchInput.value ? searchInput.value : '').toLowerCase().trim();
+
+  const conditions = codexData.gambitConditions || [];
+  const filtered = conditions.filter(cond => {
+    const matchCat = currentConditionCatFilter === 'all' || cond.category === currentConditionCatFilter;
+    const matchTarget = currentConditionTargetFilter === 'all' || cond.target === currentConditionTargetFilter;
+    const matchQuery = !query ||
+      cond.name.toLowerCase().includes(query) ||
+      cond.description.toLowerCase().includes(query) ||
+      (cond.example && cond.example.toLowerCase().includes(query)) ||
+      (cond.tags && cond.tags.some(t => t.toLowerCase().includes(query)));
+
+    return matchCat && matchTarget && matchQuery;
+  });
+
+  if (countLabel) {
+    countLabel.textContent = `Affichage de ${filtered.length} condition(s) sur ${conditions.length} déclencheur(s) répertorié(s)`;
+  }
+
+  // Render Mode 1 : Cards
+  if (cardsContainer) {
+    if (filtered.length === 0) {
+      cardsContainer.innerHTML = `
+        <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--text-dim);">
+          Aucune condition de Gambit ne correspond à vos critères de recherche.
+        </div>
+      `;
+    } else {
+      cardsContainer.innerHTML = filtered.map(cond => {
+        const tagsHtml = (cond.tags || []).map(t => `<span class="condition-tag-item">#${t}</span>`).join(' ');
+
+        return `
+          <div class="condition-card voxel-bevel" data-cat="${cond.category}">
+            <div class="condition-header">
+              <div>
+                <span class="condition-id-tag">[${cond.id}]</span>
+                <h3 class="condition-name">${cond.name}</h3>
+              </div>
+              <span class="condition-cat-badge cat-${cond.category}">${cond.category}</span>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="condition-target-badge">🎯 Cible : ${cond.target}</span>
+            </div>
+
+            <p class="condition-desc">${cond.description}</p>
+
+            <div class="gambit-syntax-box">
+              <div style="color:var(--text-dim); font-size:10px; margin-bottom:3px;">SYNTAXE GAMBIT :</div>
+              <div class="gambit-syntax-line">
+                <span>SI [${cond.name}]</span>
+                <span class="gambit-syntax-arrow">➔</span>
+                <span style="color:#93c5fd;">${cond.example}</span>
+              </div>
+            </div>
+
+            <div class="condition-tags-row">
+              ${tagsHtml}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+
+  // Render Mode 2 : Compact Table
+  if (tbody) {
+    if (filtered.length === 0) {
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="6" style="text-align: center; padding: 30px; color: var(--text-dim);">
+            Aucune condition trouvée.
+          </td>
+        </tr>
+      `;
+    } else {
+      tbody.innerHTML = filtered.map(cond => {
+        const tagsHtml = (cond.tags || []).map(t => `<span class="condition-tag-item">#${t}</span>`).join(' ');
+
+        return `
+          <tr>
+            <td>
+              <div style="font-family:var(--font-mono); font-size:11px; color:#94a3b8;">${cond.id}</div>
+              <span class="condition-cat-badge cat-${cond.category}">${cond.category}</span>
+            </td>
+            <td>
+              <strong style="color:#fff; font-family:var(--font-serif); font-size:13px;">${cond.name}</strong>
+            </td>
+            <td>
+              <span class="condition-target-badge">${cond.target}</span>
+            </td>
+            <td style="color:var(--text-muted); font-size:12px; line-height:1.4;">
+              ${cond.description}
+            </td>
+            <td style="font-family:var(--font-mono); font-size:11px; color:#38bdf8;">
+              ${cond.example}
+            </td>
+            <td>
+              <div style="display:flex; flex-wrap:wrap; gap:4px;">
+                ${tagsHtml}
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+  }
+}
+
+function setupConditionsControls() {
+  const searchInput = document.getElementById('condition-search-input');
+  if (searchInput) {
+    searchInput.addEventListener('input', () => renderConditionsView());
+  }
+
+  // Category Filter Pills
+  const catContainer = document.getElementById('conditions-categories-container');
+  if (catContainer) {
+    const catPills = catContainer.querySelectorAll('.pole-pill-btn');
+    catPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        catPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentConditionCatFilter = pill.dataset.cat;
+        renderConditionsView();
+      });
+    });
+  }
+
+  // Target Filter Pills
+  const targetPills = document.querySelectorAll('.toolbar-filters .filter-pill-type');
+  targetPills.forEach(pill => {
+    if (pill.closest('#view-conditions')) {
+      pill.addEventListener('click', () => {
+        targetPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentConditionTargetFilter = pill.dataset.target;
+        renderConditionsView();
+      });
+    }
+  });
+
+  // View Mode Toggle (Cards vs Table)
+  const btnCards = document.getElementById('btn-view-cond-cards');
+  const btnTable = document.getElementById('btn-view-cond-table');
+  const cardsContainer = document.getElementById('conditions-cards-container');
+  const tableContainer = document.getElementById('conditions-table-container');
+
+  if (btnCards && btnTable && cardsContainer && tableContainer) {
+    btnCards.addEventListener('click', () => {
+      conditionsViewMode = 'cards';
+      btnCards.classList.add('active');
+      btnTable.classList.remove('active');
       cardsContainer.style.display = 'grid';
-      matrixTableContainer.style.display = 'none';
-      renderClassesView();
+      tableContainer.style.display = 'none';
+      renderConditionsView();
     });
 
-    btnModeMatrix.addEventListener('click', () => {
-      classesViewMode = 'matrix';
-      btnModeMatrix.classList.add('active');
-      btnModeCards.classList.remove('active');
+    btnTable.addEventListener('click', () => {
+      conditionsViewMode = 'table';
+      btnTable.classList.add('active');
+      btnCards.classList.remove('active');
       cardsContainer.style.display = 'none';
-      matrixTableContainer.style.display = 'block';
-      renderClassesView();
+      tableContainer.style.display = 'block';
+      renderConditionsView();
     });
   }
 }

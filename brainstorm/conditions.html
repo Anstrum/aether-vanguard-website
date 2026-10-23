@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aether Vanguard — Conditions de Gambits (Codex Studio)</title>
+  <meta name="description" content="Catalogue complet des conditions programmables pour l'IA des 12 mercenaires d'Aether Vanguard. Système de Gambits continus sans tour par tour.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+  <!-- Subtle Orthogonal Grid Backdrop -->
+  <div class="voxel-grid-overlay" aria-hidden="true"></div>
+
+  <!-- App Header & KPI Bar (16:9 Widescreen Optimized) -->
+  <header class="app-header">
+    <div class="container header-layout">
+      <div class="header-brand">
+        <span class="brand-crest">❖</span>
+        <div>
+          <h1 class="brand-title">AETHER VANGUARD // CODEX STUDIO</h1>
+          <span class="brand-sub">Game Design Studio &bull; Système de Gambits Continus &amp; Conditions d'Exécution</span>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Bar -->
+      <div class="header-metrics">
+        <div class="metric-box">
+          <span class="metric-val" id="metric-total-classes">36</span>
+          <span class="metric-lbl">Classes &amp; Voies</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-val" id="metric-total-spells">180</span>
+          <span class="metric-lbl">Sorts au Catalogue</span>
+        </div>
+        <div class="metric-box">
+          <span class="metric-val text-gold" id="metric-total-conditions">42</span>
+          <span class="metric-lbl">Conditions de Gambits</span>
+        </div>
+        <div class="metric-box metric-progress-box">
+          <div class="metric-val text-gold" id="metric-completion">100%</div>
+          <span class="metric-lbl">Couverture IA</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Multi-Page Global Navigation Bar -->
+  <nav class="view-navigation container" aria-label="Navigation principale">
+    <div class="view-tabs-list">
+      <a href="index.html" class="view-tab-btn">
+        <span class="tab-icon">📜</span>
+        <span>Manifeste &amp; Scope du Projet</span>
+      </a>
+      <a href="classes.html" class="view-tab-btn">
+        <span class="tab-icon">🔮</span>
+        <span>Classes &amp; Moyens d'Obtention</span>
+        <span class="tab-badge" id="tab-badge-classes-count">36</span>
+      </a>
+      <a href="spells.html" class="view-tab-btn">
+        <span class="tab-icon">⚡</span>
+        <span>Catalogue des Sorts (Audit)</span>
+        <span class="tab-badge" id="tab-badge-spells-count">180</span>
+      </a>
+      <a href="conditions.html" class="view-tab-btn active">
+        <span class="tab-icon">⚙️</span>
+        <span>Conditions de Gambits</span>
+        <span class="tab-badge" id="tab-badge-conditions-count">42</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Views Container -->
+  <main class="container main-content">
+
+    <!-- =========================================================================
+         CONDITIONS DE GAMBITS & PROGRAMMATION DES MERCENAIRES
+         ========================================================================= -->
+    <section class="app-view active-view" id="view-conditions">
+
+      <!-- Gambits Core Principles Hero Card -->
+      <div class="manifesto-card voxel-bevel" style="margin-bottom: 24px; border-left: 3px solid var(--accent-gold);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:16px;">
+          <div style="max-width: 880px;">
+            <div style="display:inline-flex; align-items:center; gap:8px; font-family:var(--font-mono); font-size:11px; color:var(--accent-gold); margin-bottom:8px;">
+              <span>❖ MOTEUR TACTIQUE CONTINU</span>
+              <span>&bull;</span>
+              <span>ZÉRO TOUR PAR TOUR</span>
+              <span>&bull;</span>
+              <span>ÉVALUATION CASCADE 60 HZ</span>
+            </div>
+            <h2 style="font-family:var(--font-serif); font-size:22px; color:#fff; margin-bottom:8px; letter-spacing:0.02em;">
+              Architecture de l'IA Mercenaire : Les Gambits en Cascade
+            </h2>
+            <p style="color:var(--text-muted); font-size:13px; line-height:1.6; margin-bottom:12px;">
+              Chaque mercenaire exécute en boucle continue un automate programmable composé de <strong>3 à 10 règles ordonnées</strong> (déblocage progressif par entraînement au QG). Dès que le mercenaire a fini son action ou incantation en cours, il réévalue sa liste de Gambits <strong>de la ligne 1 à la ligne N</strong>. La première condition vérifiée dont l'arme requise est équipée et l'Éther disponible déclenche immédiatement l'action.
+            </p>
+            <div style="display:flex; flex-wrap:wrap; gap:12px; font-size:12px;">
+              <span class="badge-custom" style="background:#1e2430; border:1px solid #3b465c; color:#93c5fd; padding:4px 10px; border-radius:3px;">
+                🗝️ <strong>Condition Matérielle :</strong> Sort inactif si l'arme requise n'est pas portée
+              </span>
+              <span class="badge-custom" style="background:#1e2430; border:1px solid #3b465c; color:#fed7aa; padding:4px 10px; border-radius:3px;">
+                ⚡ <strong>Éther Commun :</strong> Le coût est déduit de la jauge commune de l'escouade
+              </span>
+              <span class="badge-custom" style="background:#1e2430; border:1px solid #3b465c; color:#a7f3d0; padding:4px 10px; border-radius:3px;">
+                🔒 <strong>Règles Figées :</strong> Aucune modification possible une fois le raid engagé
+              </span>
+              <span class="badge-custom" style="background:#1e2430; border:1px solid #3b465c; color:#fbcfe8; padding:4px 10px; border-radius:3px;">
+                👑 <strong>Hybridation Totale (36/36) :</strong> Débloque la fusion libre de tous les sorts et armes
+              </span>
+            </div>
+          </div>
+
+          <!-- Mini Gambit Syntax Box -->
+          <div style="background:#0c0e13; border:1px solid var(--border-steel-bright); padding:16px; border-radius:4px; min-width:300px; max-width:340px;">
+            <div style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim); margin-bottom:8px; border-bottom:1px solid var(--border-steel); padding-bottom:4px;">
+              SYNTAXE GAMBIT CANONIQUE
+            </div>
+            <div style="font-family:var(--font-mono); font-size:12px; line-height:1.7; color:#cbd5e1;">
+              <div style="color:#f59e0b;">L1: SI [Allié PV &lt; 30%]</div>
+              <div style="padding-left:14px; color:#38bdf8;">➔ Lancer [Prière Curative]</div>
+              <div style="color:#94a3b8; font-size:11px;">&nbsp;&nbsp;&nbsp;&nbsp;↳ <em>Requis: Sceptre/Bâton</em></div>
+              <div style="color:#f59e0b; margin-top:6px;">L2: SI [Éther Commun &lt; 20%]</div>
+              <div style="padding-left:14px; color:#38bdf8;">➔ Lancer [Canalisation Éthérée]</div>
+              <div style="color:#f59e0b; margin-top:6px;">L3: SI [Toujours]</div>
+              <div style="padding-left:14px; color:#38bdf8;">➔ Lancer [Attaque de Base]</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Categories Filter Pills Bar -->
+      <div class="poles-macro-bar voxel-bevel">
+        <div class="poles-bar-header">
+          <span class="poles-bar-title">🏷️ Catégories de Déclencheurs :</span>
+          <span class="poles-bar-sub">Filtrez les conditions par domaine d'évaluation tactique</span>
+        </div>
+        <div class="poles-pills-list" id="conditions-categories-container">
+          <!-- Dynamically populated or statically rendered -->
+          <button type="button" class="pole-pill-btn active" data-cat="all">
+            <span>🌐</span>
+            <span>Toutes les Conditions</span>
+            <span class="pole-count-tag" id="count-all-conditions">42</span>
+          </button>
+          <button type="button" class="pole-pill-btn" data-cat="Alliés">
+            <span>💚</span>
+            <span>Alliés &amp; Soins</span>
+            <span class="pole-count-tag">10</span>
+          </button>
+          <button type="button" class="pole-pill-btn" data-cat="Ennemis">
+            <span>🎯</span>
+            <span>Ennemis &amp; Menaces</span>
+            <span class="pole-count-tag">10</span>
+          </button>
+          <button type="button" class="pole-pill-btn" data-cat="Éther">
+            <span>⚡</span>
+            <span>Éther &amp; Ressources</span>
+            <span class="pole-count-tag">6</span>
+          </button>
+          <button type="button" class="pole-pill-btn" data-cat="Spatial">
+            <span>📏</span>
+            <span>Spatial &amp; Rangées</span>
+            <span class="pole-count-tag">6</span>
+          </button>
+          <button type="button" class="pole-pill-btn" data-cat="Cooldowns">
+            <span>⏳</span>
+            <span>Cooldowns &amp; États</span>
+            <span class="pole-count-tag">5</span>
+          </button>
+          <button type="button" class="pole-pill-btn" data-cat="Matériel">
+            <span>⚔️</span>
+            <span>Matériel &amp; Armes</span>
+            <span class="pole-count-tag">5</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Conditions Toolbar -->
+      <div class="view-toolbar spells-toolbar">
+        <div class="toolbar-search">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="condition-search-input" placeholder="Rechercher une condition (ex: PV, Éther, Boss, Portée, Stun, Dague)..." aria-label="Recherche de conditions">
+        </div>
+
+        <div class="toolbar-filters">
+          <span class="filter-label">Cible :</span>
+          <button type="button" class="filter-pill-type active" data-target="all">Toutes</button>
+          <button type="button" class="filter-pill-type" data-target="Allié">Allié</button>
+          <button type="button" class="filter-pill-type" data-target="Ennemi">Ennemi</button>
+          <button type="button" class="filter-pill-type" data-target="Soi-même">Soi-même</button>
+          <button type="button" class="filter-pill-type" data-target="Escouade">Escouade</button>
+        </div>
+
+        <div class="view-mode-toggle">
+          <button type="button" class="mode-toggle-btn active" id="btn-view-cond-cards" title="Vue Fiches Cartes">🗂️ Fiches</button>
+          <button type="button" class="mode-toggle-btn" id="btn-view-cond-table" title="Vue Tableau Synthétique">📋 Tableau</button>
+        </div>
+      </div>
+
+      <!-- Results Count Info Bar -->
+      <div class="results-info-bar">
+        <span id="conditions-results-count">Affichage de 42 conditions de Gambits</span>
+      </div>
+
+      <!-- Mode 1 : Cards Grid -->
+      <div class="conditions-cards-grid" id="conditions-cards-container">
+        <!-- Dynamically populated by app.js -->
+      </div>
+
+      <!-- Mode 2 : Compact Table -->
+      <div class="table-responsive-wrapper voxel-bevel" id="conditions-table-container" style="display:none; margin-top:16px;">
+        <table class="widescreen-data-table conditions-data-table">
+          <thead>
+            <tr>
+              <th style="width: 140px;">ID &amp; Catégorie</th>
+              <th style="width: 200px;">Condition / Déclencheur</th>
+              <th style="width: 100px;">Cible</th>
+              <th>Description Fonctionnelle</th>
+              <th style="width: 220px;">Exemple Gambit (Si ➔ Alors)</th>
+              <th style="width: 160px;">Tags Associés</th>
+            </tr>
+          </thead>
+          <tbody id="conditions-tbody">
+            <!-- Dynamically populated by app.js -->
+          </tbody>
+        </table>
+      </div>
+
+    </section>
+  </main>
+
+  <!-- App Footer -->
+  <footer class="app-footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <span class="brand-crest-small">❖</span>
+        <span>Aether Vanguard Codex Studio &bull; Architecture des Gambits Tactiques</span>
+      </div>
+      <div class="footer-right">
+        <span>42 Conditions &bull; 36 Classes Croisées &bull; 180 Sorts Canoniques &bull; Moteur Continu</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
