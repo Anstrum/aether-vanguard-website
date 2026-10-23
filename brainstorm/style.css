@@ -547,6 +547,8 @@ body {
 
 .toolbar-select:focus {
   border-color: var(--accent-gold);
+}
+
 .btn-group-toggle,
 .view-mode-toggle {
   display: inline-flex;
