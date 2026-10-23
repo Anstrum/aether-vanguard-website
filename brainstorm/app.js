@@ -2226,7 +2226,7 @@ function renderClassesView() {
       .map(c => c.id);
 
     const treeGroupsHtml = groups.map(grp => {
-      const groupClasses = (codexData.classes || []).filter(grp.filterFn);
+      const groupClasses = filtered.filter(grp.filterFn);
       if (groupClasses.length === 0) return '';
 
       const cardsHtml = groupClasses.map(cls => {
@@ -2288,9 +2288,13 @@ function renderClassesView() {
       `;
     }).join('');
 
+    const treeBodyHtml = filtered.length === 0
+      ? `<div style="padding: 40px; text-align: center; color: var(--text-dim); background: var(--bg-iron); border: 1px dashed var(--border-steel); border-radius: 4px; margin-bottom: 24px;">Aucune classe ne correspond à vos filtres actuels dans le Réseau Croisé.</div>`
+      : treeGroupsHtml;
+
     networkContainer.innerHTML = `
       ${focusPanelHtml}
-      ${treeGroupsHtml}
+      ${treeBodyHtml}
       <div style="background: linear-gradient(135deg, rgba(212,175,55,0.12) 0%, rgba(18,20,26,0.95) 100%); border: 2px solid var(--accent-gold); padding: 24px; border-radius: 4px; text-align: center; margin-top: 28px;">
         <div style="font-family:var(--font-serif); font-size:18px; font-weight:700; color:#fff; margin-bottom:8px;">
           👑 JALON SUPRÊME : DÉBLOCAGE DE L'HYBRIDATION TOTALE (36 / 36 CLASSES)
